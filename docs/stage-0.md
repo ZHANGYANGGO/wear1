@@ -12,12 +12,14 @@
 | --- | --- |
 | `index.html`、`src/studio.mjs` | 工作台结构、控件和界面状态绑定 |
 | `src/theme.css`、`src/studio.css` | 主题 token、桌面与窄屏布局、互动状态 |
-| `src/avatar/config.mjs`、`src/avatar/renderer.mjs` | 角色坐标、锚点、固定图层和透明精灵合成 |
+| `src/avatar/config.mjs`、`src/avatar/validation.mjs`、`src/avatar/renderer.mjs` | 角色坐标与锚点、配置校验、基础图层挂载与透明精灵合成 |
 | `src/wardrobe/catalog.mjs`、`src/wardrobe/selection.mjs` | 衣物注册、服装 ID 组合、纯函数选择逻辑 |
 | `assets/avatar/` | 独立的透明 WebP 身体和衣物图层、衣物缩略图 |
-| `scripts/serve.mjs`、`tests/selection.test.mjs` | 本地启动脚本、选择逻辑与素材校验 |
+| `scripts/serve.mjs`、`tests/` | 本地启动脚本、选择逻辑、素材与角色异常测试 |
 
-使用原生 ES 模块和 JSDoc 数据类型。阶段 0 的工作台只有一个页面，浏览器能直接运行该结构。渲染采用 DOM 叠放透明 WebP，保留插画的纹理与光影，九张精灵共享一个固定比例的容器。所有图层解码后启用换装控件，切换时仅更新衣物图层的可见性。皮肤和服装图片节点持续存在，窗口调整只缩放整个画布。
+使用原生 ES 模块和 JSDoc 数据类型。阶段 0 的工作台只有一个页面，浏览器可以直接运行。渲染采用 DOM 叠放透明 WebP，九张精灵共享一个固定比例的容器。运行中按衣物解码状态启用单品及预设。切换时仅更新衣物图层的可见性，窗口调整会缩放整个画布。
+
+角色配置校验通过且基础精灵成功解码后，新角色才会替换当前图层。角色与衣物的源图均应使用与角色画布同尺寸的透明素材，传入可由浏览器读取的绝对 URL。衣物按件报告 `loading`、`ready` 或 `failed`。正常换装、配置异常和加载异常的复验记录见 [正式验收报告](../STAGE0_ACCEPTANCE.md)。
 
 ## 素材规范
 
@@ -39,7 +41,7 @@
 
 </details>
 
-## 验收记录
+## 初版验收记录
 
 | 项目 | 结果 |
 | --- | --- |
