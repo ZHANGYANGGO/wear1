@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f9f7f1">
+    <meta name="description" content="WearMate 2D 穿搭工作台，在同一个形象上自由试搭。">
+    <title>穿搭工作台 · WearMate</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/mark.svg">
+    <link rel="stylesheet" href="./src/theme.css">
+    <link rel="stylesheet" href="./src/studio.css">
+    <script type="module" src="./src/studio.mjs"></script>
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="container masthead-inner">
+        <a class="brand" href="./" aria-label="WearMate 工作台首页">
+          <img src="./assets/mark.svg" width="32" height="32" alt="">
+          <span>WearMate<span class="brand-period">.</span></span>
+        </a>
+        <nav class="site-nav" aria-label="主导航">
+          <a class="current-section" href="./" aria-current="page">穿搭工作台</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container studio">
+      <div class="intro">
+        <div>
+          <p class="eyebrow intro-label">2D FITTING STUDIO</p>
+          <h1>穿搭工作台</h1>
+        </div>
+        <p class="intro-note">从一套造型开始，<br class="desktop-break">换一件单品，试出自己的搭配。</p>
+      </div>
+
+      <div class="studio-grid">
+        <figure class="look" id="fitting-room" tabindex="-1">
+          <div class="stage">
+            <div class="stage-frame" aria-hidden="true"></div>
+            <div class="stage-light" aria-hidden="true"></div>
+            <div class="floor-shadow" aria-hidden="true"></div>
+            <div id="avatar" class="avatar" role="img" aria-label="示例角色 Mila"></div>
+            <div class="stage-label"><strong>Mila</strong><span>示例模特</span></div>
+          </div>
+          <figcaption class="look-caption">
+            <div class="current-look" aria-live="polite" aria-atomic="true">
+              <div class="caption-title"><span class="status-dot" aria-hidden="true"></span><span class="caption-label">当前造型</span><strong id="look-name">舒适休闲</strong></div>
+              <span id="look-details" class="look-details"></span>
+            </div>
+            <a class="mobile-jump" href="#wardrobe">选单品</a>
+          </figcaption>
+        </figure>
+
+        <aside class="controls" aria-label="穿搭选择">
+          <section class="control-section" aria-labelledby="outfits-title">
+            <div class="section-heading">
+              <h2 id="outfits-title">预设搭配</h2>
+            </div>
+            <div id="outfits" class="outfit-list" aria-label="一键切换全套服装"></div>
+          </section>
+
+          <section class="control-section wardrobe" id="wardrobe" aria-labelledby="wardrobe-title" tabindex="-1">
+            <div class="section-heading">
+              <h2 id="wardrobe-title">精选单品</h2>
+              <a class="mobile-jump" href="#fitting-room">查看试穿效果</a>
+            </div>
+            <div id="categories" class="categories" role="tablist" aria-label="服装分类"></div>
+            <div id="garments" class="garment-list" role="tabpanel" tabindex="0"></div>
+            <p id="asset-error" class="asset-error" role="status" hidden>人物素材加载失败，请刷新页面重试。</p>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>
