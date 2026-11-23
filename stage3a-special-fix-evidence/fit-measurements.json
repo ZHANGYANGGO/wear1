@@ -1,0 +1,61 @@
+{
+  "metric": "shoe opaque pixels uncovered by the trousers' alpha mask",
+  "canvas": [
+    560,
+    1536
+  ],
+  "pants": {
+    "light-blue-jeans": {
+      "hemY": {
+        "before": 1425,
+        "after": 1389
+      },
+      "shoeVisiblePercent": {
+        "white-platform-sneakers": {
+          "before": 61.5,
+          "after": 92.5
+        },
+        "ivory-mary-janes": {
+          "before": 82.2,
+          "after": 97.0
+        }
+      }
+    },
+    "black-trousers": {
+      "hemY": {
+        "before": 1412,
+        "after": 1386
+      },
+      "shoeVisiblePercent": {
+        "white-platform-sneakers": {
+          "before": 74.1,
+          "after": 94.5
+        },
+        "ivory-mary-janes": {
+          "before": 89.5,
+          "after": 98.4
+        }
+      }
+    },
+    "gray-joggers": {
+      "hemY": {
+        "before": 1436,
+        "after": 1394
+      },
+      "shoeVisiblePercent": {
+        "white-platform-sneakers": {
+          "before": 50.7,
+          "after": 89.0
+        },
+        "ivory-mary-janes": {
+          "before": 67.0,
+          "after": 95.4
+        }
+      }
+    }
+  },
+  "bodyExposedAtCoatUnderarmY500_612": {
+    "before": 0,
+    "after": 0
+  }
+}

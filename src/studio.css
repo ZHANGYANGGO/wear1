@@ -35,6 +35,21 @@ h2 { font-size: 1.55rem; line-height: 1.2; }
 .intro-note { color: var(--muted); line-height: 1.65; margin-bottom: .15rem; }
 .studio-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(22rem, 1fr); gap: clamp(1.75rem, 3vw, 3.5rem); align-items: start; }
 .look { min-width: 0; }
+#rebuild-panel {
+  align-self: center;
+  padding-block: var(--space-4);
+  border-block: 1px solid var(--line);
+}
+#rebuild-panel p { color: var(--muted); margin-top: var(--space-2); }
+#rebuild-panel a {
+  display: inline-block;
+  margin-top: var(--space-4);
+  color: var(--accent-dark);
+  text-decoration: underline;
+  text-underline-offset: .3em;
+}
+#rebuild-status { margin-bottom: var(--space-3); }
+.rebuilt-preview .stage { height: clamp(29rem, 73vh, 44rem); }
 .stage {
   position: relative;
   isolation: isolate;
@@ -66,6 +81,14 @@ h2 { font-size: 1.55rem; line-height: 1.2; }
   background: radial-gradient(ellipse, var(--floor-ink), transparent 68%);
 }
 .avatar { position: relative; height: 92%; aspect-ratio: var(--avatar-ratio, 560 / 1536); }
+.stage:has(.avatar[data-pose="standard"]) .floor-shadow { bottom: 6.4%; }
+/* Only the closed coat uses the gathered skirt panel. Both variants belong
+   to the same wardrobe item, so removing the coat restores its full bodice. */
+.avatar[data-pose="standard"] [data-layer="floral-maxi-under-coat"] { visibility: hidden; }
+.avatar[data-pose="standard"]:has([data-layer="white-puffer"]:not([hidden]))
+  :is([data-wearable="navy-shirt"], [data-wearable="purple-graphic-tee"], [data-layer="floral-maxi"]) { visibility: hidden; }
+.avatar[data-pose="standard"]:has([data-layer="white-puffer"]:not([hidden]))
+  [data-layer="floral-maxi-under-coat"] { visibility: visible; }
 .sprite { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .sprite-garment:not([hidden]) { animation: settle var(--motion); }
 @keyframes settle { from { filter: brightness(1.12); } to { filter: brightness(1); } }
@@ -211,6 +234,7 @@ h2 { font-size: 1.55rem; line-height: 1.2; }
 .thumbnail-status { color: var(--muted); font-size: .875rem; }
 
 @media (max-width: 52rem) {
+  .rebuilt-preview .stage { height: clamp(23rem, 108vw, 34rem); }
   .studio-grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-5); }
   .stage { height: clamp(26rem, 79vw, 36rem); }
   .outfit-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }

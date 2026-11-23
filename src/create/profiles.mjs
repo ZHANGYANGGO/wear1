@@ -3,6 +3,7 @@ import { validateAvatar } from '../avatar/validation.mjs';
 import { mila } from '../avatar/config.mjs';
 import { garments } from '../wardrobe/catalog.mjs';
 import { fingerprint, measurement } from './photo.mjs';
+import { rebuiltBob } from './bob-rebuild.mjs';
 
 export const localRegistration = [
   { id: 'woman-bob', label: '短发女士', family: 'fitted', digest: '63645570227c1d46a003c0bc197765b940639e54c5f180be57cec8422efc4ca0' },
@@ -23,6 +24,15 @@ const straightAnchors = {
   neck: [268, 276], shoulderLeft: [78, 324], shoulderRight: [454, 322],
   waist: [263, 793], ankleLeft: [150, 1417], ankleRight: [357, 1418], feet: [254, 1418],
 };
+const bobAnchors = {
+  neck: [283, 260], shoulderLeft: [150, 273], shoulderRight: [410, 261],
+  waist: [284, 566], ankleLeft: [178, 1418], ankleRight: [348, 1425], feet: [265, 1421],
+};
+const bobSlots = {
+  head: { top: 1, bottom: 289, containsX: x => x >= 174 && x < 394 },
+  arms: { top: 363, bottom: 891, containsX: (x, y) => y < 440 || x < 178 || x > 365 },
+  ankles: { top: 1402, bottom: 1478, containsX: x => (x >= 136 && x < 213) || (x >= 310 && x < 397) },
+};
 const variants = {
   'brick-tee': ['砖红休闲圆领 T 恤', '砖红 · 棉质', '#ac5638'],
   'espresso-jacket': ['深蓝直身短袖衬衫', '深蓝 · 直身剪裁', '#3d4c5e'],
@@ -35,17 +45,21 @@ const variants = {
 function buildBundle(record) {
   const { id, label, family } = record;
   const straight = family === 'straight';
+  const bob = id === 'woman-bob';
+  const bodyFolder = bob ? 'woman-bob/refined' : id;
   const avatar = {
     id, label, width: 560, height: 1536,
-    anchors: straight ? straightAnchors : mila.anchors,
+    anchors: bob ? bobAnchors : straight ? straightAnchors : mila.anchors,
     baseLayers: [{ id: 'ankles', layer: 0 }, { id: 'head', layer: 5 }, { id: 'arms', layer: 6 }]
-      .map(layer => ({ ...layer, image: asset(id, layer.id) })),
+      .map(layer => ({ ...layer, image: asset(bodyFolder, layer.id) })),
   };
+  const bobDefaults = ['brick-tee', 'blue-denim', 'cream-trainers'];
   const clothes = straight ? garments.map(item => {
     const [name, detail, color] = variants[item.id];
     return { ...item, name, detail, color, image: asset('straight', item.id), thumbnail: asset('straight', item.id + '-thumb') };
-  }) : garments;
-  if (straight) {
+  }) : bob ? garments.map(item => bobDefaults.includes(item.id)
+    ? { ...item, image: asset(bodyFolder, item.id) } : item) : garments;
+  if (straight || bob) {
     const issue = validateAvatar(avatar, clothes);
     if (issue) throw new Error(issue);
   } else {
@@ -53,7 +67,7 @@ function buildBundle(record) {
     if (!checked.ok) throw new Error(checked.message);
   }
   return {
-    id, avatar, garments: clothes, slots: straight ? straightSlots : undefined,
+    id, avatar, garments: clothes, slots: bob ? bobSlots : straight ? straightSlots : undefined,
     sourceLabel: `${label} · 本地预制`,
     outfitDetails: straight ? { casual: '直筒牛仔裤与砖红 T 恤', commute: '深蓝直身衬衫与沙色休闲裤' } : undefined,
   };
@@ -71,7 +85,7 @@ export class LocalAvatarProvider {
     if (!measurement(heightCm) || !measurement(weightKg)) throw new Error('请填写有效的身高和体重。');
     const record = byDigest.get(await fingerprint(photo));
     if (!record) throw new Error('当前演示版本暂不支持该照片');
-    return buildBundle(record);
+    return record.id === rebuiltBob.id ? rebuiltBob : buildBundle(record);
   }
 
   async byId(id) {

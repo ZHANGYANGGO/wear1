@@ -1,0 +1,28 @@
+{
+  "before": {
+    "uncoveredBasePixelsAtHips": 1704,
+    "coatHemYByX": {
+      "135": 750,
+      "145": 741,
+      "155": 733,
+      "170": 728,
+      "207": 734,
+      "245": 734,
+      "278": 734
+    },
+    "dressHemLastRow": 1427
+  },
+  "after": {
+    "uncoveredBasePixelsAtHips": 0,
+    "coatHemYByX": {
+      "135": 698,
+      "145": 710,
+      "155": 712,
+      "170": 714,
+      "207": 720,
+      "245": 723,
+      "278": 724
+    },
+    "dressHemLastRow": 1427
+  }
+}

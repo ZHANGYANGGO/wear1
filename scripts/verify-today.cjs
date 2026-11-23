@@ -106,7 +106,7 @@ async function verify(browser) {
   await page.locator('[data-outfit=casual]:enabled').click();
   const previousLook=await worn();
   await page.locator('#today-entry').click();await page.locator('.plan-card').first().waitFor();
-  await page.route('**/woman-bob/floral-maxi.webp',r=>r.abort());await page.reload();
+  await page.route('**/woman-bob/standard/floral-maxi.webp',r=>r.abort());await page.reload();
   await page.locator('#weather-notes').getByText('加载失败',{exact:false}).waitFor();
   assert.equal(await page.locator('.plan-card').count(),0);await shot('insufficient');
   assert.deepEqual(await worn(),previousLook);

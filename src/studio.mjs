@@ -1,5 +1,6 @@
 import { categories, garments as defaultGarments, outfits as classicOutfits } from './wardrobe/catalog.mjs';
-import { bobId, bobCommute } from './wardrobe/woman-bob-wardrobe.mjs';
+import { bobId, bobCasual, bobCommute } from './wardrobe/woman-bob-wardrobe.mjs';
+import { standardBob } from './create/bob-standard.mjs';
 import { getFitInfo, wardrobeSprites } from './wardrobe/tryon-assets.mjs';
 import {
   canWearSelection, createLook, removeLayer, restoreLook, selectTryOnItem, visibleLook,
@@ -38,29 +39,41 @@ let activeBundle = null;
 let adapted = [];
 let avatar;
 let profileError = '';
-try {
-  const bundle = await avatarProvider.byId(profileId);
-  const extras = wardrobeSprites(bundle.id);
+async function loadBundle(bundle) {
+  const extras = wardrobeSprites(bundle.id, { legacy: bundle.id === bobId && !bundle.pose });
   const prepared = await preparePreview(avatarElement, bundle, { extras, strict: false });
+  return { bundle, extras, ...prepared };
+}
+try {
+  const legacy = () => avatarProvider.byId(profileId).then(loadBundle);
+  const prepared = profileId === bobId
+    ? await loadBundle(standardBob).catch(() => {
+      profileError = '标准母版暂不可用，现显示原版试衣角色。';
+      return legacy();
+    })
+    : await legacy();
+  const { bundle, extras } = prepared;
   avatarElement.replaceWith(prepared.next);
   avatarElement = prepared.next;
   avatarElement.dataset.profile = bundle.id;
+  if (bundle.pose) avatarElement.dataset.pose = bundle.pose;
   avatar = prepared.mounted;
   activeBundle = bundle;
   adapted = extras;
   document.querySelector('#stage-role-name').textContent = bundle.avatar.label;
-  document.querySelector('#stage-role-type').textContent = '本地预制分身';
+  document.querySelector('#stage-role-type').textContent = bundle.pose ? '标准换装母版' : '本地预制分身';
 } catch {
   profileError = '当前分身暂不可用，现显示示例角色 Mila。';
 }
 avatar ??= mountAvatar(avatarElement, mila, defaultGarments);
 const dedicated = activeBundle?.id === bobId;
-const outfits = dedicated ? [classicOutfits[0], bobCommute] : classicOutfits;
+const standard = activeBundle?.pose === 'standard';
+const outfits = dedicated ? [standard ? bobCasual : classicOutfits[0], bobCommute] : classicOutfits;
 const extras = adapted.map(item => dedicated && personal.has(item.id)
   ? { ...item, name: personal.get(item.id).name } : item);
 const garments = [...(activeBundle?.garments ?? defaultGarments), ...extras];
 const allById = new Map(garments.map(item => [item.id, item]));
-const baseIds = new Set(Object.values(classicOutfits[0].items));
+const baseIds = new Set(standard ? [] : Object.values(classicOutfits[0].items));
 const controlGarments = garments.filter(item =>
   item.parts ? personal.has(item.id) : (!dedicated || baseIds.has(item.id)));
 const garmentById = dedicated ? new Map(controlGarments.map(item => [item.id, item])) : allById;
@@ -185,7 +198,7 @@ function updateLook() {
     if (garmentStatus(selection[slot]) === 'failed') selection = removeLayer(selection, slot);
   }
   for (const { id } of categories) {
-    if (garmentStatus(selection[id]) !== 'failed') continue;
+    if (garmentStatus(selection[id]) !== 'failed' && (!standard || garmentById.has(selection[id]))) continue;
     const fallback = dedicated
       ? controlGarments.find(item => item.category === id && isGarmentReady(item.id))
       : garments.find(item => !item.parts && item.category === id && isGarmentReady(item.id));
@@ -198,8 +211,8 @@ function updateLook() {
   const complete = avatarReady && canWearSelection(selection, garmentById, isGarmentReady);
   const matched = complete && !visible.dress && !visible.outerwear
     ? outfits.find(outfit => categories.every(slot => outfit.items[slot.id] === visible[slot.id])) : undefined;
-  avatarElement.hidden = !complete;
-  avatar.show(visible);
+  avatarElement.hidden = !complete && !(standard && avatarReady);
+  avatar.show(standard && !complete ? {} : visible);
   syncWeatherSelection?.();
   saveButton.disabled = !complete;
 
@@ -219,10 +232,13 @@ function updateLook() {
     updateChoice(choice, ready && selectedIds.includes(id), ready, message);
   }
 
+  const missing = standard && selectedIds.some(id => !garmentById.has(id));
   const name = complete ? (matched?.name ?? '自定义搭配')
     : avatarError ? '造型不可用'
+      : missing ? '衣橱中缺少可穿单品'
       : selectedIds.some(id => garmentStatus(id) === 'failed') ? '造型未完整加载' : '造型加载中';
-  const details = selectedIds.filter(isGarmentReady).map(id => garmentById.get(id).name).join(' / ');
+  const details = selectedIds.filter(id => garmentById.has(id) && isGarmentReady(id))
+    .map(id => garmentById.get(id).name).join(' / ');
   const failures = garments.filter(item => garmentStatus(item.id) === 'failed').map(item => item.name);
   const errorText = [profileError, avatarError, failures.length ? `衣物素材加载失败（${failures.join('、')}）。` : ''].filter(Boolean).join(' ');
   if (lookName.textContent !== name) lookName.textContent = name;

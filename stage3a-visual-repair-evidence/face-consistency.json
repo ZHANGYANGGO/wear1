@@ -1,0 +1,16 @@
+{
+  "region": [
+    130,
+    13,
+    271,
+    144
+  ],
+  "changed": {
+    "after-pilot": false,
+    "after-casual": false,
+    "after-commute": false,
+    "after-dress": false,
+    "after-coat": false,
+    "after-coat-dress": false
+  }
+}

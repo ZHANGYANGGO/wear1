@@ -1,0 +1,16 @@
+{
+  "faceCrop": [
+    138,
+    38,
+    265,
+    151
+  ],
+  "samePixels": {
+    "light-blue-jeans": true,
+    "dress": true,
+    "coat": true,
+    "gray-joggers": true,
+    "black-trousers": true,
+    "coat-over-dress": true
+  }
+}

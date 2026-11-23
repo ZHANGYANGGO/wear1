@@ -1,0 +1,15 @@
+{
+  "region": [
+    132,
+    35,
+    265,
+    146
+  ],
+  "samePixels": {
+    "commute": true,
+    "joggers": true,
+    "dress": true,
+    "coat": true,
+    "coat-dress": true
+  }
+}

@@ -1,5 +1,5 @@
 import { garmentCatalog } from './garments.mjs';
-import { bobId, bobLayers } from './woman-bob-wardrobe.mjs';
+import { bobId, bobLayers, bobStandardLayers } from './woman-bob-wardrobe.mjs';
 import { localRegistration } from '../create/profiles.mjs';
 
 // Each entry names sprite parts in the role's 560 × 1536 coordinates.
@@ -59,14 +59,16 @@ const swatches = {
   'light-blue-jeans': '#779fbb', 'white-platform-sneakers': '#dbceba', 'purple-graphic-tee': '#786389',
 };
 
-export function getFitInfo(id, roleId) {
+export function getFitInfo(id, roleId, { legacy = false } = {}) {
   if (roleId === bobId) {
-    const entries = Object.hasOwn(bobLayers, id) ? bobLayers[id] : null;
+    const layers = legacy ? bobLayers : bobStandardLayers;
+    const directory = legacy ? 'refined' : 'standard';
+    const entries = Object.hasOwn(layers, id) ? layers[id] : null;
     if (!entries) return { status: 'pending', message: '这件衣物未纳入短发女士的专属衣橱。' };
     return {
       status: 'ready', template: bobId,
       parts: entries.map(([piece, layer]) => ({
-        id: piece, layer, image: new URL(`../../assets/wardrobe/tryon/woman-bob/${piece}.webp`, import.meta.url).href,
+        id: piece, layer, image: new URL(`../../assets/wardrobe/tryon/woman-bob/${directory}/${piece}.webp`, import.meta.url).href,
       })),
     };
   }
@@ -88,9 +90,9 @@ export function getFitInfo(id, roleId) {
   };
 }
 
-export function wardrobeSprites(roleId) {
+export function wardrobeSprites(roleId, options) {
   return garmentCatalog.flatMap(item => {
-    const fit = getFitInfo(item.id, roleId);
+    const fit = getFitInfo(item.id, roleId, options);
     if (fit.status !== 'ready') return [];
     return [{
       id: item.id, name: item.name, category: item.category,

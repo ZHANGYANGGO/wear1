@@ -4,7 +4,7 @@ const { chromium } = require(process.env.WEARMATE_PLAYWRIGHT || 'playwright');
 const base = process.env.WEARMATE_PREVIEW || 'http://127.0.0.1:4173';
 
 async function check(page) {
-  await page.goto(base);
+  await page.goto(new URL('/?view=fitting', base).href);
   const avatar = page.locator('#avatar[data-profile="woman-bob"]');
   const ready = () => page.locator('#save-look-button:enabled').waitFor();
   const visible = () => avatar.locator('[data-wearable]:not([hidden])')
@@ -15,13 +15,22 @@ async function check(page) {
   }
   async function checkCoat(items) {
     assert.deepEqual(await visible(), [...items].sort());
+    const dress = avatar.locator('[data-layer="floral-maxi"]');
+    const tuckedSkirt = avatar.locator('[data-layer="floral-maxi-under-coat"]');
+    assert.equal(await dress.isVisible(), items.includes('floral-maxi'));
+    assert.equal(await tuckedSkirt.isVisible(), false);
     await wear('outerwear', 'white-puffer');
     assert.deepEqual(await visible(), [...items, 'white-puffer'].sort());
+    assert.equal(await dress.isVisible(), false);
+    assert.equal(await tuckedSkirt.isVisible(), items.includes('floral-maxi'));
     await page.getByRole('button', { name: '脱下外套' }).click();
     assert.deepEqual(await visible(), [...items].sort());
+    assert.equal(await dress.isVisible(), items.includes('floral-maxi'));
+    assert.equal(await tuckedSkirt.isVisible(), false);
   }
   await ready();
-  assert.deepEqual(await visible(), ['blue-denim', 'brick-tee', 'cream-trainers']);
+  assert.equal(await avatar.getAttribute('data-pose'), 'standard');
+  assert.deepEqual(await visible(), ['light-blue-jeans', 'purple-graphic-tee', 'white-platform-sneakers']);
   await page.getByRole('navigation').getByText('我的衣橱').click();
   const cards = page.locator('[data-garment-id]');
   await cards.first().waitFor();

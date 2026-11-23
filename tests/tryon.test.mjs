@@ -37,10 +37,18 @@ test('role-scoped fitting entries have independent transparent parts in the shar
         if (seen.has(part.image)) continue;
         seen.add(part.image);
         const bytes = await readFile(new URL(part.image));
-        assert.equal(bytes.toString('ascii', 8, 16), 'WEBPVP8X');
-        assert.ok(bytes[20] & 0x10);
-        assert.equal(bytes.readUIntLE(24, 3) + 1, 560);
-        assert.equal(bytes.readUIntLE(27, 3) + 1, 1536);
+        if (role.id === 'woman-bob') {
+          assert.equal(bytes.toString('ascii', 8, 16), 'WEBPVP8L');
+          const header = bytes.readUInt32LE(21);
+          assert.equal((header & 0x3fff) + 1, 560);
+          assert.equal(((header >>> 14) & 0x3fff) + 1, 1536);
+          assert.equal((header >>> 28) & 1, 1);
+        } else {
+          assert.equal(bytes.toString('ascii', 8, 16), 'WEBPVP8X');
+          assert.ok(bytes[20] & 0x10);
+          assert.equal(bytes.readUIntLE(24, 3) + 1, 560);
+          assert.equal(bytes.readUIntLE(27, 3) + 1, 1536);
+        }
       }
     }
   }
