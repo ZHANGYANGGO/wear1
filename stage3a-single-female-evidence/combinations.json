@@ -1,0 +1,247 @@
+{
+  "viewport": [
+    1280,
+    800
+  ],
+  "role": "woman-bob",
+  "observations": [
+    {
+      "worn": [
+        "ivory-mary-janes",
+        "navy-shirt",
+        "black-trousers"
+      ],
+      "coated": false
+    },
+    {
+      "worn": [
+        "ivory-mary-janes",
+        "navy-shirt",
+        "white-puffer",
+        "black-trousers"
+      ],
+      "coated": true
+    },
+    {
+      "worn": [
+        "navy-shirt",
+        "white-platform-sneakers",
+        "black-trousers"
+      ],
+      "coated": false
+    },
+    {
+      "worn": [
+        "navy-shirt",
+        "white-puffer",
+        "white-platform-sneakers",
+        "black-trousers"
+      ],
+      "coated": true
+    },
+    {
+      "worn": [
+        "ivory-mary-janes",
+        "navy-shirt",
+        "gray-joggers"
+      ],
+      "coated": false
+    },
+    {
+      "worn": [
+        "ivory-mary-janes",
+        "navy-shirt",
+        "white-puffer",
+        "gray-joggers"
+      ],
+      "coated": true
+    },
+    {
+      "worn": [
+        "navy-shirt",
+        "white-platform-sneakers",
+        "gray-joggers"
+      ],
+      "coated": false
+    },
+    {
+      "worn": [
+        "navy-shirt",
+        "white-puffer",
+        "white-platform-sneakers",
+        "gray-joggers"
+      ],
+      "coated": true
+    },
+    {
+      "worn": [
+        "ivory-mary-janes",
+        "navy-shirt",
+        "light-blue-jeans"
+      ],
+      "coated": false
+    },
+    {
+      "worn": [
+        "ivory-mary-janes",
+        "navy-shirt",
+        "white-puffer",
+        "light-blue-jeans"
+      ],
+      "coated": true
+    },
+    {
+      "worn": [
+        "navy-shirt",
+        "white-platform-sneakers",
+        "light-blue-jeans"
+      ],
+      "coated": false
+    },
+    {
+      "worn": [
+        "navy-shirt",
+        "white-puffer",
+        "white-platform-sneakers",
+        "light-blue-jeans"
+      ],
+      "coated": true
+    },
+    {
+      "worn": [
+        "ivory-mary-janes",
+        "purple-graphic-tee",
+        "black-trousers"
+      ],
+      "coated": false
+    },
+    {
+      "worn": [
+        "ivory-mary-janes",
+        "white-puffer",
+        "purple-graphic-tee",
+        "black-trousers"
+      ],
+      "coated": true
+    },
+    {
+      "worn": [
+        "purple-graphic-tee",
+        "white-platform-sneakers",
+        "black-trousers"
+      ],
+      "coated": false
+    },
+    {
+      "worn": [
+        "white-puffer",
+        "purple-graphic-tee",
+        "white-platform-sneakers",
+        "black-trousers"
+      ],
+      "coated": true
+    },
+    {
+      "worn": [
+        "ivory-mary-janes",
+        "purple-graphic-tee",
+        "gray-joggers"
+      ],
+      "coated": false
+    },
+    {
+      "worn": [
+        "ivory-mary-janes",
+        "white-puffer",
+        "purple-graphic-tee",
+        "gray-joggers"
+      ],
+      "coated": true
+    },
+    {
+      "worn": [
+        "purple-graphic-tee",
+        "white-platform-sneakers",
+        "gray-joggers"
+      ],
+      "coated": false
+    },
+    {
+      "worn": [
+        "white-puffer",
+        "purple-graphic-tee",
+        "white-platform-sneakers",
+        "gray-joggers"
+      ],
+      "coated": true
+    },
+    {
+      "worn": [
+        "ivory-mary-janes",
+        "purple-graphic-tee",
+        "light-blue-jeans"
+      ],
+      "coated": false
+    },
+    {
+      "worn": [
+        "ivory-mary-janes",
+        "white-puffer",
+        "purple-graphic-tee",
+        "light-blue-jeans"
+      ],
+      "coated": true
+    },
+    {
+      "worn": [
+        "purple-graphic-tee",
+        "white-platform-sneakers",
+        "light-blue-jeans"
+      ],
+      "coated": false
+    },
+    {
+      "worn": [
+        "white-puffer",
+        "purple-graphic-tee",
+        "white-platform-sneakers",
+        "light-blue-jeans"
+      ],
+      "coated": true
+    },
+    {
+      "worn": [
+        "ivory-mary-janes",
+        "floral-maxi"
+      ],
+      "coated": false
+    },
+    {
+      "worn": [
+        "ivory-mary-janes",
+        "white-puffer",
+        "floral-maxi"
+      ],
+      "coated": true
+    },
+    {
+      "worn": [
+        "floral-maxi",
+        "white-platform-sneakers"
+      ],
+      "coated": false
+    },
+    {
+      "worn": [
+        "white-puffer",
+        "floral-maxi",
+        "white-platform-sneakers"
+      ],
+      "coated": true
+    }
+  ],
+  "deletedPresetDisabled": true,
+  "excludedItemRejected": true,
+  "missingCoatPartPreservesCurrentLook": true,
+  "errors": []
+}

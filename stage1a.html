@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>个性化角色验证 · WearMate</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/mark.svg">
+    <link rel="stylesheet" href="./src/theme.css">
+    <link rel="stylesheet" href="./src/studio.css">
+    <link rel="stylesheet" href="./src/stage1a/lab.css">
+    <script type="module" src="./src/stage1a/lab.mjs"></script>
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="container masthead-inner">
+        <a class="brand" href="./">
+          <img src="./assets/mark.svg" width="32" height="32" alt="">WearMate.
+        </a>
+        <a class="lab-home" href="./">返回穿搭工作台</a>
+      </div>
+    </header>
+    <main class="container studio">
+      <div class="intro">
+        <div>
+          <p class="eyebrow intro-label">STAGE 1A</p>
+          <h1>个性化角色验证</h1>
+        </div>
+        <p class="intro-note lab-description">ImageGen 根据两张合成照片生成了插画，经人工对位后导出图层。此页加载预制图层供对照和换装。</p>
+      </div>
+      <div class="lab-grid">
+        <figure class="look">
+          <div class="stage lab-stage" id="lab-stage">
+            <div class="stage-frame" aria-hidden="true"></div>
+            <div class="stage-light" aria-hidden="true"></div>
+            <div class="floor-shadow" aria-hidden="true"></div>
+            <div id="lab-avatar" class="avatar" role="img"></div>
+          </div>
+          <figcaption class="look-caption lab-figcaption">
+            <strong id="avatar-name">Mila</strong>
+            <span id="current-outfit">舒适休闲</span>
+          </figcaption>
+        </figure>
+        <aside class="lab-controls" aria-label="验证控制">
+          <label class="lab-field">测试角色
+            <select id="role-select"><option value="mila">Mila（阶段 0 对照）</option></select>
+          </label>
+          <p id="lab-status" class="asset-error" role="status"></p>
+          <div class="lab-presets" id="lab-presets" aria-label="预设搭配"></div>
+          <div class="lab-garments" id="lab-garments"></div>
+          <figure id="lab-reference" class="lab-reference" hidden>
+            <img id="reference-image" alt="">
+            <figcaption><strong>合成参考照片</strong><p id="reference-traits"></p></figcaption>
+          </figure>
+        </aside>
+      </div>
+    </main>
+  </body>
+</html>

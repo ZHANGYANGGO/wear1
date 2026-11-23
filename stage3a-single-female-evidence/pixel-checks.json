@@ -1,0 +1,30 @@
+{
+  "headROI": [
+    105,
+    15,
+    288,
+    143
+  ],
+  "faceDifferences": {
+    "look-a": 0,
+    "look-b": 0,
+    "winter": 0,
+    "commute": 0,
+    "coat-over-red": 0,
+    "coat-over-dress": 0
+  },
+  "defaultPixelDifferences": 0,
+  "blackTrouserGap": {
+    "before": 49,
+    "after": 0
+  },
+  "underarmLeak": {
+    "before": 0,
+    "after": 0
+  },
+  "navyOutsideCoatShoulders": 0,
+  "redTopExposedInCoatSideRegion": {
+    "before": 333,
+    "after": 0
+  }
+}

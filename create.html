@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f9f7f1">
+    <title>创建分身 · WearMate</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/mark.svg">
+    <link rel="stylesheet" href="./src/theme.css">
+    <link rel="stylesheet" href="./src/studio.css">
+    <link rel="stylesheet" href="./src/create/create.css">
+    <script type="module" src="./src/create/create.mjs"></script>
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="container masthead-inner">
+        <a class="brand" href="./" aria-label="WearMate 工作台首页">
+          <img src="./assets/mark.svg" width="32" height="32" alt="">
+          <span>WearMate<span class="brand-period">.</span></span>
+        </a>
+        <nav class="site-nav" aria-label="主导航">
+          <a class="current-section" href="./create.html" aria-current="page">创建分身</a>
+          <a class="site-link" href="./">穿搭工作台</a>
+          <a class="site-link" href="./wardrobe.html">我的衣橱</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container studio">
+      <div class="intro">
+        <div>
+          <p class="eyebrow intro-label">AVATAR STUDIO</p>
+          <h1>创建分身</h1>
+        </div>
+        <p class="intro-note">选一张清晰的半身照，填写身高和体重，<br class="desktop-break">预览后即可到工作台试穿。</p>
+      </div>
+
+      <div class="create-grid">
+        <section class="create-inputs" aria-labelledby="inputs-title">
+          <div class="section-heading">
+            <h2 id="inputs-title">照片与身材信息</h2>
+          </div>
+          <form id="create-form" autocomplete="off" novalidate>
+            <div class="upload-box">
+              <label for="photo">半身正面照</label>
+              <p id="photo-guide">单人正面，头脸和肩部清晰可见。JPEG、PNG 或 WebP，最大 10 MB。</p>
+              <input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="photo-guide" required>
+            </div>
+            <div class="measurements">
+              <div class="measure">
+                <label for="height">身高（cm）</label>
+                <input id="height" name="height" type="number" step="any" inputmode="decimal" placeholder="例如 170" required>
+              </div>
+              <div class="measure">
+                <label for="weight">体重（kg）</label>
+                <input id="weight" name="weight" type="number" step="any" inputmode="decimal" placeholder="例如 65" required>
+              </div>
+            </div>
+            <button id="generate" class="create-action primary-action" type="submit" disabled>创建分身</button>
+          </form>
+          <p id="create-status" class="create-status" role="status">选择照片并填写两项数值。</p>
+          <p id="create-error" class="asset-error" role="alert" hidden></p>
+          <aside class="local-note" aria-label="当前生成范围">
+            <strong>本地预生成演示模式</strong>
+            <p>请使用四张指定参考照中的原文件。匹配后会直接预览对应分身。确认时保存身高、体重，预制体型按素材显示。照片在浏览器中匹配。</p>
+          </aside>
+        </section>
+
+        <section class="create-preview" aria-labelledby="preview-title">
+          <div class="section-heading">
+            <h2 id="preview-title" tabindex="-1">分身预览</h2>
+            <span id="preview-source" class="preview-source" hidden></span>
+          </div>
+          <div class="preview-grid">
+            <figure>
+              <div class="photo-frame">
+                <img id="uploaded-preview" alt="已选半身照片" hidden>
+                <span id="photo-empty">选择照片后显示</span>
+              </div>
+              <figcaption>原始半身照</figcaption>
+            </figure>
+            <figure>
+              <div class="stage candidate-stage">
+                <div class="stage-frame" aria-hidden="true"></div>
+                <div class="stage-light" aria-hidden="true"></div>
+                <div class="floor-shadow" aria-hidden="true"></div>
+                <div id="candidate-avatar" class="avatar" role="img" hidden></div>
+                <span id="candidate-empty">全身分身将在这里显示</span>
+              </div>
+              <figcaption>2D 分身</figcaption>
+            </figure>
+          </div>
+          <div id="preview-actions" class="preview-actions" hidden>
+            <button id="regenerate" class="create-action" type="button">重新匹配</button>
+            <button id="confirm" class="create-action primary-action" type="button">确认使用该分身</button>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

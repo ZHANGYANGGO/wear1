@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f9f7f1">
+    <meta name="description" content="把自己的衣物照片与插画收进 WearMate 数字衣橱。">
+    <title>我的衣橱 · WearMate</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/mark.svg">
+    <link rel="stylesheet" href="./src/theme.css">
+    <link rel="stylesheet" href="./src/studio.css">
+    <link rel="stylesheet" href="./src/wardrobe/wardrobe.css">
+    <script type="module" src="./src/wardrobe/page.mjs"></script>
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="container masthead-inner">
+        <a class="brand" href="./" aria-label="WearMate 工作台首页">
+          <img src="./assets/mark.svg" width="32" height="32" alt="">
+          <span>WearMate<span class="brand-period">.</span></span>
+        </a>
+        <nav class="site-nav" aria-label="主导航">
+          <a class="site-link" href="./create.html">创建分身</a>
+          <a class="site-link" href="./">穿搭工作台</a>
+          <a class="current-section" href="./wardrobe.html" aria-current="page">我的衣橱</a>
+        </nav>
+      </div>
+    </header>
+    <main class="container wardrobe-page">
+      <header class="wardrobe-intro">
+        <div>
+          <p class="eyebrow intro-label">THE ILLUSTRATED CLOSET</p>
+          <h1>我的衣橱</h1>
+          <p class="wardrobe-note">把真实衣物收进插画衣橱。</p>
+        </div>
+        <button class="closet-action closet-primary" id="open-add" type="button"><span aria-hidden="true">＋</span> 添加衣物</button>
+      </header>
+      <p class="wardrobe-alert" id="storage-problem" role="alert" hidden></p>
+      <p class="wardrobe-status" id="wardrobe-status" role="status" hidden></p>
+      <section class="closet-empty" id="closet-empty" aria-labelledby="empty-title" hidden>
+        <div class="empty-copy">
+          <h2 id="empty-title">从一件喜欢的衣服开始</h2>
+          <p>上传素材包里的原始照片，预览对应插画，确认后收进你的衣橱。</p>
+          <button class="closet-action" id="import-samples" type="button">导入示例衣橱 <span aria-hidden="true">↗</span></button>
+        </div>
+        <div class="empty-art" aria-hidden="true">
+          <div class="empty-image"><img id="showcase-one" alt="" decoding="async"></div>
+          <div class="empty-image"><img id="showcase-two" alt="" decoding="async"></div>
+          <div class="empty-image"><img id="showcase-three" alt="" decoding="async"></div>
+        </div>
+      </section>
+      <section id="closet-library" aria-label="个人衣物" hidden>
+        <div class="closet-toolbar">
+          <div id="closet-filters" class="closet-filters" role="group" aria-label="按类别筛选"></div>
+          <label class="closet-search"><span>搜索</span><input id="closet-search" type="search" placeholder="输入衣物名称" autocomplete="off"></label>
+        </div>
+        <p id="closet-count" class="closet-count" aria-live="polite"></p>
+        <div id="closet-grid" class="closet-grid"></div>
+        <p id="no-results" class="no-results" hidden>没有符合当前条件的衣物。</p>
+      </section>
+    </main>
+
+    <dialog id="garment-dialog" class="garment-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-inner">
+        <header class="dialog-header">
+          <h2 id="dialog-title" tabindex="-1"></h2>
+          <button id="close-dialog" class="closet-close" type="button" aria-label="关闭">×</button>
+        </header>
+        <div id="upload-panel" class="upload-panel" hidden>
+          <label for="garment-photo">选择衣物原图</label>
+          <p id="upload-guide">本地预制演示支持素材包里的原始文件。裁剪、压缩或截图后可能无法匹配。JPEG、PNG 或 WebP，最大 10 MB。</p>
+          <input id="garment-photo" type="file" accept="image/png,image/jpeg,image/webp" aria-describedby="upload-guide">
+        </div>
+        <p class="dialog-feedback" id="dialog-status" role="status" hidden></p>
+        <p class="wardrobe-alert" id="dialog-error" role="alert" hidden></p>
+
+        <form id="garment-form" hidden>
+          <div class="garment-compare">
+            <figure>
+              <div class="compare-frame compare-original">
+                <img id="original-image" alt="原始衣物照片">
+                <span id="original-unavailable" hidden>原图当前不可用</span>
+              </div>
+              <figcaption>原始照片</figcaption>
+            </figure>
+            <figure>
+              <div class="compare-frame"><img id="cartoon-image" alt="卡通衣物展示图"></div>
+              <figcaption>卡通插画</figcaption>
+            </figure>
+          </div>
+          <p id="tryon-status" class="tryon-note"></p>
+          <div class="closet-fields">
+            <label class="field-name">名称<input id="field-name" name="name" type="text" maxlength="45" required></label>
+            <label>类别<select name="category" required></select></label>
+            <label>可穿状态<select name="availability" required></select></label>
+            <label>主色<input name="primaryColor" type="text" maxlength="20" required></label>
+            <label>辅色<input name="secondaryColors" type="text" maxlength="125" placeholder="用顿号或逗号分隔"></label>
+            <label>厚度<select name="warmthLevel" required></select></label>
+            <label>搭配定位<select name="statementLevel" required></select></label>
+            <label class="field-name">风格标签<input name="styleTags" type="text" maxlength="167" placeholder="用顿号或逗号分隔"></label>
+            <fieldset id="season-fields"><legend>适合季节</legend></fieldset>
+          </div>
+          <div class="dialog-actions">
+            <button class="closet-remove" id="remove-item" type="button" hidden>删除衣物</button>
+            <button class="closet-action" id="try-on-item" type="button" hidden>试穿</button>
+            <button class="closet-action closet-primary" id="save-item" type="submit"></button>
+          </div>
+          <div class="remove-check" id="remove-check" hidden>
+            <p>要从个人衣橱删除这件衣物吗？</p>
+            <button class="closet-action" id="cancel-remove" type="button">取消</button>
+            <button class="closet-action closet-primary" id="confirm-remove" type="button">确认删除</button>
+          </div>
+        </form>
+      </div>
+    </dialog>
+  </body>
+</html>

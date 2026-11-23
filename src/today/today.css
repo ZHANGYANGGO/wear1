@@ -1,0 +1,47 @@
+#today-entry,.adjust-link { font-size:.9rem; font-weight:650; color:var(--accent-dark); }
+#today-entry { padding:.65rem 1rem; border:1px solid var(--line); border-radius:var(--radius); }
+#today-entry:hover,.plan-card button:hover { background:var(--accent-wash); }
+.today .intro { margin-bottom:1.1rem; }
+.today h1 { font-size:clamp(2.5rem,4.2vw,3.5rem); }
+#weather-panel { padding:.95rem 1.2rem; background:#efeee4; border-block:1px solid #c8c7b6; display:flex; align-items:center; flex-wrap:wrap; gap:.9rem 2rem; margin:0 0 1.35rem; }
+.weather-controls { display:flex; align-items:end; gap:.65rem; }
+.weather-controls label { display:grid; gap:.3rem; font-size:.72rem; color:var(--muted); }
+.weather-controls select { font:inherit; font-size:.87rem; color:var(--ink); background:var(--paper); border:1px solid #c6c1b1; border-radius:var(--radius); padding:.42rem .42rem; }
+.weather-controls button,.adjust-link { border:0; background:transparent; text-decoration:underline; text-underline-offset:4px; }
+.weather-controls button { padding:.45rem .15rem; font-size:.8rem; }
+#weather-summary { display:flex; align-items:center; gap:1rem; }
+#weather-degree { font:normal 3.05rem/1 var(--font-editorial); letter-spacing:-.075em; }
+#weather-condition { font-size:1rem; }
+#weather-range,#weather-values,#weather-source { font-size:.77rem; line-height:1.6; color:var(--muted); }
+.weather-detail { border-left:1px solid #c8c7b6; padding-left:1rem; }
+#weather-hint { font-size:.88rem; }
+#weather-status:empty,#plan-feedback:empty,#weather-notes:empty { display:none; }
+#weather-status,#weather-notes,#plan-feedback { color:var(--accent-dark); font-size:.85rem; line-height:1.65; }
+.today .studio-grid { grid-template-columns:minmax(0,1.08fr) minmax(0,1fr); }
+.today .stage { height:clamp(28rem,58vh,36rem); }
+.today .controls { gap:1.1rem; }
+#weather-plans { display:grid; gap:.65rem; margin-top:.75rem; }
+.plan-card { border:1px solid var(--line); padding:.8rem 1rem; border-radius:var(--radius); background:#f5f2ea; }
+.plan-card:nth-child(2) { background:#f4eee6; }
+.plan-card:has([aria-pressed=true]) { border-color:var(--accent); }
+.plan-card header { display:flex; align-items:center; gap:.6rem; }
+.plan-letter { color:var(--accent-dark); font:italic 1.55rem/1 var(--font-editorial); }
+.plan-card h3 { margin:0; font:700 1.18rem var(--font-display); }
+.plan-card button { margin-left:auto; border:1px solid #b9ad9c; background:var(--paper); border-radius:var(--radius); padding:.4rem .85rem; font-size:.8rem; }
+.plan-card button[aria-pressed=true] { color:var(--on-accent); background:var(--accent-dark); border-color:var(--accent-dark); }
+.plan-pieces { display:flex; flex-wrap:wrap; gap:.5rem; margin:.55rem 0 .4rem; }
+.plan-pieces figure { width:calc((100% - 1.5rem)/4); text-align:center; font-size:.72rem; color:var(--muted); }
+.plan-pieces img { display:block; object-fit:contain; width:100%; height:3.8rem; }
+.plan-pieces figcaption { line-height:1.4; margin-top:.2rem; }
+.plan-reason { font-size:.8rem; line-height:1.6; }
+#weather-notes,#plan-feedback { margin-top:.45rem; }
+@media(max-width:52rem) {
+ .today .studio-grid { grid-template-columns:minmax(0,1fr);gap:.95rem; }
+ .today .stage { height:clamp(20rem,55vh,28rem); }
+ #weather-panel { gap:.6rem; padding:.8rem; }
+ #weather-summary { flex-wrap:wrap; gap:.25rem .8rem; }
+ #weather-degree { font-size:2.45rem; }
+ .weather-detail { flex-basis:100%; border:0; padding:.25rem 0 0; }
+ .today #fitting-room,.today #today-recommendations { scroll-margin:.5rem; }
+ .plan-card button { min-height:2.75rem; }
+}

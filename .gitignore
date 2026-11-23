@@ -1,0 +1,5 @@
+# Private development references. Do not include them in competition hosting.
+.local-wardrobe-references/
+# Local acceptance captures can include product reference photos.
+/stage2-wardrobe-evidence/
+/stage3-tryon-evidence/

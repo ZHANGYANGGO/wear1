@@ -21,7 +21,10 @@ async function spriteError(image, { width, height }) {
  * decoded, while wearable sprites settle independently.
  * @param {HTMLElement} element
  * @param {import('./config.mjs').AvatarConfig} avatar
- * @param {import('../wardrobe/catalog.mjs').Garment[]} garments
+ * @param {Array<{
+ *   id: string, anchor: string, offset: number[], scale: number,
+ *   layer?: number, image?: string, parts?: {id: string, layer: number, image: string}[]
+ * }>} garments
  */
 export function mountAvatar(element, avatar, garments) {
   const attempt = {};
@@ -60,19 +63,23 @@ export function mountAvatar(element, avatar, garments) {
       garmentLoads.set(garment.id, { status: 'failed', settled: Promise.resolve() });
       continue;
     }
-    const image = createImage(garment);
     const [anchorX, anchorY] = avatar.anchors[garment.anchor];
     const [offsetX, offsetY] = garment.offset;
-    image.classList.add('sprite-garment');
-    image.style.transformOrigin = `${100 * anchorX / avatar.width}% ${100 * anchorY / avatar.height}%`;
-    image.style.transform = `translate(${100 * offsetX / avatar.width}%, ${100 * offsetY / avatar.height}%) scale(${garment.scale})`;
-    image.hidden = true;
-    clothing.set(garment.id, image);
+    const images = (garment.parts ?? [garment]).map(part => {
+      const image = createImage(part);
+      image.classList.add('sprite-garment');
+      image.dataset.wearable = garment.id;
+      image.style.transformOrigin = `${100 * anchorX / avatar.width}% ${100 * anchorY / avatar.height}%`;
+      image.style.transform = `translate(${100 * offsetX / avatar.width}%, ${100 * offsetY / avatar.height}%) scale(${garment.scale})`;
+      image.hidden = true;
+      return image;
+    });
+    clothing.set(garment.id, images);
     /** @type {GarmentLoad} */
     const load = {
       status: 'loading',
-      settled: spriteError(image, avatar).then(error => {
-        load.status = error ? 'failed' : 'ready';
+      settled: Promise.all(images.map(image => spriteError(image, avatar))).then(errors => {
+        load.status = errors.some(Boolean) ? 'failed' : 'ready';
       }),
     };
     garmentLoads.set(garment.id, load);
@@ -95,11 +102,12 @@ export function mountAvatar(element, avatar, garments) {
   return {
     garmentLoads,
     ready,
-    /** @param {import('../wardrobe/catalog.mjs').OutfitSelection} selection */
+    /** @param {Readonly<Record<string, string | null>>} selection */
     show(selection) {
       const selected = new Set(Object.values(selection));
-      for (const [id, image] of clothing) {
-        image.hidden = !selected.has(id) || garmentLoads.get(id).status !== 'ready';
+      for (const [id, images] of clothing) {
+        const hidden = !selected.has(id) || garmentLoads.get(id).status !== 'ready';
+        for (const image of images) image.hidden = hidden;
       }
     },
   };

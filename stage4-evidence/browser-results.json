@@ -1,0 +1,72 @@
+{
+  "scenarios": {
+    "mild": [
+      [
+        "light-blue-jeans",
+        "purple-graphic-tee",
+        "white-platform-sneakers"
+      ],
+      [
+        "floral-maxi",
+        "ivory-mary-janes"
+      ]
+    ],
+    "cold": [
+      [
+        "light-blue-jeans",
+        "purple-graphic-tee",
+        "white-platform-sneakers",
+        "white-puffer"
+      ],
+      [
+        "black-trousers",
+        "navy-shirt",
+        "white-platform-sneakers",
+        "white-puffer"
+      ]
+    ],
+    "hot": [
+      [
+        "floral-maxi",
+        "white-platform-sneakers"
+      ],
+      [
+        "black-trousers",
+        "ivory-mary-janes",
+        "navy-shirt"
+      ]
+    ],
+    "rain": [
+      [
+        "light-blue-jeans",
+        "purple-graphic-tee",
+        "white-platform-sneakers"
+      ],
+      [
+        "black-trousers",
+        "navy-shirt",
+        "white-platform-sneakers"
+      ]
+    ]
+  },
+  "live": {
+    "source": "Open-Meteo · 预报更新时间 2026-11-20 20:45　Asia/Shanghai",
+    "message": "",
+    "weather": "7°\n上海 · 晴\n\n低 3.7° / 高 11.6°\n\n体感偏冷，优先叠穿外套。\n\n体感 4.5°C　·　今日降水概率 0%　·　风速 5.2 km/h\n\nOpen-Meteo · 预报更新时间 2026-11-20 20:45　Asia/Shanghai"
+  },
+  "secondCity": "2°\n北京 · 晴\n\n低 -1.1° / 高 8°\n\n体感偏冷，优先叠穿外套。\n\n体感 -2.6°C　·　今日降水概率 0%　·　风速 11.3 km/h\n\nOpen-Meteo · 预报更新时间 2026-11-20 20:45　Asia/Shanghai",
+  "saved": {
+    "roleId": "woman-bob",
+    "name": "今日春日穿搭",
+    "createdAt": "2026-11-20T12:56:18.191Z",
+    "top": null,
+    "bottom": null,
+    "dress": "floral-maxi",
+    "outerwear": null,
+    "shoes": "ivory-mary-janes"
+  },
+  "retryRecovered": true,
+  "errors": [],
+  "retries": 2,
+  "chrome": "157.0.8103.79"
+}

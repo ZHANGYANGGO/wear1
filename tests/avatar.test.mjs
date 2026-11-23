@@ -134,6 +134,30 @@ test('a slower role cannot overwrite a later successful mount', async () => {
   assert.equal(stage.attributes.get('aria-label'), mila.label);
 });
 
+test('a multi-part outerwear sprite is atomic and keeps the body and other garments', async () => {
+  const back = { id: 'coat-back', layer: 4, image: 'file:///coat-back.webp' };
+  const front = { id: 'coat-front', layer: 40, image: 'file:///coat-front.webp' };
+  const coat = { id: 'coat', category: 'outerwear', anchor: 'neck', scale: 1, offset: [0, 0], parts: [back, front] };
+  for (const fail of [false, true]) {
+    const stage = createStage(async image => {
+      if (fail && image.src === back.image) throw new Error('Missing material');
+    });
+    const mounted = mountAvatar(stage, mila, [...garments, coat]);
+    assert.deepEqual(await mounted.ready, { ok: true });
+    await Promise.all([...mounted.garmentLoads.values()].map(load => load.settled));
+    mounted.show({ ...outfits[0].items, outerwear: coat.id });
+    const ids = visibleIds(stage);
+    assert.equal(mounted.garmentLoads.get(coat.id).status, fail ? 'failed' : 'ready');
+    assert.equal(ids.includes('coat-front'), !fail);
+    assert.equal(ids.includes('coat-back'), !fail);
+    if (!fail) {
+      assert.ok(ids.indexOf('coat-back') < ids.indexOf('head'));
+      assert.ok(ids.indexOf('coat-front') > ids.indexOf('brick-tee'));
+    }
+    assert.ok(ids.includes('brick-tee') && ids.includes('blue-denim'));
+  }
+});
+
 function visibleIds(stage) {
   return stage.children.filter(image => !image.hidden).map(image => image.dataset.layer);
 }

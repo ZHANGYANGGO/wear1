@@ -57,11 +57,19 @@ export function validateAvatar(avatar, garments) {
 
 /** A malformed sprite can be skipped without invalidating the other garment IDs. */
 export function validateGarmentLayer(garment) {
-  if (!isAssetUrl(garment.image)) return '衣物素材地址无效。';
   if (!isName(garment.anchor) || !isPoint(garment.offset)
-      || !Number.isFinite(garment.scale) || garment.scale <= 0
-      || !Number.isFinite(garment.layer)) {
+      || !Number.isFinite(garment.scale) || garment.scale <= 0) {
     return '衣物定位、缩放或层级无效。';
+  }
+  if (Object.hasOwn(garment, 'parts') && (!Array.isArray(garment.parts) || garment.parts.length === 0)) {
+    return '衣物至少需要一个透明素材图层。';
+  }
+  const parts = garment.parts ?? [garment];
+  const ids = new Set();
+  for (const part of parts) {
+    if (!isRecord(part) || !isName(part.id) || ids.has(part.id)
+        || !Number.isFinite(part.layer) || !isAssetUrl(part.image)) return '衣物素材或层级无效。';
+    ids.add(part.id);
   }
   return '';
 }

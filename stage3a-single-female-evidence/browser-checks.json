@@ -1,0 +1,2101 @@
+{
+  "browser": "157.0.8103.79",
+  "catalog": [
+    "navy-shirt",
+    "floral-maxi",
+    "black-trousers",
+    "ivory-mary-janes",
+    "gray-joggers",
+    "white-puffer",
+    "light-blue-jeans",
+    "white-platform-sneakers",
+    "purple-graphic-tee"
+  ],
+  "saved": {
+    "roleId": "woman-bob",
+    "name": "春日碎花",
+    "createdAt": "2026-11-20T12:30:01.406Z",
+    "top": null,
+    "bottom": null,
+    "dress": "floral-maxi",
+    "outerwear": null,
+    "shoes": "ivory-mary-janes"
+  },
+  "restored": [
+    "ivory-mary-janes",
+    "purple-graphic-tee",
+    "light-blue-jeans"
+  ],
+  "errors": [],
+  "externalRequests": [],
+  "capture": {
+    "default": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "cream-trainers",
+          "layer": "cream-trainers",
+          "src": "/assets/avatar/cream-trainers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "blue-denim",
+          "layer": "blue-denim",
+          "src": "/assets/avatar/blue-denim.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "brick-tee",
+          "layer": "brick-tee",
+          "src": "/assets/avatar/brick-tee.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "砖红圆领 T 恤 / 水洗直筒牛仔裤 / 奶白低帮运动鞋",
+      "selectedCategory": "tab-top",
+      "scrollWidth": 1440,
+      "file": "default.png"
+    },
+    "default-page": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "cream-trainers",
+          "layer": "cream-trainers",
+          "src": "/assets/avatar/cream-trainers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "blue-denim",
+          "layer": "blue-denim",
+          "src": "/assets/avatar/blue-denim.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "brick-tee",
+          "layer": "brick-tee",
+          "src": "/assets/avatar/brick-tee.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "砖红圆领 T 恤 / 水洗直筒牛仔裤 / 奶白低帮运动鞋",
+      "selectedCategory": "tab-top",
+      "scrollWidth": 1440,
+      "file": "default-page.png"
+    },
+    "single-navy-shirt": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "navy-shirt",
+          "layer": "navy-shirt-back",
+          "src": "/assets/wardrobe/tryon/woman-bob/navy-shirt-back.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "navy-shirt",
+          "layer": "neckline",
+          "src": "/assets/wardrobe/tryon/woman-bob/neckline.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "cream-trainers",
+          "layer": "cream-trainers",
+          "src": "/assets/avatar/cream-trainers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "blue-denim",
+          "layer": "blue-denim",
+          "src": "/assets/avatar/blue-denim.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "navy-shirt",
+          "layer": "navy-shirt",
+          "src": "/assets/wardrobe/tryon/woman-bob/navy-shirt.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "深蓝色短袖衬衫 / 水洗直筒牛仔裤 / 奶白低帮运动鞋",
+      "selectedCategory": "tab-top",
+      "scrollWidth": 1440,
+      "file": "single-navy-shirt.png"
+    },
+    "tryon-after": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "navy-shirt",
+          "layer": "navy-shirt-back",
+          "src": "/assets/wardrobe/tryon/woman-bob/navy-shirt-back.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "navy-shirt",
+          "layer": "neckline",
+          "src": "/assets/wardrobe/tryon/woman-bob/neckline.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "cream-trainers",
+          "layer": "cream-trainers",
+          "src": "/assets/avatar/cream-trainers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "blue-denim",
+          "layer": "blue-denim",
+          "src": "/assets/avatar/blue-denim.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "navy-shirt",
+          "layer": "navy-shirt",
+          "src": "/assets/wardrobe/tryon/woman-bob/navy-shirt.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "深蓝色短袖衬衫 / 水洗直筒牛仔裤 / 奶白低帮运动鞋",
+      "selectedCategory": "tab-top",
+      "scrollWidth": 1440,
+      "file": "tryon-after.png"
+    },
+    "single-floral-maxi": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "floral-maxi",
+          "layer": "neckline",
+          "src": "/assets/wardrobe/tryon/woman-bob/neckline.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "cream-trainers",
+          "layer": "cream-trainers",
+          "src": "/assets/avatar/cream-trainers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "floral-maxi",
+          "layer": "floral-maxi",
+          "src": "/assets/wardrobe/tryon/woman-bob/floral-maxi.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "白色碎花长裙 / 奶白低帮运动鞋",
+      "selectedCategory": "tab-dress",
+      "scrollWidth": 1440,
+      "file": "single-floral-maxi.png"
+    },
+    "single-black-trousers": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "cream-trainers",
+          "layer": "cream-trainers",
+          "src": "/assets/avatar/cream-trainers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "black-trousers",
+          "layer": "black-trousers",
+          "src": "/assets/wardrobe/tryon/woman-bob/black-trousers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "brick-tee",
+          "layer": "brick-tee",
+          "src": "/assets/avatar/brick-tee.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "砖红圆领 T 恤 / 黑色直筒裤 / 奶白低帮运动鞋",
+      "selectedCategory": "tab-bottom",
+      "scrollWidth": 1440,
+      "file": "single-black-trousers.png"
+    },
+    "single-ivory-mary-janes": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "ivory-mary-janes",
+          "layer": "mary-jane-insteps",
+          "src": "/assets/wardrobe/tryon/woman-bob/mary-jane-insteps.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "ivory-mary-janes",
+          "layer": "ivory-mary-janes",
+          "src": "/assets/wardrobe/tryon/woman-bob/ivory-mary-janes.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "blue-denim",
+          "layer": "blue-denim",
+          "src": "/assets/avatar/blue-denim.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "brick-tee",
+          "layer": "brick-tee",
+          "src": "/assets/avatar/brick-tee.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "砖红圆领 T 恤 / 水洗直筒牛仔裤 / 米白色玛丽珍鞋",
+      "selectedCategory": "tab-shoes",
+      "scrollWidth": 1440,
+      "file": "single-ivory-mary-janes.png"
+    },
+    "single-gray-joggers": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "cream-trainers",
+          "layer": "cream-trainers",
+          "src": "/assets/avatar/cream-trainers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "gray-joggers",
+          "layer": "gray-joggers",
+          "src": "/assets/wardrobe/tryon/woman-bob/gray-joggers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "brick-tee",
+          "layer": "brick-tee",
+          "src": "/assets/avatar/brick-tee.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "砖红圆领 T 恤 / 浅灰色直腿运动裤 / 奶白低帮运动鞋",
+      "selectedCategory": "tab-bottom",
+      "scrollWidth": 1440,
+      "file": "single-gray-joggers.png"
+    },
+    "single-white-puffer": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "white-puffer",
+          "layer": "white-puffer-back",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-puffer-back.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "cream-trainers",
+          "layer": "cream-trainers",
+          "src": "/assets/avatar/cream-trainers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "blue-denim",
+          "layer": "blue-denim",
+          "src": "/assets/avatar/blue-denim.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "brick-tee",
+          "layer": "brick-tee",
+          "src": "/assets/avatar/brick-tee.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "white-puffer",
+          "layer": "white-puffer",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-puffer.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "砖红圆领 T 恤 / 水洗直筒牛仔裤 / 白色立领羽绒服 / 奶白低帮运动鞋",
+      "selectedCategory": "tab-outerwear",
+      "scrollWidth": 1440,
+      "file": "single-white-puffer.png"
+    },
+    "single-light-blue-jeans": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "cream-trainers",
+          "layer": "cream-trainers",
+          "src": "/assets/avatar/cream-trainers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "light-blue-jeans",
+          "layer": "light-blue-jeans",
+          "src": "/assets/wardrobe/tryon/woman-bob/light-blue-jeans.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "brick-tee",
+          "layer": "brick-tee",
+          "src": "/assets/avatar/brick-tee.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "砖红圆领 T 恤 / 浅蓝色牛仔裤 / 奶白低帮运动鞋",
+      "selectedCategory": "tab-bottom",
+      "scrollWidth": 1440,
+      "file": "single-light-blue-jeans.png"
+    },
+    "single-white-platform-sneakers": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "white-platform-sneakers",
+          "layer": "white-platform-sneakers",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-platform-sneakers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "blue-denim",
+          "layer": "blue-denim",
+          "src": "/assets/avatar/blue-denim.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "brick-tee",
+          "layer": "brick-tee",
+          "src": "/assets/avatar/brick-tee.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "砖红圆领 T 恤 / 水洗直筒牛仔裤 / 白色厚底运动鞋",
+      "selectedCategory": "tab-shoes",
+      "scrollWidth": 1440,
+      "file": "single-white-platform-sneakers.png"
+    },
+    "single-purple-graphic-tee": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "purple-graphic-tee",
+          "layer": "neckline",
+          "src": "/assets/wardrobe/tryon/woman-bob/neckline.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "cream-trainers",
+          "layer": "cream-trainers",
+          "src": "/assets/avatar/cream-trainers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "blue-denim",
+          "layer": "blue-denim",
+          "src": "/assets/avatar/blue-denim.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "purple-graphic-tee",
+          "layer": "purple-graphic-tee",
+          "src": "/assets/wardrobe/tryon/woman-bob/purple-graphic-tee.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "紫色印花 T 恤 / 水洗直筒牛仔裤 / 奶白低帮运动鞋",
+      "selectedCategory": "tab-top",
+      "scrollWidth": 1440,
+      "file": "single-purple-graphic-tee.png"
+    },
+    "look-a": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "purple-graphic-tee",
+          "layer": "neckline",
+          "src": "/assets/wardrobe/tryon/woman-bob/neckline.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "white-platform-sneakers",
+          "layer": "white-platform-sneakers",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-platform-sneakers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "light-blue-jeans",
+          "layer": "light-blue-jeans",
+          "src": "/assets/wardrobe/tryon/woman-bob/light-blue-jeans.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "purple-graphic-tee",
+          "layer": "purple-graphic-tee",
+          "src": "/assets/wardrobe/tryon/woman-bob/purple-graphic-tee.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "紫色印花 T 恤 / 浅蓝色牛仔裤 / 白色厚底运动鞋",
+      "selectedCategory": "tab-shoes",
+      "scrollWidth": 1440,
+      "file": "look-a.png"
+    },
+    "look-a-page": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "purple-graphic-tee",
+          "layer": "neckline",
+          "src": "/assets/wardrobe/tryon/woman-bob/neckline.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "white-platform-sneakers",
+          "layer": "white-platform-sneakers",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-platform-sneakers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "light-blue-jeans",
+          "layer": "light-blue-jeans",
+          "src": "/assets/wardrobe/tryon/woman-bob/light-blue-jeans.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "purple-graphic-tee",
+          "layer": "purple-graphic-tee",
+          "src": "/assets/wardrobe/tryon/woman-bob/purple-graphic-tee.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "紫色印花 T 恤 / 浅蓝色牛仔裤 / 白色厚底运动鞋",
+      "selectedCategory": "tab-shoes",
+      "scrollWidth": 1440,
+      "file": "look-a-page.png"
+    },
+    "look-b": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "ivory-mary-janes",
+          "layer": "mary-jane-insteps",
+          "src": "/assets/wardrobe/tryon/woman-bob/mary-jane-insteps.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "floral-maxi",
+          "layer": "neckline",
+          "src": "/assets/wardrobe/tryon/woman-bob/neckline.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "ivory-mary-janes",
+          "layer": "ivory-mary-janes",
+          "src": "/assets/wardrobe/tryon/woman-bob/ivory-mary-janes.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "floral-maxi",
+          "layer": "floral-maxi",
+          "src": "/assets/wardrobe/tryon/woman-bob/floral-maxi.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "白色碎花长裙 / 米白色玛丽珍鞋",
+      "selectedCategory": "tab-shoes",
+      "scrollWidth": 1440,
+      "file": "look-b.png"
+    },
+    "look-b-page": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "ivory-mary-janes",
+          "layer": "mary-jane-insteps",
+          "src": "/assets/wardrobe/tryon/woman-bob/mary-jane-insteps.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "floral-maxi",
+          "layer": "neckline",
+          "src": "/assets/wardrobe/tryon/woman-bob/neckline.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "ivory-mary-janes",
+          "layer": "ivory-mary-janes",
+          "src": "/assets/wardrobe/tryon/woman-bob/ivory-mary-janes.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "floral-maxi",
+          "layer": "floral-maxi",
+          "src": "/assets/wardrobe/tryon/woman-bob/floral-maxi.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "白色碎花长裙 / 米白色玛丽珍鞋",
+      "selectedCategory": "tab-shoes",
+      "scrollWidth": 1440,
+      "file": "look-b-page.png"
+    },
+    "coat-over-dress": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "ivory-mary-janes",
+          "layer": "mary-jane-insteps",
+          "src": "/assets/wardrobe/tryon/woman-bob/mary-jane-insteps.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "white-puffer",
+          "layer": "white-puffer-back",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-puffer-back.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "floral-maxi",
+          "layer": "neckline",
+          "src": "/assets/wardrobe/tryon/woman-bob/neckline.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "ivory-mary-janes",
+          "layer": "ivory-mary-janes",
+          "src": "/assets/wardrobe/tryon/woman-bob/ivory-mary-janes.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "floral-maxi",
+          "layer": "floral-maxi",
+          "src": "/assets/wardrobe/tryon/woman-bob/floral-maxi.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "white-puffer",
+          "layer": "white-puffer",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-puffer.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "白色碎花长裙 / 白色立领羽绒服 / 米白色玛丽珍鞋",
+      "selectedCategory": "tab-outerwear",
+      "scrollWidth": 1440,
+      "file": "coat-over-dress.png"
+    },
+    "coat-over-dress-page": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "ivory-mary-janes",
+          "layer": "mary-jane-insteps",
+          "src": "/assets/wardrobe/tryon/woman-bob/mary-jane-insteps.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "white-puffer",
+          "layer": "white-puffer-back",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-puffer-back.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "floral-maxi",
+          "layer": "neckline",
+          "src": "/assets/wardrobe/tryon/woman-bob/neckline.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "ivory-mary-janes",
+          "layer": "ivory-mary-janes",
+          "src": "/assets/wardrobe/tryon/woman-bob/ivory-mary-janes.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "floral-maxi",
+          "layer": "floral-maxi",
+          "src": "/assets/wardrobe/tryon/woman-bob/floral-maxi.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "white-puffer",
+          "layer": "white-puffer",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-puffer.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "白色碎花长裙 / 白色立领羽绒服 / 米白色玛丽珍鞋",
+      "selectedCategory": "tab-outerwear",
+      "scrollWidth": 1440,
+      "file": "coat-over-dress-page.png"
+    },
+    "commute": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "ivory-mary-janes",
+          "layer": "mary-jane-insteps",
+          "src": "/assets/wardrobe/tryon/woman-bob/mary-jane-insteps.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "navy-shirt",
+          "layer": "navy-shirt-back",
+          "src": "/assets/wardrobe/tryon/woman-bob/navy-shirt-back.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "navy-shirt",
+          "layer": "neckline",
+          "src": "/assets/wardrobe/tryon/woman-bob/neckline.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "ivory-mary-janes",
+          "layer": "ivory-mary-janes",
+          "src": "/assets/wardrobe/tryon/woman-bob/ivory-mary-janes.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "black-trousers",
+          "layer": "black-trousers",
+          "src": "/assets/wardrobe/tryon/woman-bob/black-trousers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "navy-shirt",
+          "layer": "navy-shirt",
+          "src": "/assets/wardrobe/tryon/woman-bob/navy-shirt.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "深蓝色短袖衬衫 / 黑色直筒裤 / 米白色玛丽珍鞋",
+      "selectedCategory": "tab-dress",
+      "scrollWidth": 1440,
+      "file": "commute.png"
+    },
+    "commute-page": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "ivory-mary-janes",
+          "layer": "mary-jane-insteps",
+          "src": "/assets/wardrobe/tryon/woman-bob/mary-jane-insteps.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "navy-shirt",
+          "layer": "navy-shirt-back",
+          "src": "/assets/wardrobe/tryon/woman-bob/navy-shirt-back.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "navy-shirt",
+          "layer": "neckline",
+          "src": "/assets/wardrobe/tryon/woman-bob/neckline.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "ivory-mary-janes",
+          "layer": "ivory-mary-janes",
+          "src": "/assets/wardrobe/tryon/woman-bob/ivory-mary-janes.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "black-trousers",
+          "layer": "black-trousers",
+          "src": "/assets/wardrobe/tryon/woman-bob/black-trousers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "navy-shirt",
+          "layer": "navy-shirt",
+          "src": "/assets/wardrobe/tryon/woman-bob/navy-shirt.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "深蓝色短袖衬衫 / 黑色直筒裤 / 米白色玛丽珍鞋",
+      "selectedCategory": "tab-dress",
+      "scrollWidth": 1440,
+      "file": "commute-page.png"
+    },
+    "winter": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "ivory-mary-janes",
+          "layer": "mary-jane-insteps",
+          "src": "/assets/wardrobe/tryon/woman-bob/mary-jane-insteps.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "navy-shirt",
+          "layer": "navy-shirt-back",
+          "src": "/assets/wardrobe/tryon/woman-bob/navy-shirt-back.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "white-puffer",
+          "layer": "white-puffer-back",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-puffer-back.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "navy-shirt",
+          "layer": "neckline",
+          "src": "/assets/wardrobe/tryon/woman-bob/neckline.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "ivory-mary-janes",
+          "layer": "ivory-mary-janes",
+          "src": "/assets/wardrobe/tryon/woman-bob/ivory-mary-janes.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "black-trousers",
+          "layer": "black-trousers",
+          "src": "/assets/wardrobe/tryon/woman-bob/black-trousers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "navy-shirt",
+          "layer": "navy-shirt",
+          "src": "/assets/wardrobe/tryon/woman-bob/navy-shirt.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "white-puffer",
+          "layer": "white-puffer",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-puffer.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "深蓝色短袖衬衫 / 黑色直筒裤 / 白色立领羽绒服 / 米白色玛丽珍鞋",
+      "selectedCategory": "tab-outerwear",
+      "scrollWidth": 1440,
+      "file": "winter.png"
+    },
+    "winter-page": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "ivory-mary-janes",
+          "layer": "mary-jane-insteps",
+          "src": "/assets/wardrobe/tryon/woman-bob/mary-jane-insteps.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "navy-shirt",
+          "layer": "navy-shirt-back",
+          "src": "/assets/wardrobe/tryon/woman-bob/navy-shirt-back.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "white-puffer",
+          "layer": "white-puffer-back",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-puffer-back.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "navy-shirt",
+          "layer": "neckline",
+          "src": "/assets/wardrobe/tryon/woman-bob/neckline.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "ivory-mary-janes",
+          "layer": "ivory-mary-janes",
+          "src": "/assets/wardrobe/tryon/woman-bob/ivory-mary-janes.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "black-trousers",
+          "layer": "black-trousers",
+          "src": "/assets/wardrobe/tryon/woman-bob/black-trousers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "navy-shirt",
+          "layer": "navy-shirt",
+          "src": "/assets/wardrobe/tryon/woman-bob/navy-shirt.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "white-puffer",
+          "layer": "white-puffer",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-puffer.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "深蓝色短袖衬衫 / 黑色直筒裤 / 白色立领羽绒服 / 米白色玛丽珍鞋",
+      "selectedCategory": "tab-outerwear",
+      "scrollWidth": 1440,
+      "file": "winter-page.png"
+    },
+    "coat-over-red": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "white-puffer",
+          "layer": "white-puffer-back",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-puffer-back.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "cream-trainers",
+          "layer": "cream-trainers",
+          "src": "/assets/avatar/cream-trainers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "blue-denim",
+          "layer": "blue-denim",
+          "src": "/assets/avatar/blue-denim.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "brick-tee",
+          "layer": "brick-tee",
+          "src": "/assets/avatar/brick-tee.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "white-puffer",
+          "layer": "white-puffer",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-puffer.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "砖红圆领 T 恤 / 水洗直筒牛仔裤 / 白色立领羽绒服 / 奶白低帮运动鞋",
+      "selectedCategory": "tab-outerwear",
+      "scrollWidth": 1440,
+      "file": "coat-over-red.png"
+    },
+    "coat-over-red-page": {
+      "role": "woman-bob",
+      "rect": [
+        196.203125,
+        538.1875
+      ],
+      "labelBox": [
+        -234.453125,
+        469.015625,
+        156.8125,
+        38.796875
+      ],
+      "viewport": [
+        1440,
+        900
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "white-puffer",
+          "layer": "white-puffer-back",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-puffer-back.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "cream-trainers",
+          "layer": "cream-trainers",
+          "src": "/assets/avatar/cream-trainers.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "blue-denim",
+          "layer": "blue-denim",
+          "src": "/assets/avatar/blue-denim.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "brick-tee",
+          "layer": "brick-tee",
+          "src": "/assets/avatar/brick-tee.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "white-puffer",
+          "layer": "white-puffer",
+          "src": "/assets/wardrobe/tryon/woman-bob/white-puffer.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "砖红圆领 T 恤 / 水洗直筒牛仔裤 / 白色立领羽绒服 / 奶白低帮运动鞋",
+      "selectedCategory": "tab-outerwear",
+      "scrollWidth": 1440,
+      "file": "coat-over-red-page.png"
+    },
+    "mobile": {
+      "role": "woman-bob",
+      "rect": [
+        139.953125,
+        383.90625
+      ],
+      "labelBox": [
+        -87.4375,
+        339.921875,
+        76.453125,
+        18.90625
+      ],
+      "viewport": [
+        390,
+        844
+      ],
+      "body": [
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/ankles.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/head.webp",
+        "http://127.0.0.1:4196/assets/local-avatar/woman-bob/arms.webp"
+      ],
+      "sprites": [
+        {
+          "id": "ivory-mary-janes",
+          "layer": "mary-jane-insteps",
+          "src": "/assets/wardrobe/tryon/woman-bob/mary-jane-insteps.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "floral-maxi",
+          "layer": "neckline",
+          "src": "/assets/wardrobe/tryon/woman-bob/neckline.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "ivory-mary-janes",
+          "layer": "ivory-mary-janes",
+          "src": "/assets/wardrobe/tryon/woman-bob/ivory-mary-janes.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        },
+        {
+          "id": "floral-maxi",
+          "layer": "floral-maxi",
+          "src": "/assets/wardrobe/tryon/woman-bob/floral-maxi.webp",
+          "natural": [
+            560,
+            1536
+          ],
+          "computedTransform": "matrix(1, 0, 0, 1, 0, 0)",
+          "clipPath": "none",
+          "objectFit": "fill"
+        }
+      ],
+      "text": "白色碎花长裙 / 米白色玛丽珍鞋",
+      "selectedCategory": "tab-outerwear",
+      "scrollWidth": 390,
+      "file": "mobile.png"
+    }
+  }
+}
