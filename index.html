@@ -4,12 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f9f7f1">
-    <meta name="description" content="WearMate 2D 穿搭工作台，在同一个形象上自由试搭。">
-    <title>穿搭工作台 · WearMate</title>
+    <meta name="description" content="WearMate 3D 人物工作台，旋转、缩放并导出由照片生成的 GLB 人物模型。">
+    <title>3D 工作台 · WearMate</title>
     <link rel="icon" type="image/svg+xml" href="./assets/mark.svg">
     <link rel="stylesheet" href="./src/theme.css">
     <link rel="stylesheet" href="./src/studio.css">
-    <link rel="stylesheet" href="./src/today/today.css">
+    <link rel="stylesheet" href="./src/3d/viewer.css">
+    <script type="importmap">{"imports":{"three":"/vendor/three/build/three.module.js","three/addons/":"/vendor/three/examples/jsm/"}}</script>
     <script type="module" src="./src/studio.mjs"></script>
   </head>
   <body>
@@ -20,8 +21,8 @@
           <span>WearMate<span class="brand-period">.</span></span>
         </a>
         <nav class="site-nav" aria-label="主导航">
-          <a class="site-link" href="./create.html">创建分身</a>
-          <a class="current-section" href="./" aria-current="page">穿搭工作台</a>
+          <a class="site-link" href="./create.html">创建 3D 分身</a>
+          <a class="current-section" href="./" aria-current="page">3D 工作台</a>
           <a class="site-link" href="./wardrobe.html">我的衣橱</a>
         </nav>
       </div>
@@ -30,82 +31,65 @@
     <main class="container studio">
       <div class="intro">
         <div>
-          <p class="eyebrow intro-label">2D FITTING STUDIO</p>
-          <h1>穿搭工作台</h1>
+          <p class="eyebrow intro-label">3D AVATAR WORKBENCH</p>
+          <h1>3D 人物工作台</h1>
         </div>
-        <a id="today-entry" href="./?view=today" hidden>今日穿搭 <span aria-hidden="true">↗</span></a>
-        <p class="intro-note">从一套造型开始，<br class="desktop-break">换一件单品，试出自己的搭配。</p>
+        <p class="intro-note">查看你的试衣分身，<br class="desktop-break">旋转检查体型，进入衣橱搭配。</p>
       </div>
 
-      <section id="weather-panel" aria-label="今日天气" hidden>
-        <div class="weather-controls">
-          <label>城市<select id="weather-city"></select></label>
-          <label>天气来源<select id="weather-mode"><option value="live">实时预报</option></select></label>
-          <button id="weather-retry" type="button">重新获取</button>
-        </div>
-        <p id="weather-status" role="status"></p>
-        <div id="weather-summary" hidden>
-          <strong id="weather-degree"></strong>
-          <div><strong id="weather-condition"></strong><p id="weather-range"></p></div>
-          <div class="weather-detail"><p id="weather-hint"></p><p id="weather-values"></p><p id="weather-source"></p></div>
-        </div>
-      </section>
       <div class="studio-grid">
         <figure class="look" id="fitting-room" tabindex="-1">
           <div class="stage">
             <div class="stage-frame" aria-hidden="true"></div>
             <div class="stage-light" aria-hidden="true"></div>
-            <div class="floor-shadow" aria-hidden="true"></div>
-            <div id="avatar" class="avatar" role="img" aria-label="示例角色 Mila"></div>
-            <div class="stage-label"><strong id="stage-role-name">Mila</strong><span id="stage-role-type">示例模特</span></div>
+            <div id="avatar-viewer" class="model-viewport"></div>
+            <span id="avatar-empty" class="model-empty">尚未创建 3D 分身</span>
+            <div class="stage-label"><strong id="stage-role-name">3D</strong><span id="stage-role-type">试衣分身</span></div>
           </div>
           <figcaption class="look-caption">
             <div class="current-look" aria-live="polite" aria-atomic="true">
-              <div class="caption-title"><span class="status-dot" aria-hidden="true"></span><span class="caption-label">当前造型</span><strong id="look-name">舒适休闲</strong></div>
-              <span id="look-details" class="look-details"></span>
+              <div class="caption-title"><span class="status-dot" aria-hidden="true"></span><span class="caption-label">模型状态</span><strong id="model-state">等待创建</strong></div>
+              <span id="model-summary" class="look-details"></span>
             </div>
-            <a class="mobile-jump" href="#wardrobe">选单品</a>
           </figcaption>
         </figure>
 
-        <aside class="controls" aria-label="穿搭选择">
-          <section id="today-recommendations" hidden aria-label="今日推荐">
-            <div class="section-heading"><h2>推荐穿搭</h2><a class="adjust-link" href="./">手动调整 ↗</a></div>
-            <div id="weather-plans"></div><div id="weather-notes" role="status"></div>
-            <p id="plan-feedback" role="status"></p>
-          </section>
-          <section class="control-section" aria-labelledby="outfits-title">
-            <div class="section-heading">
-              <h2 id="outfits-title">预设搭配</h2>
+        <aside class="controls" aria-label="3D 模型操作">
+          <section class="control-section">
+            <div class="section-heading"><h2>模型操作</h2></div>
+            <div class="model-toolbar workbench-toolbar">
+              <a class="primary-model-action" href="./create.html">创建 / 更换 3D 分身</a>
+              <button id="studio-reset" type="button" disabled>重置视角</button>
+              <button id="studio-rotate" type="button" aria-pressed="false" disabled>自动旋转</button>
+              <button id="studio-download" type="button" hidden>下载 GLB</button>
             </div>
-            <div id="outfits" class="outfit-list" aria-label="一键切换全套服装"></div>
+            <p id="studio-status" class="model-meta" role="status">选择创建方式，生成并确认你的试衣分身。</p>
+            <p id="studio-error" class="asset-error" role="alert" hidden></p>
           </section>
 
-          <section class="control-section wardrobe" id="wardrobe" aria-labelledby="wardrobe-title" tabindex="-1">
-            <div class="section-heading">
-              <h2 id="wardrobe-title">精选单品</h2>
-              <a class="mobile-jump" href="#fitting-room">查看试穿效果</a>
-            </div>
-            <div id="categories" class="categories" role="tablist" aria-label="服装分类"></div>
-            <p id="tryon-feedback" class="tryon-feedback" role="status" hidden></p>
-            <div id="garments" class="garment-list" role="tabpanel" tabindex="0"></div>
-            <p id="asset-error" class="asset-error" role="status" hidden></p>
+          <section class="control-section">
+            <div class="section-heading"><h2>分身资料</h2></div>
+            <dl class="model-info-list">
+              <div><dt>格式</dt><dd id="profile-format">—</dd></div>
+              <div><dt>身高记录</dt><dd id="profile-height">—</dd></div>
+              <div><dt>体重记录</dt><dd id="profile-weight">—</dd></div>
+              <div><dt>重建方式</dt><dd id="profile-method">—</dd></div>
+            </dl>
+            <p id="studio-approximation" class="model-warning" hidden>当前模型来自单张照片。完整身体、侧脸和背面包含 AI 推测，不能作为精确人体测量或身份认证依据。</p>
           </section>
 
-          <section class="control-section save-look" aria-labelledby="save-look-title">
-            <div class="section-heading"><h2 id="save-look-title">保存穿搭</h2></div>
-            <form id="save-look-form">
-              <label for="look-title">穿搭名称</label>
-              <div class="save-look-row">
-                <input id="look-title" name="name" type="text" maxlength="45" placeholder="例如 周末出门" required>
-                <button type="submit" id="save-look-button" disabled>保存</button>
-              </div>
-            </form>
-            <p id="saved-look-status" class="tryon-feedback" role="status" hidden></p>
-            <details id="saved-looks" hidden>
-              <summary>已保存的穿搭</summary>
-              <ul id="saved-look-list"></ul>
-            </details>
+          <section class="control-section">
+            <div class="section-heading"><h2>3D 服装试穿</h2></div>
+            <p class="model-meta">六件服装可独立切换，本地人台和服装使用同一组体型参数。</p>
+            <a class="wardrobe-catalog-link" href="./wardrobe.html">打开 3D 试衣间 ↗</a>
+          </section>
+          <section id="reference-panel" class="control-section" hidden>
+            <div class="section-heading"><h2>外观参考</h2></div>
+            <p class="model-meta">自选正脸或全身参考照，同意后交给 Tripo 处理。参考可单独预览，试穿使用本地人台。</p>
+            <div class="model-toolbar workbench-toolbar">
+              <a href="./appearance.html" id="enhance">选择照片并增强外观</a>
+              <button id="switch-model" type="button" hidden>查看外观参考</button>
+            </div>
           </section>
         </aside>
       </div>

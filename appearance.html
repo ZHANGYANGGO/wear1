@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f9f7f1">
+    <meta name="description" content="上传同一人物的照片，通过云端 AI 生成可旋转、可导出的 3D 人物模型。">
+    <title>外观参考 · WearMate</title>
+    <link rel="icon" type="image/svg+xml" href="./assets/mark.svg">
+    <link rel="stylesheet" href="./src/theme.css">
+    <link rel="stylesheet" href="./src/studio.css">
+    <link rel="stylesheet" href="./src/3d/viewer.css">
+    <link rel="stylesheet" href="./src/create/create.css">
+    <script type="importmap">{"imports":{"three":"/vendor/three/build/three.module.js","three/addons/":"/vendor/three/examples/jsm/"}}</script>
+    <script type="module" src="./src/create/appearance.mjs"></script>
+  </head>
+  <body>
+    <header class="masthead">
+      <div class="container masthead-inner">
+        <a class="brand" href="./" aria-label="WearMate 工作台首页">
+          <img src="./assets/mark.svg" width="32" height="32" alt="">
+          <span>WearMate<span class="brand-period">.</span></span>
+        </a>
+        <nav class="site-nav" aria-label="主导航">
+          <a class="site-link" href="./create.html">创建 3D 分身</a>
+          <a class="site-link" href="./">3D 工作台</a>
+          <a class="site-link" href="./wardrobe.html">我的衣橱</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container studio">
+      <div class="intro">
+        <div>
+          <p class="eyebrow intro-label">3D AVATAR STUDIO</p>
+          <h1>生成外观参考</h1>
+        </div>
+        <p class="intro-note">使用清晰正脸生成头部外观参考，可补充相同取景的侧面和背面。<br>需要全身参考时，所有照片均使用全身取景。</p>
+      </div>
+
+      <div class="create-grid">
+        <section class="create-inputs" aria-labelledby="inputs-title">
+          <div class="section-heading"><h2 id="inputs-title">选择发给云端的参考照</h2></div>
+          <form id="create-form" autocomplete="off" novalidate>
+            <div class="view-uploads" aria-describedby="photo-guide">
+              <div class="upload-box" data-slot="front">
+                <label for="ref-front"><strong>正面参考照 <span>必需</span></strong></label>
+                <img data-preview="front" alt="正面照片预览" hidden>
+                <span class="upload-copy">正脸清晰，避免遮挡</span>
+                <input disabled id="ref-front" data-view="front" name="front" type="file" accept="image/jpeg,image/png" required>
+              </div>
+              <div class="upload-box" data-slot="left">
+                <label for="ref-left"><strong>左侧参考照 <span>可选</span></strong></label>
+                <img data-preview="left" alt="左侧照片预览" hidden>
+                <span class="upload-copy">同一人物、服装和站姿</span>
+                <input disabled id="ref-left" data-view="left" name="left" type="file" accept="image/jpeg,image/png">
+              </div>
+              <div class="upload-box" data-slot="back">
+                <label for="ref-back"><strong>背面参考照 <span>可选</span></strong></label>
+                <img data-preview="back" alt="背面照片预览" hidden>
+                <span class="upload-copy">同一人物、服装和站姿</span>
+                <input disabled id="ref-back" data-view="back" name="back" type="file" accept="image/jpeg,image/png">
+              </div>
+              <div class="upload-box" data-slot="right">
+                <label for="ref-right"><strong>右侧参考照 <span>可选</span></strong></label>
+                <img data-preview="right" alt="右侧照片预览" hidden>
+                <span class="upload-copy">同一人物、服装和站姿</span>
+                <input disabled id="ref-right" data-view="right" name="right" type="file" accept="image/jpeg,image/png">
+              </div>
+            </div>
+            <p id="photo-guide" class="field-guide">JPEG 或 PNG，每张最大 10 MB。头部参考使用相同取景的正脸和可选侧、背面照。全身参考则使用同一站姿的全身照。单张照片的遮挡区域由云端估计。</p>
+            <div class="measurements">
+              <div class="measure">
+                <label for="height">身高（cm）</label>
+                <input id="height" name="height" type="number" readonly step="any" inputmode="decimal" placeholder="例如 170" required>
+              </div>
+              <div class="measure">
+                <label for="weight">体重（kg）</label>
+                <input id="weight" name="weight" type="number" readonly step="any" inputmode="decimal" placeholder="例如 65" required>
+              </div>
+            </div>
+            <p class="field-guide">此处显示当前试衣人台的身高体重。云端单独生成外观参考，衣橱继续使用本地人台。</p>
+            <label class="consent"><input id="consent" type="checkbox" required> <span>我同意将所选照片上传至 <strong>阿里云百炼（Tripo）</strong>生成独立外观参考，并了解会产生服务额度消耗。</span></label>
+            <button id="generate" class="create-action primary-action" type="submit" disabled>上传并生成外观参考</button>
+          </form>
+          <p id="create-status" class="create-status" role="status">正在检查云端 3D 服务配置…</p>
+          <progress id="generation-progress" max="100" value="0" hidden aria-label="3D 生成进度"></progress>
+          <p id="create-error" class="asset-error" role="alert" hidden></p>
+          <aside class="local-note" aria-label="服务与隐私">
+            <strong>按需云端重建</strong>
+            <p>密钥仅由本机 Node 服务读取。生成结果是带贴图的 GLB 网格，可旋转查看并下载；服装试穿继续使用本地拟合的分身。</p>
+          </aside>
+        </section>
+
+        <section class="create-preview" aria-labelledby="preview-title">
+          <div class="section-heading">
+            <h2 id="preview-title" tabindex="-1">外观参考预览</h2>
+            <span id="preview-source" class="preview-source" hidden></span>
+          </div>
+          <div class="stage candidate-stage">
+            <div class="stage-frame" aria-hidden="true"></div>
+            <div class="stage-light" aria-hidden="true"></div>
+            <div id="candidate-viewer" class="model-viewport"></div>
+            <span id="candidate-empty" class="model-empty">生成后可在这里拖动旋转、滚轮缩放</span>
+          </div>
+          <div class="preview-caption">
+            <p id="model-meta" class="model-meta">尚未生成模型。</p>
+            <p id="approximation-note" class="model-warning" hidden>这是单图近似重建，不是完整人体扫描。未拍摄到的身体、侧后方和背面由 AI 推测。</p>
+          </div>
+          <div id="preview-actions" class="preview-actions" hidden>
+            <button id="reset-view" class="create-action" type="button">重置视角</button>
+            <button id="auto-rotate" class="create-action" type="button" aria-pressed="false">自动旋转</button>
+            <a id="download-model" class="create-action" href="#">下载 GLB</a>
+            <button id="confirm" class="create-action primary-action" type="button">将参考关联到试衣分身</button>
+          </div>
+          <button id="regenerate" class="create-action regenerate-action" type="button" hidden>重新生成（会创建新的计费任务）</button>
+        </section>
+      </div>
+    <dialog id="camera-dialog" aria-labelledby="camera-label">
+      <h2 id="camera-label">拍摄照片</h2><video autoplay playsinline muted></video>
+      <p id="camera-status" role="status"></p>
+      <div class="model-toolbar"><button type="button" id="shoot">使用这张照片</button><button type="button" id="close-camera">关闭摄像头</button></div>
+    </dialog>
+    </main>
+  </body>
+</html>

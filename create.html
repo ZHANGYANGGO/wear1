@@ -4,11 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#f9f7f1">
-    <title>创建分身 · WearMate</title>
+    <meta name="description" content="选择建模方式，在本地生成可试衣的分身。">
+    <title>创建 3D 分身 · WearMate</title>
     <link rel="icon" type="image/svg+xml" href="./assets/mark.svg">
     <link rel="stylesheet" href="./src/theme.css">
     <link rel="stylesheet" href="./src/studio.css">
+    <link rel="stylesheet" href="./src/3d/viewer.css">
     <link rel="stylesheet" href="./src/create/create.css">
+    <script type="importmap">{"imports":{"three":"/vendor/three/build/three.module.js","three/addons/":"/vendor/three/examples/jsm/"}}</script>
     <script type="module" src="./src/create/create.mjs"></script>
   </head>
   <body>
@@ -19,8 +22,8 @@
           <span>WearMate<span class="brand-period">.</span></span>
         </a>
         <nav class="site-nav" aria-label="主导航">
-          <a class="current-section" href="./create.html" aria-current="page">创建分身</a>
-          <a class="site-link" href="./">穿搭工作台</a>
+          <a class="current-section" href="./create.html" aria-current="page">创建 3D 分身</a>
+          <a class="site-link" href="./">3D 工作台</a>
           <a class="site-link" href="./wardrobe.html">我的衣橱</a>
         </nav>
       </div>
@@ -29,73 +32,81 @@
     <main class="container studio">
       <div class="intro">
         <div>
-          <p class="eyebrow intro-label">AVATAR STUDIO</p>
-          <h1>创建分身</h1>
+          <p class="eyebrow intro-label">3D AVATAR STUDIO</p>
+          <h1>创建 3D 分身</h1>
         </div>
-        <p class="intro-note">选一张清晰的半身照，填写身高和体重，<br class="desktop-break">预览后即可到工作台试穿。</p>
+        <p class="intro-note">按需要选择体型数据。<br>试衣分身在当前浏览器中生成。</p>
       </div>
 
       <div class="create-grid">
         <section class="create-inputs" aria-labelledby="inputs-title">
-          <div class="section-heading">
-            <h2 id="inputs-title">照片与身材信息</h2>
-          </div>
-          <form id="create-form" autocomplete="off" novalidate>
-            <div class="upload-box">
-              <label for="photo">半身正面照</label>
-              <p id="photo-guide">单人正面，头脸和肩部清晰可见。JPEG、PNG 或 WebP，最大 10 MB。</p>
-              <input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="photo-guide" required>
-            </div>
+          <div class="section-heading"><h2 id="inputs-title">建模方式</h2></div>
+          <form id="create-form">
+            <fieldset class="tier-grid" aria-label="选择建模方式">
+              <label><input type="radio" name="tier" value="quick" checked><span><strong>快速人台</strong><small>身高、体重与手动微调</small></span></label>
+              <label><input type="radio" name="tier" value="photos"><span><strong>双视角拟合</strong><small>正面与侧面全身照</small></span></label>
+              <label><input type="radio" name="tier" value="measured"><span><strong>实测围度</strong><small>双视角照片与胸腰臀围</small></span></label>
+              <label><input type="radio" name="tier" value="appearance"><span><strong>外观增强</strong><small>本地人台与可选云端参考</small></span></label>
+            </fieldset>
             <div class="measurements">
-              <div class="measure">
-                <label for="height">身高（cm）</label>
-                <input id="height" name="height" type="number" step="any" inputmode="decimal" placeholder="例如 170" required>
-              </div>
-              <div class="measure">
-                <label for="weight">体重（kg）</label>
-                <input id="weight" name="weight" type="number" step="any" inputmode="decimal" placeholder="例如 65" required>
-              </div>
+              <label class="measure">身高（cm）<input id="height" type="number" min="80" max="250" step="any" placeholder="例如 170" required></label>
+              <label class="measure">体重（kg）<input id="weight" type="number" min="20" max="300" step="any" placeholder="例如 65" required></label>
             </div>
-            <button id="generate" class="create-action primary-action" type="submit" disabled>创建分身</button>
+            <fieldset id="adjustments"><legend>体型微调</legend>
+              <label>肩宽 <input type="range" name="shoulders" min="-25" max="25" value="0"><output>0%</output></label>
+              <label>腰腹 <input type="range" name="waist" min="-25" max="25" value="0"><output>0%</output></label>
+              <label>臀部 <input type="range" name="hips" min="-25" max="25" value="0"><output>0%</output></label>
+            </fieldset>
+            <fieldset id="local-photos" hidden disabled><legend>本地轮廓照片</legend>
+              <p class="field-guide">镜头固定，头脚完整入镜，穿合身衣物，双臂稍离躯干。先正对镜头，再原地转身 90°。每张 JPEG 或 PNG 最大 10 MB。</p>
+              <div class="view-uploads">
+                <div class="upload-box"><label for="front-file">正面全身照</label><img data-preview="front" hidden alt="正面预览"><input id="front-file" data-view="front" type="file" accept="image/jpeg,image/png" required></div>
+                <div class="upload-box"><label for="side-file">侧面全身照</label><img data-preview="side" hidden alt="侧面预览"><input id="side-file" data-view="side" type="file" accept="image/jpeg,image/png" required></div>
+              </div>
+            </fieldset>
+            <fieldset id="girths" hidden disabled><legend>软尺实测（cm）</legend>
+              <div class="measurements">
+                <label class="measure">胸围<input type="number" name="chest" min="35" max="220" step="any"></label>
+                <label class="measure">腰围<input type="number" name="waistGirth" min="35" max="220" step="any"></label>
+                <label class="measure">臀围<input type="number" name="hipGirth" min="35" max="220" step="any"></label>
+              </div>
+            </fieldset>
+            <p id="tier-guide" class="field-guide"></p>
+            <button id="generate" disabled class="create-action primary-action" type="submit">生成本地试衣分身</button>
           </form>
-          <p id="create-status" class="create-status" role="status">选择照片并填写两项数值。</p>
+          <p id="create-status" class="create-status" role="status"></p>
           <p id="create-error" class="asset-error" role="alert" hidden></p>
-          <aside class="local-note" aria-label="当前生成范围">
-            <strong>本地预生成演示模式</strong>
-            <p>请使用四张指定参考照中的原文件。匹配后会直接预览对应分身。确认时保存身高、体重，预制体型按素材显示。照片在浏览器中匹配。</p>
-          </aside>
         </section>
 
         <section class="create-preview" aria-labelledby="preview-title">
           <div class="section-heading">
-            <h2 id="preview-title" tabindex="-1">分身预览</h2>
+            <h2 id="preview-title" tabindex="-1">3D 模型预览</h2>
             <span id="preview-source" class="preview-source" hidden></span>
           </div>
-          <div class="preview-grid">
-            <figure>
-              <div class="photo-frame">
-                <img id="uploaded-preview" alt="已选半身照片" hidden>
-                <span id="photo-empty">选择照片后显示</span>
-              </div>
-              <figcaption>原始半身照</figcaption>
-            </figure>
-            <figure>
-              <div class="stage candidate-stage">
-                <div class="stage-frame" aria-hidden="true"></div>
-                <div class="stage-light" aria-hidden="true"></div>
-                <div class="floor-shadow" aria-hidden="true"></div>
-                <div id="candidate-avatar" class="avatar" role="img" hidden></div>
-                <span id="candidate-empty">全身分身将在这里显示</span>
-              </div>
-              <figcaption>2D 分身</figcaption>
-            </figure>
+          <div class="stage candidate-stage">
+            <div class="stage-frame" aria-hidden="true"></div>
+            <div class="stage-light" aria-hidden="true"></div>
+            <div id="candidate-viewer" class="model-viewport"></div>
+            <span id="candidate-empty" class="model-empty">生成后可在这里拖动旋转、滚轮缩放</span>
+          </div>
+          <div class="preview-caption">
+            <p id="model-meta" class="model-meta">尚未生成模型。</p>
+
           </div>
           <div id="preview-actions" class="preview-actions" hidden>
-            <button id="regenerate" class="create-action" type="button">重新匹配</button>
-            <button id="confirm" class="create-action primary-action" type="button">确认使用该分身</button>
+            <button id="reset-view" class="create-action" type="button">重置视角</button>
+            <button id="auto-rotate" class="create-action" type="button" aria-pressed="false">自动旋转</button>
+            <button id="download-model" class="create-action" type="button">下载人台 GLB</button>
+            <button id="confirm" class="create-action primary-action" type="button">在 3D 工作台使用</button>
           </div>
+
         </section>
       </div>
+    <dialog id="camera-dialog" aria-labelledby="camera-label">
+      <h2 id="camera-label">拍摄照片</h2><video autoplay playsinline muted></video>
+      <p id="camera-status" role="status"></p>
+      <div class="model-toolbar"><button type="button" id="shoot">使用这张照片</button><button type="button" id="close-camera">关闭摄像头</button></div>
+    </dialog>
     </main>
   </body>
 </html>

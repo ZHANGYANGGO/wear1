@@ -3,3 +3,8 @@
 # Local acceptance captures can include product reference photos.
 /stage2-wardrobe-evidence/
 /stage3-tryon-evidence/
+
+# Local AI credentials and private face/body reconstruction results.
+.env
+.private/
+node_modules/

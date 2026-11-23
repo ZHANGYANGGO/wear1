@@ -44,6 +44,7 @@ h2 { font-size: 1.55rem; line-height: 1.2; }
   background: var(--stage-bg);
   overflow: hidden;
   border-radius: var(--radius);
+  touch-action: none;
 }
 .stage-frame { position: absolute; z-index: -1; inset: .85rem; border: 1px solid color-mix(in srgb, var(--stage-rule) 31%, transparent); pointer-events: none; }
 .stage-light {

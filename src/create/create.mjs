@@ -1,181 +1,157 @@
-import { openPhoto, measurement } from './photo.mjs';
-import { avatarProvider, confirmProfile, readConfirmedProfile } from './profiles.mjs';
-import { preparePreview } from './preview.mjs';
+import { createModelViewer } from '../3d/viewer.mjs';
+import { fitBody, tiers } from '../3d/fitting.mjs';
+import { confirmModel, readConfirmedModel } from '../3d/profile.mjs';
+import { downloadBody } from '../3d/download.mjs';
+import { openPhoto } from './photo.mjs';
+import { installCamera } from './camera.mjs';
+import { analyzePhoto } from './silhouette.mjs';
 
-const form = document.querySelector('#create-form');
-const photoInput = document.querySelector('#photo');
-const heightInput = document.querySelector('#height');
-const weightInput = document.querySelector('#weight');
-const generate = document.querySelector('#generate');
-const status = document.querySelector('#create-status');
-const errorBox = document.querySelector('#create-error');
-const photoPreview = document.querySelector('#uploaded-preview');
-const photoEmpty = document.querySelector('#photo-empty');
-const candidateEmpty = document.querySelector('#candidate-empty');
-const source = document.querySelector('#preview-source');
-const actions = document.querySelector('#preview-actions');
-let candidateStage = document.querySelector('#candidate-avatar');
-let photo = null;
-let candidate = null;
-let checkingPhoto = false;
-let generating = false;
-let lastUpload = 0;
-let lastGeneration = 0;
-const previousProfile = readConfirmedProfile();
-if (previousProfile) {
-  heightInput.value = previousProfile.heightCm;
-  weightInput.value = previousProfile.weightKg;
+const byId = id => document.getElementById(id);
+const form = byId('create-form');
+const inputs = [...form.querySelectorAll('[data-view]')];
+const photos = new Map();
+const status = byId('create-status');
+const error = byId('create-error');
+let revision = 0, busy = false, checking = 0, candidate, viewer;
+const previous = readConfirmedModel();
+if (previous) {
+  byId('height').value = previous.heightCm;
+  byId('weight').value = previous.weightKg;
 }
-
-function error(message = '') {
-  errorBox.textContent = message;
-  errorBox.hidden = !message;
+try { viewer = createModelViewer(byId('candidate-viewer')); }
+catch { status.textContent = '请在支持 WebGL 的浏览器中启用硬件加速。'; }
+const guides = {
+  quick: '使用身高和体重估计体型，可调节肩宽、腰腹和臀部。',
+  photos: '两张照片仅在本页分析。宽松服装会影响轮廓估计。',
+  measured: '在自然站立时用软尺测量三处围度，水平绕一圈。围度将约束双视角拟合结果。',
+  appearance: '先用正侧面照建立试衣分身，围度可选。确认后可另选清晰正脸等参考照，自主决定是否提交云端增强。',
+};
+function refresh() {
+  byId('generate').disabled = !viewer || busy || checking > 0;
+  byId('confirm').disabled = !candidate || busy;
 }
-
-function clearPhoto() {
-  if (photo) URL.revokeObjectURL(photo.url);
-  photo = null;
-  photoPreview.removeAttribute('src');
-  photoPreview.hidden = true;
-  photoEmpty.hidden = false;
-}
-
-function clearCandidate() {
+function invalidate() {
+  revision++;
   candidate = null;
-  candidateStage.replaceChildren();
-  candidateStage.hidden = true;
-  candidateEmpty.hidden = false;
-  source.hidden = true;
-  actions.hidden = true;
+  viewer?.clear();
+  byId('candidate-empty').hidden = false;
+  byId('preview-actions').hidden = true;
+  byId('preview-source').hidden = true;
+  byId('model-meta').textContent = '尚未生成模型。';
+  if (viewer) status.textContent = '';
+  error.hidden = true;
+  refresh();
 }
-
-function refreshForm() {
-  generate.hidden = !!candidate;
-  generate.disabled = generating || checkingPhoto || !photo
-    || !measurement(heightInput.value) || !measurement(weightInput.value);
-  for (const input of [photoInput, heightInput, weightInput]) input.disabled = generating;
-  form.setAttribute('aria-busy', String(generating || checkingPhoto));
-}
-
-function idleStatus() {
-  const measures = [[heightInput, '身高'], [weightInput, '体重']];
-  const invalid = measures.filter(([input]) => input.validity.badInput
-    || (input.value !== '' && !measurement(input.value)));
-  for (const [input] of measures) input.setAttribute('aria-invalid', String(invalid.some(([field]) => field === input)));
-  if (invalid.length) status.textContent = `${invalid.map(([, label]) => label).join('和')}请输入有效的正数。`;
-  else if (!photo) status.textContent = '选择照片并填写两项数值。';
-  else if (measures.every(([input]) => measurement(input.value))) status.textContent = '信息已齐全，可以创建分身。';
-  else status.textContent = '照片已就绪。填写身高和体重后可预览分身。';
-}
-
-photoInput.addEventListener('change', async () => {
-  const request = ++lastUpload;
-  clearCandidate();
-  clearPhoto();
-  error();
-  const file = photoInput.files[0];
-  checkingPhoto = !!file;
-  refreshForm();
-  if (!file) { idleStatus(); return; }
-  status.textContent = '正在检查照片…';
-  try {
-    const selected = await openPhoto(file);
-    if (request !== lastUpload) { URL.revokeObjectURL(selected.url); return; }
-    photo = selected;
-    photoPreview.src = photo.url;
-    photoPreview.hidden = false;
-    photoEmpty.hidden = true;
-    idleStatus();
-  } catch (failure) {
-    if (request !== lastUpload) return;
-    photoInput.value = '';
-    status.textContent = '请重新选择照片。';
-    error(failure.message);
-  } finally {
-    if (request === lastUpload) {
-      checkingPhoto = false;
-      refreshForm();
-    }
+function updateTier() {
+  const tier = form.elements.tier.value;
+  for (const [id, show] of [['adjustments', tier === 'quick'], ['local-photos', tier !== 'quick'], ['girths', ['measured','appearance'].includes(tier)]]) {
+    byId(id).hidden = !show;
+    byId(id).disabled = !show;
   }
+  for (const input of byId('girths').querySelectorAll('input')) input.required = tier === 'measured';
+  byId('tier-guide').textContent = guides[tier];
+  byId('confirm').textContent = tier === 'appearance' ? '确认分身，查看外观增强选项' : '在工作台使用';
+}
+form.addEventListener('input', event => {
+  invalidate();
+  if (event.target.name === 'tier') updateTier();
+  if (event.target.type === 'range') event.target.nextElementSibling.value = event.target.value + '%';
 });
-
-for (const input of [heightInput, weightInput]) {
-  input.addEventListener('input', () => {
-    clearCandidate();
-    error();
-    idleStatus();
-    refreshForm();
+installCamera(inputs);
+for (const input of inputs) {
+  let version = 0;
+  input.addEventListener('change', async () => {
+    const current = ++version, key = input.dataset.view;
+    invalidate();
+    const old = photos.get(key);
+    if (old) URL.revokeObjectURL(old.url);
+    photos.delete(key);
+    const preview = form.querySelector('[data-preview="' + key + '"]');
+    preview.hidden = true;
+    preview.removeAttribute('src');
+    const file = input.files[0];
+    if (!file) return;
+    checking++;
+    refresh();
+    try {
+      const photo = await openPhoto(file);
+      if (current !== version) { URL.revokeObjectURL(photo.url); return; }
+      if (!['image/jpeg','image/png'].includes(photo.type)) {
+        URL.revokeObjectURL(photo.url);
+        throw new Error('请选择 JPEG 或 PNG 照片。');
+      }
+      photos.set(key, photo);
+      preview.src = photo.url;
+      preview.hidden = false;
+    } catch (failure) {
+      if (current === version) { input.value = ''; error.textContent = failure.message; error.hidden = false; }
+    } finally { checking--; refresh(); }
   });
 }
-
-async function buildCandidate() {
-  if (generating || checkingPhoto || !photo
-    || !measurement(heightInput.value) || !measurement(weightInput.value)) return;
-  clearCandidate();
-  error();
-  const request = ++lastGeneration;
-  generating = true;
-  status.textContent = '正在准备分身…';
-  candidateEmpty.textContent = '正在准备分身…';
-  refreshForm();
-  try {
-    const heightCm = measurement(heightInput.value);
-    const weightKg = measurement(weightInput.value);
-    const bundle = await avatarProvider.resolve({ photo: photo.buffer, heightCm, weightKg });
-    if (request !== lastGeneration) return;
-    const { next } = await preparePreview(candidateStage, bundle);
-    if (request !== lastGeneration) return;
-    candidateStage.replaceWith(next);
-    candidateStage = next;
-    candidateStage.hidden = false;
-    candidateEmpty.hidden = true;
-    candidate = { id: bundle.id, heightCm, weightKg };
-    source.textContent = bundle.sourceLabel;
-    source.hidden = false;
-    actions.hidden = false;
-    status.textContent = '本地预览已就绪。确认后可进入穿搭工作台。';
-    document.querySelector('#preview-title').focus();
-  } catch (failure) {
-    if (request === lastGeneration) {
-      status.textContent = '';
-      error(failure.message);
-    }
-  } finally {
-    if (request === lastGeneration) {
-      generating = false;
-      candidateEmpty.textContent = '全身分身将在这里显示';
-      refreshForm();
-    }
-  }
-}
-
-form.addEventListener('submit', event => {
+form.addEventListener('submit', async event => {
   event.preventDefault();
-  buildCandidate();
-});
-document.querySelector('#regenerate').addEventListener('click', buildCandidate);
-document.querySelector('#confirm').addEventListener('click', () => {
-  if (!candidate || generating) return;
+  if (busy || checking || !viewer || !form.reportValidity()) return;
+  invalidate();
+  const current = revision;
+  const data = new FormData(form);
+  const tier = data.get('tier');
+  const optional = name => data.get(name) ? Number(data.get(name)) : null;
+  const input = {
+    tier, heightCm: byId('height').valueAsNumber, weightKg: byId('weight').valueAsNumber,
+    girths: { chest: optional('chest'), waist: optional('waistGirth'), hips: optional('hipGirth') },
+    adjust: Object.fromEntries(['shoulders','waist','hips'].map(key => [key, Number(data.get(key))])), views: {},
+  };
+  busy = true;
+  refresh();
   try {
-    confirmProfile(candidate);
-    location.assign('./');
-  } catch {
-    error('此浏览器未允许保存本次分身。请允许此站点使用会话存储后重试。');
-  }
+    if (tier !== 'quick') {
+      for (const key of ['front','side']) {
+        const photo = photos.get(key);
+        if (!photo) throw new Error('请提供正面和侧面全身照。');
+        status.textContent = key === 'front' ? '正在本地分析正面轮廓…' : '正在本地分析侧面轮廓…';
+        await new Promise(resolve => setTimeout(resolve, 30));
+        photo.sections ??= await analyzePhoto(photo, key);
+        if (revision !== current) return;
+        input.views[key] = photo.sections;
+      }
+    }
+    const record = fitBody(input);
+    status.textContent = '正在拟合人体模板…';
+    const stats = await viewer.load(null, record);
+    if (current !== revision) return;
+    candidate = record;
+    byId('candidate-empty').hidden = true;
+    byId('preview-source').textContent = tiers[tier] + ' · 本地';
+    byId('preview-source').hidden = false;
+    byId('model-meta').textContent = record.heightCm + ' cm / ' + record.weightKg + ' kg · ' + stats.triangles.toLocaleString() + ' 个三角面';
+    byId('preview-actions').hidden = false;
+    status.textContent = '本地分身已就绪，可旋转检查后确认。';
+    byId('preview-title').focus();
+  } catch (failure) {
+    if (revision === current) { error.textContent = failure.message; error.hidden = false; status.textContent = '请调整输入后重试。'; }
+  } finally { busy = false; refresh(); }
 });
+byId('confirm').onclick = () => {
+  if (!candidate) return;
+  try { confirmModel(candidate); location.assign(candidate.tier === 'appearance' ? './#reference-panel' : './'); }
+  catch { error.textContent = '无法保存分身，请允许浏览器会话存储。'; error.hidden = false; }
+};
+byId('reset-view').onclick = () => viewer?.reset();
+byId('auto-rotate').onclick = event => {
+  const button = event.currentTarget, active = button.getAttribute('aria-pressed') !== 'true';
+  viewer?.setAutoRotate(active); button.setAttribute('aria-pressed', String(active));
+};
+byId('download-model').onclick = async () => {
+  if (!candidate) return;
+  try { await downloadBody(viewer, candidate.id); }
+  catch (failure) { error.textContent = failure.message; error.hidden = false; }
+};
 window.addEventListener('pagehide', () => {
-  lastUpload++;
-  lastGeneration++;
-  clearPhoto();
+  revision++;
+  for (const photo of photos.values()) URL.revokeObjectURL(photo.url);
+  viewer?.dispose();
 });
-window.addEventListener('pageshow', event => {
-  if (!event.persisted) return;
-  photoInput.value = '';
-  checkingPhoto = false;
-  generating = false;
-  clearCandidate();
-  candidateEmpty.textContent = '全身分身将在这里显示';
-  error();
-  idleStatus();
-  refreshForm();
-});
+updateTier();
+refresh();
+
+window.addEventListener('pageshow', event => { if (event.persisted) location.reload(); });
