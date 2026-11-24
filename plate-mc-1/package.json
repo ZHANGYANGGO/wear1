@@ -1,0 +1,26 @@
+{
+  "name": "moving-day",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "node plate/build.mjs && tsc --noEmit && vite build",
+    "start": "vite preview",
+    "test": "tsx --test tests/搬运.test.ts tests/campaign.test.ts plate/tests/game.test.mjs"
+  },
+  "dependencies": {
+    "matter-js": "0.20.0",
+    "peerjs": "^1.5.5",
+    "phaser": "3.90.0"
+  },
+  "devDependencies": {
+    "@types/matter-js": "^0.19.8",
+    "@types/node": "^24.0.0",
+    "esbuild": "0.28.2",
+    "playwright-core": "^1.55.0",
+    "tsx": "^4.20.0",
+    "typescript": "~5.9.2",
+    "vite": "^7.2.0"
+  }
+}

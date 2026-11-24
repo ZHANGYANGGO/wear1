@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f5eb"><title>搬家日 · 今天应该很顺利</title>
+  <script data-vite-entry="/src/main.ts">
+    const gamePage = new URL("./dist/index.html", location.href);
+    gamePage.search = location.search;
+    gamePage.hash = location.hash;
+    location.replace(gamePage);
+  </script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='2' y='5' width='28' height='23' rx='4' fill='%23efb64b' stroke='%23283b36' stroke-width='3'/%3E%3Cpath d='M12 6h8v10l-4-2-4 2z' fill='%23fff3cf'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header><div class="brand"><i class="parcel" aria-hidden="true"></i><div><h1>搬家日</h1><small>今天应该很顺利</small></div></div>
+    <nav aria-label="游戏模式"><button id="solo" aria-pressed="true">单人试玩</button><button id="multi" aria-pressed="false">双人搬家</button><a class="kitchen-link" data-switch-game href="./plate/index.html">厨房营业</a></nav>
+  </header>
+  <main><div class="workspace">
+    <section class="map-panel"><div class="map-head"><h2><span aria-hidden="true">⌗</span> 公寓平面图</h2><strong id="timer" aria-label="发车倒计时"></strong><button id="new-run" hidden>新开一局</button><button id="reset" hidden>↻　再搬一次</button></div>
+      <div class="playfield"><div id="stage" aria-label="从客厅经过直角门厅或露天小院，把三件货送上货车"></div><div id="dispatch" class="dispatch"><section id="sheet"></section></div></div>
+      <p id="notice" role="status" hidden></p><div class="hint"><b>操作提示</b><span id="hint" role="status"></span><button id="close-order" hidden>关门收工</button><button id="cancel-close" hidden>继续搬运</button></div>
+    </section>
+    <aside><section class="ticket"><div class="ticket-top"><span class="paperclip" aria-hidden="true"></span><h2>搬家货单</h2><span class="stamp" id="stamp">待装车</span></div>
+      <ul class="manifest"><li><strong>三人座长沙发</strong><span id="row-sofa">待搬</span></li><li><strong>一箱书</strong><span id="row-books">待搬</span></li><li><strong>绿植盆栽</strong><span id="row-plant">待搬</span></li></ul>
+      <div class="progress"><span>装车进度</span><b id="count" role="status">0 / 3</b></div><div class="track"><i id="bar"></i></div>
+      <dl class="ledger"><dt>基础款</dt><dd id="base-pay"></dd><dt>额外货</dt><dd id="extra-pay"></dd><dt>盆栽货损</dt><dd id="damage-pay"></dd><dt>预计实收</dt><dd id="actual-pay"></dd><dt>预计净收益</dt><dd id="net-pay"></dd><dt>本局钱包</dt><dd id="wallet"></dd></dl><div id="extra-list"></div><p id="delivery">四角入厢，松手放稳后签收。</p>
+    </section><section class="tools"><h2>随车工具</h2><dl class="inventory"><dt>家具滑板</dt><dd id="tool-state">可安装</dd><dt>推车</dt><dd id="cart-state">0 / 1 份</dd><dt>胶带</dt><dd id="tape-state">1 卷</dd></dl><p id="box-state"></p><button id="scenario">重开湿箱局</button></section>
+    <div id="online" hidden><h2>双人房间</h2><p id="members"></p><button id="invite">复制邀请链接</button></div></aside>
+  </div>
+  <section class="controls"><h2>操作指南</h2><div><kbd>WASD</kbd><span>/</span><kbd>↑↓←→</kbd> 移动</div><div><kbd>空格</kbd> 抓住 / 松手</div><div><kbd>Q</kbd><kbd>E</kbd> 转动货物 / 扶稳盆栽</div><div><kbd>F</kbd> 使用工具</div></section>
+  <section class="touch" aria-label="触控操作"><div class="pad"><button data-key="ArrowUp" aria-label="向上">↑</button><button data-key="ArrowLeft" aria-label="向左">←</button><button data-key="ArrowDown" aria-label="向下">↓</button><button data-key="ArrowRight" aria-label="向右">→</button></div><div class="actions"><button data-key="KeyQ">左转</button><button data-key="KeyE">右转</button><button data-act="use" id="touch-use">工具</button><button data-act="grab">抓 / 放</button></div></section>
+  </main>
+  <dialog id="lobby"><form method="dialog"><div class="dialog-title"><h2>双人搬家</h2><button aria-label="关闭">×</button></div></form><p>房主请保持网页打开，把邀请链接发给搭档。房主刷新后，双方会自动重连。</p><button id="create" class="primary">创建房间</button><button id="resume-room" type="button" hidden>恢复上次主持的房间</button><label for="code">已有房间号</label><div class="join-line"><input id="code" maxlength="40" autocomplete="off" placeholder="输入房间号"><button id="join">加入</button></div><p id="network-msg" role="status"></p></dialog>
+</body></html>

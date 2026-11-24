@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#24423c"><title>山间食堂 · 厨房营业</title><link rel="icon" href="data:,"><style>/*APP_STYLE*/</style></head>
+<body>
+<header><div class="bar"><div class="identity"><i class="crest" aria-hidden="true">山</i>山间食堂</div><a data-switch-game href="../index.html">返回搬家日</a></div></header>
+<main>
+<div class="heading"><div><p class="sub" id="todayMenu"></p><h1><span id="shopName">山间食堂</span><span class="seal" aria-hidden="true">手作</span></h1></div><div class="room-tools"><span id="connection">单人经营</span><button id="roomButton">双人房间</button></div></div>
+<section id="mapPicker" class="map-picker" aria-label="选择店面" hidden>
+<div class="map-options"><label class="recipe-choice" for="recipeChoice">本局菜谱<select id="recipeChoice"></select></label><h2>选择店面</h2><div id="mapCards"></div></div>
+<figure class="map-sheet"><figcaption><h2 id="previewName"></h2><span id="previewSize"></span></figcaption>
+<canvas id="mapPreview" aria-label="店面初始布局"></canvas>
+<div class="map-footer"><p id="mapDescription"></p><div><button id="cancelMap" hidden>返回当前布置</button><button class="accent" id="chooseMap"></button></div></div></figure></section>
+<div class="columns" id="kitchen"><section class="shop">
+<div class="board-head"><strong><i id="lamp"></i><span id="phase">营业准备</span></strong><label class="day-meter">来客时段 <progress id="time" max="1000" value="1000"></progress></label></div>
+<div id="board"><canvas id="scene" aria-label="食堂俯视地图"></canvas><div id="cells" aria-label="店面格子"></div></div>
+<div class="command"><div><span class="label">手持</span> <strong id="hand">空手</strong></div><button id="grab" hidden>空格 · 拿放</button><button id="work" hidden>E · 工作</button><button id="rotate" hidden>转向 R</button><button id="browseMaps" hidden>更换菜谱或店面</button><button id="practice">练习</button><button class="accent" id="openShop">开门营业</button></div>
+<p id="hint" role="status"></p>
+</section>
+<aside><section class="ticket"><div class="ticket-head"><h2>前厅桌单</h2><span id="served">已服务 0 桌</span></div><div id="tables"></div><div class="queue"><strong>门外等位</strong><span id="queue">暂无客人</span></div></section>
+<section class="menu"><div class="ticket-head"><h2>手作菜单</h2><span id="dishPrice"></span></div><div id="recipes"></div><p id="plateCount"></p></section></aside></div>
+<section class="help"><b>操作</b><span><kbd>WASD</kbd> 移动 · <kbd>空格</kbd> 拿放和上菜 · <kbd>E</kbd> 工作</span><span>点工位可走近操作</span><span>准备时点家具，再点空地摆放</span></section>
+</main>
+<dialog id="roomDialog"><form method="dialog"><h2>双人房间</h2><button aria-label="关闭">×</button></form>
+<div id="lobby"><p>房主在准备阶段邀请搭档，两人共用这一家店。</p><button class="accent" id="createRoom">创建房间</button><label for="code">加入已有房间</label><div class="join"><input id="code" maxlength="10" autocomplete="off" placeholder="10 位房间号"><button id="joinRoom">加入</button></div></div>
+<div id="hosting" hidden><p id="roomInfo"></p><strong id="roomCode"></strong><div class="join"><button id="copy">复制房间号</button><button id="leave">退出房间</button></div></div><p id="network" role="status"></p></dialog>
+<dialog id="result"><span class="sub">营业回执</span><h2 id="outcome"></h2><p id="reason"></p><dl id="totals"></dl><button class="accent" id="again">再玩一次</button> <button id="resultMaps" hidden>重选菜谱或店面</button></dialog>
+<dialog id="replaceLayout"><form method="dialog"><h2>重新布置厨房？</h2><button aria-label="关闭">×</button></form><p>确认更换后，家具将按所选菜谱和店面的初始位置摆放。</p><button id="keepLayout">继续预览</button> <button class="accent" id="replaceMap">确认更换</button></dialog>
+<script>/*APP_SCRIPT*/</script></body></html>
