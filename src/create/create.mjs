@@ -2,17 +2,17 @@ import { createModelViewer } from '../3d/viewer.mjs';
 import { fitBody, tiers } from '../3d/fitting.mjs';
 import { confirmModel, readConfirmedModel } from '../3d/profile.mjs';
 import { downloadBody } from '../3d/download.mjs';
-import { openPhoto } from './photo.mjs';
 import { installCamera } from './camera.mjs';
-import { analyzePhoto } from './silhouette.mjs';
+import { createPhotoReview, viewLabels, stateLabels } from './photo-review.mjs';
+import { originalPoint } from './contour.mjs';
 
 const byId = id => document.getElementById(id);
 const form = byId('create-form');
 const inputs = [...form.querySelectorAll('[data-view]')];
-const photos = new Map();
+const review = createPhotoReview(renderPhotos);
 const status = byId('create-status');
 const error = byId('create-error');
-let revision = 0, busy = false, checking = 0, candidate, viewer;
+let revision = 0, busy = false, candidate, viewer;
 const previous = readConfirmedModel();
 if (previous) {
   byId('height').value = previous.heightCm;
@@ -27,8 +27,69 @@ const guides = {
   appearance: '先用正侧面照建立试衣分身，围度可选。确认后可另选清晰正脸等参考照，自主决定是否提交云端增强。',
 };
 function refresh() {
-  byId('generate').disabled = !viewer || busy || checking > 0;
+  const reasons = [];
+  if (form.elements.tier.value !== 'quick') {
+    for (const input of inputs) {
+      const view = input.dataset.view;
+      const { state } = review.get(view);
+      if (state !== 'ready') reasons.push(viewLabels[view] + stateLabels[state]);
+    }
+  }
+  if (!byId('height').validity.valid || !byId('weight').validity.valid) reasons.push('请填写有效的身高和体重');
+  if (byId('girths').querySelector('input:invalid')) reasons.push('请检查胸围、腰围和臀围');
+  const guide = reasons.join('，');
+  if (byId('generate-guide').textContent !== guide) byId('generate-guide').textContent = guide;
+  byId('generate').disabled = !viewer || busy || reasons.length > 0;
   byId('confirm').disabled = !candidate || busy;
+}
+function renderPhotos() {
+  for (const input of inputs) {
+    const view = input.dataset.view;
+    const { state, detail, photo, contour } = review.get(view);
+    const preview = form.querySelector('[data-preview="' + view + '"]');
+    preview.hidden = !photo;
+    if (!photo) preview.removeAttribute('src');
+    else if (preview.src !== photo.url) preview.src = photo.url;
+    const overlay = form.querySelector('[data-contour="' + view + '"]');
+    overlay.hidden = !contour;
+    if (!contour) overlay.open = false;
+    const result = byId(view + '-result');
+    const message = [viewLabels[view], stateLabels[state], detail].filter(Boolean).join(' · ');
+    result.dataset.state = state;
+    if (result.textContent !== message) result.textContent = message;
+    form.querySelector('[data-retry="' + view + '"]').hidden = state !== 'retry';
+  }
+  refresh();
+}
+
+function drawContour(view) {
+  const overlay = form.querySelector('[data-contour="' + view + '"]');
+  const { contour } = review.get(view);
+  const img = form.querySelector('[data-preview="' + view + '"]');
+  if (!overlay.open || !contour || !img.naturalWidth) return;
+  const canvas = overlay.querySelector('canvas'), { frame, rows, issues } = contour;
+  const scale = Math.min(1, 640 / Math.max(frame.originalWidth, frame.originalHeight));
+  canvas.width = Math.round(frame.originalWidth * scale) || 1;
+  canvas.height = Math.round(frame.originalHeight * scale) || 1;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+  const sx = canvas.width / frame.originalWidth, sy = canvas.height / frame.originalHeight;
+  const axis = originalPoint(frame, 1, 0), foot = originalPoint(frame, 0, 0);
+  ctx.fillStyle = '#4767ce';
+  ctx.fillRect(axis.x * sx, axis.y * sy, 1, (foot.y - axis.y) * sy);
+  for (const [i, [h, left, right]] of rows.entries()) {
+    if (left === null) continue;
+    const y = frame.top + i;
+    ctx.fillStyle = issues.some(r => y >= r.fromRow && y <= r.toRow) ? '#eb9000' : '#00cfc1';
+    for (const offset of [left, right]) {
+      const p = originalPoint(frame, h, offset);
+      ctx.fillRect(p.x * sx - 1, p.y * sy, 2, Math.max(1, canvas.height / frame.maskHeight));
+    }
+  }
+  let note = '蓝线为参考轴，青色为可见边界，橙色为有遮挡或不确定的行段。';
+  if (view === 'side') note += contour.direction
+    ? ' 腹侧在画面' + (contour.direction.anterior === 'left' ? '左' : '右') + '侧。' : ' 腹背朝向待定。';
+  overlay.querySelector('small').textContent = note;
 }
 function invalidate() {
   revision++;
@@ -53,44 +114,25 @@ function updateTier() {
   byId('confirm').textContent = tier === 'appearance' ? '确认分身，查看外观增强选项' : '在工作台使用';
 }
 form.addEventListener('input', event => {
-  invalidate();
+  if (event.target.type === 'file') return; // The change handler also handles camera captures.
   if (event.target.name === 'tier') updateTier();
+  invalidate();
   if (event.target.type === 'range') event.target.nextElementSibling.value = event.target.value + '%';
 });
 installCamera(inputs);
 for (const input of inputs) {
-  let version = 0;
-  input.addEventListener('change', async () => {
-    const current = ++version, key = input.dataset.view;
+  const view = input.dataset.view;
+  form.querySelector('[data-contour="' + view + '"]').ontoggle = () => drawContour(view);
+  form.querySelector('[data-preview="' + view + '"]').onload = () => drawContour(view);
+  form.querySelector('[data-retry="' + view + '"]').onclick = () => review.retry(view);
+  input.addEventListener('change', () => {
     invalidate();
-    const old = photos.get(key);
-    if (old) URL.revokeObjectURL(old.url);
-    photos.delete(key);
-    const preview = form.querySelector('[data-preview="' + key + '"]');
-    preview.hidden = true;
-    preview.removeAttribute('src');
-    const file = input.files[0];
-    if (!file) return;
-    checking++;
-    refresh();
-    try {
-      const photo = await openPhoto(file);
-      if (current !== version) { URL.revokeObjectURL(photo.url); return; }
-      if (!['image/jpeg','image/png'].includes(photo.type)) {
-        URL.revokeObjectURL(photo.url);
-        throw new Error('请选择 JPEG 或 PNG 照片。');
-      }
-      photos.set(key, photo);
-      preview.src = photo.url;
-      preview.hidden = false;
-    } catch (failure) {
-      if (current === version) { input.value = ''; error.textContent = failure.message; error.hidden = false; }
-    } finally { checking--; refresh(); }
+    review.select(view, input.files[0]);
   });
 }
 form.addEventListener('submit', async event => {
   event.preventDefault();
-  if (busy || checking || !viewer || !form.reportValidity()) return;
+  if (byId('generate').disabled || !form.reportValidity()) return;
   invalidate();
   const current = revision;
   const data = new FormData(form);
@@ -105,15 +147,7 @@ form.addEventListener('submit', async event => {
   refresh();
   try {
     if (tier !== 'quick') {
-      for (const key of ['front','side']) {
-        const photo = photos.get(key);
-        if (!photo) throw new Error('请提供正面和侧面全身照。');
-        status.textContent = key === 'front' ? '正在本地分析正面轮廓…' : '正在本地分析侧面轮廓…';
-        await new Promise(resolve => setTimeout(resolve, 30));
-        photo.sections ??= await analyzePhoto(photo, key);
-        if (revision !== current) return;
-        input.views[key] = photo.sections;
-      }
+      for (const view of ['front','side']) input.views[view] = review.get(view).sections;
     }
     const record = fitBody(input);
     status.textContent = '正在拟合人体模板…';
@@ -148,10 +182,10 @@ byId('download-model').onclick = async () => {
 };
 window.addEventListener('pagehide', () => {
   revision++;
-  for (const photo of photos.values()) URL.revokeObjectURL(photo.url);
+  review.dispose();
   viewer?.dispose();
 });
 updateTier();
-refresh();
+renderPhotos();
 
 window.addEventListener('pageshow', event => { if (event.persisted) location.reload(); });

@@ -1,4 +1,4 @@
-import { validLocalFit } from './fitting.mjs';
+import { upgradePhotoFit, validLocalFit } from './fitting.mjs';
 const storageKey = 'wearmate.3d.confirmed';
 
 export function readConfirmedModel() {
@@ -6,7 +6,7 @@ export function readConfirmedModel() {
     const record = JSON.parse(sessionStorage.getItem(storageKey));
     if (!record || !/^[a-f0-9-]{36}$/.test(record.id)
       || !Number.isFinite(record.heightCm) || !Number.isFinite(record.weightKg)) return null;
-    if (record.kind === 'local' && !validLocalFit(record)) return null;
+    if (record.kind === 'local') return validLocalFit(record) ? upgradePhotoFit(record) : null;
     return record;
   } catch {
     return null;

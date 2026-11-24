@@ -23,6 +23,8 @@ export function installCamera(inputs) {
       const current = ++revision;
       target = input;
       document.querySelector('#camera-label').textContent = '拍摄' + (input.closest('.upload-box').querySelector('strong,label')?.textContent || '参考照');
+      const guide = dialog.querySelector('#camera-guide');
+      if (guide) guide.textContent = input.closest('.upload-box').querySelector('.upload-copy').textContent;
       status.textContent = '请允许浏览器使用摄像头。';
       shoot.disabled = true;
       dialog.showModal();

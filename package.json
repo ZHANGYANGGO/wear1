@@ -8,10 +8,15 @@
   },
   "scripts": {
     "dev": "node scripts/serve.mjs",
-    "test": "node --test"
+    "test": "node --test",
+    "bodym:parse": "node scripts/parse-bodym.mjs"
   },
   "dependencies": {
     "@mediapipe/tasks-vision": "0.10.32",
     "three": "^0.183.2"
+  },
+  "devDependencies": {
+    "csv-parse": "^6.2.1",
+    "pngjs": "^7.0.0"
   }
 }

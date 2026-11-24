@@ -87,6 +87,12 @@
 #adjustments label { display: grid; grid-template-columns: 3em 1fr 3em; gap: .8rem; align-items: center; margin-block: .5rem; }
 #adjustments output { text-align: right; }
 #local-photos .field-guide { margin-bottom: .65rem; }
+.photo-result { font-size: .875rem; line-height: 1.55; }
+.upload-box details { min-width: 0; font-size: .875rem; }
+.upload-box summary { cursor: pointer; }
+.upload-box details canvas { display: block; max-width: 100%; max-height: 20rem; margin: .5rem auto; }
+.photo-result[data-state="ready"] { color: #35543c; }
+.photo-result[data-state="retake"], .photo-result[data-state="retry"] { color: var(--accent-dark); }
 #camera-dialog { width: min(90vw,32rem); padding: 1.2rem; margin: auto; color: var(--ink); background: var(--paper); border: 1px solid var(--line); }
 #camera-dialog video { width: 100%; max-height: 60vh; display: block; margin-block: .75rem; background: var(--photo); }
 #camera-dialog::backdrop { background: #19181299; }

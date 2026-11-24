@@ -58,10 +58,26 @@
               <label>臀部 <input type="range" name="hips" min="-25" max="25" value="0"><output>0%</output></label>
             </fieldset>
             <fieldset id="local-photos" hidden disabled><legend>本地轮廓照片</legend>
-              <p class="field-guide">镜头固定，头脚完整入镜，穿合身衣物，双臂稍离躯干。先正对镜头，再原地转身 90°。每张 JPEG 或 PNG 最大 10 MB。</p>
+              <p class="field-guide">只需正面和侧面两张全身照，顺序不限。穿合身衣物，选择简洁背景和均匀光线。每张 JPEG 或 PNG 最大 10 MB。</p>
               <div class="view-uploads">
-                <div class="upload-box"><label for="front-file">正面全身照</label><img data-preview="front" hidden alt="正面预览"><input id="front-file" data-view="front" type="file" accept="image/jpeg,image/png" required></div>
-                <div class="upload-box"><label for="side-file">侧面全身照</label><img data-preview="side" hidden alt="侧面预览"><input id="side-file" data-view="side" type="file" accept="image/jpeg,image/png" required></div>
+                <div class="upload-box">
+                  <label for="front-file">正面全身照</label>
+                  <p id="front-guide" class="upload-copy">自然站直，双肩朝向镜头，双臂稍离躯干。头顶和双脚完整入镜，上下留边。</p>
+                  <img data-preview="front" hidden alt="正面预览">
+                  <input id="front-file" data-view="front" type="file" accept="image/jpeg,image/png" aria-describedby="front-guide front-result" required>
+                  <p id="front-result" class="photo-result" role="status">待添加</p>
+                  <details data-contour="front" hidden><summary>查看正面轮廓</summary><canvas aria-label="正面照片与轮廓叠加"></canvas><small></small></details>
+                  <button type="button" class="create-action" data-retry="front" hidden>重试正面检测</button>
+                </div>
+                <div class="upload-box">
+                  <label for="side-file">侧面全身照</label>
+                  <p id="side-guide" class="upload-copy">保持同一机位和距离，原地向左或向右转约 90°，让两肩在画面中尽量重合，头脚留边。</p>
+                  <img data-preview="side" hidden alt="侧面预览">
+                  <input id="side-file" data-view="side" type="file" accept="image/jpeg,image/png" aria-describedby="side-guide side-result" required>
+                  <p id="side-result" class="photo-result" role="status">待添加</p>
+                  <details data-contour="side" hidden><summary>查看侧面轮廓</summary><canvas aria-label="侧面照片与轮廓叠加"></canvas><small></small></details>
+                  <button type="button" class="create-action" data-retry="side" hidden>重试侧面检测</button>
+                </div>
               </div>
             </fieldset>
             <fieldset id="girths" hidden disabled><legend>软尺实测（cm）</legend>
@@ -72,7 +88,8 @@
               </div>
             </fieldset>
             <p id="tier-guide" class="field-guide"></p>
-            <button id="generate" disabled class="create-action primary-action" type="submit">生成本地试衣分身</button>
+            <button id="generate" disabled class="create-action primary-action" type="submit" aria-describedby="generate-guide">生成本地试衣分身</button>
+            <p id="generate-guide" class="field-guide" role="status"></p>
           </form>
           <p id="create-status" class="create-status" role="status"></p>
           <p id="create-error" class="asset-error" role="alert" hidden></p>
@@ -103,7 +120,7 @@
         </section>
       </div>
     <dialog id="camera-dialog" aria-labelledby="camera-label">
-      <h2 id="camera-label">拍摄照片</h2><video autoplay playsinline muted></video>
+      <h2 id="camera-label">拍摄照片</h2><p id="camera-guide"></p><video autoplay playsinline muted></video>
       <p id="camera-status" role="status"></p>
       <div class="model-toolbar"><button type="button" id="shoot">使用这张照片</button><button type="button" id="close-camera">关闭摄像头</button></div>
     </dialog>

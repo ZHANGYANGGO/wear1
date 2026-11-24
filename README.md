@@ -34,12 +34,31 @@ Windows PowerShell 下显式使用 `npm.cmd` 可避开 `npm.ps1` 的脚本执行
 
 本地创建和试衣均可在无密钥时运行。需要外观参考时，在 `.env` 设置 `DASHSCOPE_API_KEY` 和 `DASHSCOPE_WORKSPACE_ID` 并重启服务。工作台的「选择照片并增强外观」会打开独立页面。用户在该页重新选择照片、勾选同意并点击上传后，Node 服务才向阿里云百炼 Tripo 提交计费任务。云端输出是独立 GLB，确认关联后用于外观对照。生成失败时可返回试衣分身。
 
+## 正侧面轮廓与 BodyM 离线解析
+
+创建页照片通过检测后，可展开「查看正面轮廓」或「查看侧面轮廓」。每个视角复用同一次 MediaPipe 检测得到的关键点、可见性和分割遮罩。试衣继续使用原有截面。轮廓、关键点和原图只保留在当前创建页内存中。
+
+在本目录运行以下命令。匿名同步脚本使用 Python、requests 和 Pillow，按官方 S3 清单比较对象键、长度和单段对象的 MD5，并对 PNG 做解码检查。重复运行会补齐缺损对象。[BodyM 官方数据说明](https://registry.opendata.aws/bodym/)
+
+```powershell
+python -m pip install requests Pillow
+python -B scripts/sync_bodym.py
+npm.cmd run bodym:parse
+npm.cmd test
+```
+
+原始数据位于 `.private/datasets/bodym/`。打开 `.private/bodym-analysis/latest.json`，其中的 `dir` 指向本次完整运行。各分区的 `.ndjson.gz` 每行是一对正侧面解析记录，保留拍摄 ID、人物 ID 和身高体重等元数据。14 项量体标签按人物单存于 `*-measurements.json`。可用浏览器直接打开 `*-sample.svg`、`*-partial.svg`，与同名 JSON 对照。常规测试使用小型构造样例，可在没有 BodyM 的工作区运行。
+
+每行轮廓保存相对高度、图像左边界和右边界。存在分开的前景段时，第四列保留每段的左右边界。脚底为 0，头顶为 1，横向偏移以原图中的人物像素高度为单位；缺失边界用 `null`。每张图的 `frame` 记录包围框中轴、顶底行和原图、检测输入、遮罩三种尺寸，可用 `originalPoint` 还原到原图像素中心。`issues` 使用遮罩的起止行标记局部不确定性，手臂与躯干未分离的外缘仍可见，不能直接用作腰线。BodyM 的相机和关键点均为未知。侧面朝向可判定时，`direction` 标明图像哪一边朝腹部。原生遮罩没有可靠朝向依据时保留 `null`。
+
+统计以映射表记录为分母。`validPairs` 是两图均可读取和解码的对数；两图均提取完整可见边界为成功，任一视角出现局部不确定行段为部分可用，缺图、坏图或无法提取主体为失败。没有相机信息、关键点或朝向本身不会触发降级。
+
 ## 实现方式
 
 | 环节 | 代码入口 | 处理方式 |
 | --- | --- | --- |
 | 采集与轮廓 | [创建页](src/create/create.mjs) · [照片分析](src/create/silhouette.mjs) | MediaPipe Pose Landmarker Lite 在浏览器中提取关键点和分割遮罩，比较正面宽度与侧面厚度。模型与 WASM 均由本机提供。 |
-| 体型拟合 | [参数化拟合](src/3d/fitting.mjs) | 用身高确定米制尺度，体重给出体型初值，结合两视角轮廓及可选的实测围度调整各截面。围度约束使用椭圆近似。 |
+| 体型拟合 | [参数化拟合](src/3d/fitting.mjs) | 身高确定米制尺度，身高和体重给出体型初值。照片拟合按视角给遮挡和模糊截面降权，联合估计肩、胸、腰、臀的变化。手臂通过模板原有的肩臂骨骼权重随肩移动，服装使用相同的变形。实测围度使用椭圆近似。 |
 | 试衣与导出 | [Three.js 查看器](src/3d/viewer.mjs) · [衣橱](src/wardrobe/tryon3d.mjs) | 在同一站姿下变形模板与服装顶点，用相机取景显示人物。下载的是已变形的试衣人台 GLB。 |
 | 存储与外观 | [会话](src/3d/profile.mjs) · [云端处理](scripts/reconstruction.mjs) | 本地照片在页面内存中处理，确认的人台参数和参考 ID 保存在当前标签页的会话中。云端产物存入 `.private/3d-models/<任务ID>/`。 |
 

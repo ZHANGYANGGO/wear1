@@ -15,11 +15,12 @@ export function imageType(buffer) {
   return null;
 }
 
-export async function openPhoto(file) {
+export async function openPhoto(file, acceptedTypes) {
   if (!file?.size || file.size > maxBytes) throw new Error('请选择一张不超过 10 MB 的照片。');
   const buffer = await file.arrayBuffer();
   const type = imageType(buffer);
-  if (!type || (file.type && file.type !== type)) throw new Error('请选择可读取的 JPEG、PNG 或 WebP 照片。');
+  if (acceptedTypes && !acceptedTypes.includes(type)) throw new Error('文件格式无法识别，请重新选择 JPEG 或 PNG 照片。');
+  if (!type || (file.type && file.type !== type)) throw new Error('文件内容与图片格式不符，请重新导出后选择照片。');
   const url = URL.createObjectURL(new Blob([buffer], { type }));
   try {
     const image = new Image();

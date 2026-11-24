@@ -1,4 +1,4 @@
-import { deformPoint } from './fitting.mjs';
+import { createPointDeformer } from './fitting.mjs';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -18,14 +18,34 @@ function disposeObject(root) {
 
 // Body and garments share the MakeHuman rest coordinates (metres). Bake the
 // static fit into vertices so it survives export and is identical on every page.
+function armInfluence(object) {
+  const painted = object.geometry.getAttribute('_arm_weight');
+  if (painted) return i => painted.getX(i);
+  if (!object.isSkinnedMesh) return () => 0;
+  const armBones = object.skeleton.bones.map(bone => {
+    for (let parent = bone; parent; parent = parent.parent) {
+      if (parent.name === 'upperarm_l' || parent.name === 'upperarm_r') return true;
+    }
+    return false;
+  });
+  const joints = object.geometry.getAttribute('skinIndex'), weights = object.geometry.getAttribute('skinWeight');
+  return i => {
+    let sum = 0;
+    for (let k = 0; k < 4; k++) if (armBones[joints.getComponent(i, k)]) sum += weights.getComponent(i, k);
+    return Math.min(1, sum);
+  };
+}
+
 function fitTemplate(source, profile) {
   const fitted = new THREE.Group();
+  const deform = createPointDeformer(profile);
   source.traverse(object => {
     if (!object.isMesh) return;
     const geometry = new THREE.BufferGeometry();
     const position = object.geometry.attributes.position.clone();
+    const armWeight = profile.tier === 'quick' ? () => 0 : armInfluence(object);
     for (let i = 0; i < position.count; i++) {
-      position.setXYZ(i, ...deformPoint(position.getX(i), position.getY(i), position.getZ(i), profile));
+      position.setXYZ(i, ...deform(position.getX(i), position.getY(i), position.getZ(i), armWeight(i)));
     }
     geometry.setAttribute('position', position);
     for (const key of ['uv', 'color']) {
