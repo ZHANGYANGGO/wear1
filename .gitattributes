@@ -1,0 +1,4 @@
+* text=auto
+*.zip binary
+/厨房营业-网页版.html -text
+/plate/index.html -text
