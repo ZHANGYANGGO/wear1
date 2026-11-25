@@ -1,12 +1,23 @@
 import { createReadStream, promises as fs } from 'node:fs';
 import { createServer } from 'node:http';
+import { spawn } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { garmentCatalog } from '../src/wardrobe/garments.mjs';
 
+import { analyzePhoto } from './analysis-route.mjs';
+import { generateCartoon } from './cartoon-route.mjs';
+
 const root = fileURLToPath(new URL('../', import.meta.url));
 const host = '127.0.0.1';
-const port = Number(process.argv[2] ?? 4173);
+const port = Number(process.argv[2] ?? 4375);
+const open = process.platform === 'win32' && process.argv.includes('--open-browser');
+const entry = `http://${host}:${port}/`;
+function openBrowser() {
+  const child = spawn('rundll32.exe', ['url.dll,FileProtocolHandler', entry], { stdio: 'ignore', windowsHide: true });
+  child.on('error', () => console.error('请在浏览器中打开 ' + entry));
+  child.unref();
+}
 const privateRoot = process.env.WEARMATE_PRIVATE_PROFILE_DIR
   ? path.resolve(process.env.WEARMATE_PRIVATE_PROFILE_DIR) : null;
 const privateAsset = /^\/local-profile\/sprites\/((?:role-(?:head|arms|ankles)|(?:brick-tee|espresso-jacket|blue-denim|oat-trousers|cream-trainers|penny-loafers)(?:-thumb)?)\.webp)$/;
@@ -21,6 +32,8 @@ const mime = {
 };
 
 const server = createServer(async (request, response) => {
+  if (request.url === '/api/photo-analysis') return analyzePhoto(request,response,root,server.address().port);
+  if (request.url === '/api/cartoon-head') return generateCartoon(request,response,root,server.address().port);
   if (request.method !== 'GET' && request.method !== 'HEAD') {
     response.writeHead(405, { Allow: 'GET, HEAD' }).end();
     return;
@@ -71,7 +84,7 @@ const server = createServer(async (request, response) => {
       response.writeHead(404).end();
       return;
     }
-    const publicRoute = ['/', '/index.html', '/stage1a.html', '/create.html', '/wardrobe.html'].includes(route)
+    const publicRoute = ['/', '/index.html', '/stage1a.html', '/create.html', '/wardrobe.html', '/people.html'].includes(route)
       || /^\/(assets|src)\/(?:[a-z0-9-]+\/)*[a-z0-9-]+\.(?:css|mjs|svg|webp)$/i.test(route);
     if (!publicRoute) {
       response.writeHead(404).end();
@@ -96,10 +109,20 @@ const server = createServer(async (request, response) => {
   }
 });
 
-server.on('error', error => {
+server.on('error', async error => {
+  if (open && error.code === 'EADDRINUSE') {
+    try {
+      const response = await fetch(entry + 'people.html', { signal: AbortSignal.timeout(2000), redirect: 'error' });
+      if (response.ok && (await response.text()).includes('./src/people/page.mjs')) {
+        openBrowser();
+        return;
+      }
+    } catch { /* Show the original port error below. */ }
+  }
   console.error(error.message);
   process.exitCode = 1;
 });
 server.listen(port, host, () => {
   console.log(`WearMate  http://${host}:${server.address().port}/`);
+  if (open) openBrowser();
 });

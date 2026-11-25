@@ -1,0 +1,755 @@
+{
+  "browser": "129.0.6668.29",
+  "figures": {
+    "default": "a9113c4fece3caef49f67fde900a56131ed9f447caea07382661edf898bc7223",
+    "separates-coat": "c471d2ff2819771f89fcb0540feaa3f911bab9ec08f5a9230233ade1a63f030e",
+    "dress-coat": "f1501e1915ede7469da3ea016b507dd6789b600589cac960560c520b4b8d33c7",
+    "restored": "a9113c4fece3caef49f67fde900a56131ed9f447caea07382661edf898bc7223"
+  },
+  "inventory": {
+    "roles": [
+      "mila",
+      "nia",
+      "iris",
+      "woman-bob",
+      "man-smile",
+      "man-glasses",
+      "woman-silver"
+    ],
+    "fit": {
+      "woman-bob": {
+        "navy-shirt": [
+          "ready",
+          [
+            "neckline",
+            7,
+            "/assets/wardrobe/tryon/woman-bob/neckline.webp"
+          ],
+          [
+            "navy-shirt-back",
+            4,
+            "/assets/wardrobe/tryon/woman-bob/navy-shirt-back.webp"
+          ],
+          [
+            "navy-shirt",
+            30,
+            "/assets/wardrobe/tryon/woman-bob/navy-shirt.webp"
+          ]
+        ],
+        "nude-pumps": [
+          "pending"
+        ],
+        "floral-maxi": [
+          "ready",
+          [
+            "neckline",
+            7,
+            "/assets/wardrobe/tryon/woman-bob/neckline.webp"
+          ],
+          [
+            "floral-maxi",
+            25,
+            "/assets/wardrobe/tryon/woman-bob/floral-maxi.webp"
+          ]
+        ],
+        "white-sweatshirt": [
+          "pending"
+        ],
+        "black-trousers": [
+          "ready",
+          [
+            "black-trousers",
+            20,
+            "/assets/wardrobe/tryon/woman-bob/black-trousers.webp"
+          ]
+        ],
+        "ivory-mary-janes": [
+          "ready",
+          [
+            "mary-jane-insteps",
+            1,
+            "/assets/wardrobe/tryon/woman-bob/mary-jane-insteps.webp"
+          ],
+          [
+            "ivory-mary-janes",
+            10,
+            "/assets/wardrobe/tryon/woman-bob/ivory-mary-janes.webp"
+          ]
+        ],
+        "blue-collar-polo": [
+          "pending"
+        ],
+        "gray-joggers": [
+          "ready",
+          [
+            "gray-joggers",
+            20,
+            "/assets/wardrobe/tryon/woman-bob/gray-joggers.webp"
+          ]
+        ],
+        "white-puffer": [
+          "ready",
+          [
+            "white-puffer-back",
+            4,
+            "/assets/wardrobe/tryon/woman-bob/white-puffer-back.webp"
+          ],
+          [
+            "white-puffer",
+            40,
+            "/assets/wardrobe/tryon/woman-bob/white-puffer.webp"
+          ]
+        ],
+        "light-blue-jeans": [
+          "ready",
+          [
+            "light-blue-jeans",
+            20,
+            "/assets/wardrobe/tryon/woman-bob/light-blue-jeans.webp"
+          ]
+        ],
+        "white-platform-sneakers": [
+          "ready",
+          [
+            "white-platform-sneakers",
+            10,
+            "/assets/wardrobe/tryon/woman-bob/white-platform-sneakers.webp"
+          ]
+        ],
+        "purple-graphic-tee": [
+          "ready",
+          [
+            "neckline",
+            7,
+            "/assets/wardrobe/tryon/woman-bob/neckline.webp"
+          ],
+          [
+            "purple-graphic-tee",
+            30,
+            "/assets/wardrobe/tryon/woman-bob/purple-graphic-tee.webp"
+          ]
+        ]
+      },
+      "man-smile": {
+        "navy-shirt": [
+          "ready",
+          [
+            "navy-shirt",
+            30,
+            "/assets/wardrobe/tryon/straight/navy-shirt.webp"
+          ]
+        ],
+        "nude-pumps": [
+          "pending"
+        ],
+        "floral-maxi": [
+          "ready",
+          [
+            "floral-maxi",
+            25,
+            "/assets/wardrobe/tryon/straight/floral-maxi.webp"
+          ]
+        ],
+        "white-sweatshirt": [
+          "ready",
+          [
+            "white-sweatshirt",
+            30,
+            "/assets/wardrobe/tryon/straight/white-sweatshirt.webp"
+          ]
+        ],
+        "black-trousers": [
+          "ready",
+          [
+            "black-trousers",
+            20,
+            "/assets/wardrobe/tryon/straight/black-trousers.webp"
+          ]
+        ],
+        "ivory-mary-janes": [
+          "ready",
+          [
+            "ivory-mary-janes",
+            10,
+            "/assets/wardrobe/tryon/straight/ivory-mary-janes.webp"
+          ]
+        ],
+        "blue-collar-polo": [
+          "ready",
+          [
+            "blue-collar-polo",
+            30,
+            "/assets/wardrobe/tryon/straight/blue-collar-polo.webp"
+          ]
+        ],
+        "gray-joggers": [
+          "ready",
+          [
+            "gray-joggers",
+            20,
+            "/assets/wardrobe/tryon/straight/gray-joggers.webp"
+          ]
+        ],
+        "white-puffer": [
+          "ready",
+          [
+            "white-puffer-back",
+            4,
+            "/assets/wardrobe/tryon/straight/white-puffer-back.webp"
+          ],
+          [
+            "white-puffer",
+            40,
+            "/assets/wardrobe/tryon/straight/white-puffer.webp"
+          ]
+        ],
+        "light-blue-jeans": [
+          "ready",
+          [
+            "light-blue-jeans",
+            20,
+            "/assets/wardrobe/tryon/straight/light-blue-jeans.webp"
+          ]
+        ],
+        "white-platform-sneakers": [
+          "ready",
+          [
+            "white-platform-sneakers",
+            10,
+            "/assets/wardrobe/tryon/straight/white-platform-sneakers.webp"
+          ]
+        ],
+        "purple-graphic-tee": [
+          "ready",
+          [
+            "purple-graphic-tee",
+            30,
+            "/assets/wardrobe/tryon/straight/purple-graphic-tee.webp"
+          ]
+        ]
+      },
+      "man-glasses": {
+        "navy-shirt": [
+          "ready",
+          [
+            "navy-shirt",
+            30,
+            "/assets/wardrobe/tryon/straight/navy-shirt.webp"
+          ]
+        ],
+        "nude-pumps": [
+          "pending"
+        ],
+        "floral-maxi": [
+          "ready",
+          [
+            "floral-maxi",
+            25,
+            "/assets/wardrobe/tryon/straight/floral-maxi.webp"
+          ]
+        ],
+        "white-sweatshirt": [
+          "ready",
+          [
+            "white-sweatshirt",
+            30,
+            "/assets/wardrobe/tryon/straight/white-sweatshirt.webp"
+          ]
+        ],
+        "black-trousers": [
+          "ready",
+          [
+            "black-trousers",
+            20,
+            "/assets/wardrobe/tryon/straight/black-trousers.webp"
+          ]
+        ],
+        "ivory-mary-janes": [
+          "ready",
+          [
+            "ivory-mary-janes",
+            10,
+            "/assets/wardrobe/tryon/straight/ivory-mary-janes.webp"
+          ]
+        ],
+        "blue-collar-polo": [
+          "ready",
+          [
+            "blue-collar-polo",
+            30,
+            "/assets/wardrobe/tryon/straight/blue-collar-polo.webp"
+          ]
+        ],
+        "gray-joggers": [
+          "ready",
+          [
+            "gray-joggers",
+            20,
+            "/assets/wardrobe/tryon/straight/gray-joggers.webp"
+          ]
+        ],
+        "white-puffer": [
+          "ready",
+          [
+            "white-puffer-back",
+            4,
+            "/assets/wardrobe/tryon/straight/white-puffer-back.webp"
+          ],
+          [
+            "white-puffer",
+            40,
+            "/assets/wardrobe/tryon/straight/white-puffer.webp"
+          ]
+        ],
+        "light-blue-jeans": [
+          "ready",
+          [
+            "light-blue-jeans",
+            20,
+            "/assets/wardrobe/tryon/straight/light-blue-jeans.webp"
+          ]
+        ],
+        "white-platform-sneakers": [
+          "ready",
+          [
+            "white-platform-sneakers",
+            10,
+            "/assets/wardrobe/tryon/straight/white-platform-sneakers.webp"
+          ]
+        ],
+        "purple-graphic-tee": [
+          "ready",
+          [
+            "purple-graphic-tee",
+            30,
+            "/assets/wardrobe/tryon/straight/purple-graphic-tee.webp"
+          ]
+        ]
+      },
+      "woman-silver": {
+        "navy-shirt": [
+          "ready",
+          [
+            "navy-shirt",
+            30,
+            "/assets/wardrobe/tryon/fitted/navy-shirt.webp"
+          ]
+        ],
+        "nude-pumps": [
+          "pending"
+        ],
+        "floral-maxi": [
+          "ready",
+          [
+            "floral-maxi",
+            25,
+            "/assets/wardrobe/tryon/fitted/floral-maxi.webp"
+          ]
+        ],
+        "white-sweatshirt": [
+          "ready",
+          [
+            "white-sweatshirt",
+            30,
+            "/assets/wardrobe/tryon/fitted/white-sweatshirt.webp"
+          ]
+        ],
+        "black-trousers": [
+          "ready",
+          [
+            "black-trousers",
+            20,
+            "/assets/wardrobe/tryon/fitted/black-trousers.webp"
+          ]
+        ],
+        "ivory-mary-janes": [
+          "ready",
+          [
+            "ivory-mary-janes",
+            10,
+            "/assets/wardrobe/tryon/fitted/ivory-mary-janes.webp"
+          ]
+        ],
+        "blue-collar-polo": [
+          "ready",
+          [
+            "blue-collar-polo",
+            30,
+            "/assets/wardrobe/tryon/fitted/blue-collar-polo.webp"
+          ]
+        ],
+        "gray-joggers": [
+          "ready",
+          [
+            "gray-joggers",
+            20,
+            "/assets/wardrobe/tryon/fitted/gray-joggers.webp"
+          ]
+        ],
+        "white-puffer": [
+          "ready",
+          [
+            "white-puffer-back",
+            4,
+            "/assets/wardrobe/tryon/fitted/white-puffer-back.webp"
+          ],
+          [
+            "white-puffer",
+            40,
+            "/assets/wardrobe/tryon/fitted/white-puffer.webp"
+          ]
+        ],
+        "light-blue-jeans": [
+          "ready",
+          [
+            "light-blue-jeans",
+            20,
+            "/assets/wardrobe/tryon/fitted/light-blue-jeans.webp"
+          ]
+        ],
+        "white-platform-sneakers": [
+          "ready",
+          [
+            "white-platform-sneakers",
+            10,
+            "/assets/wardrobe/tryon/fitted/white-platform-sneakers.webp"
+          ]
+        ],
+        "purple-graphic-tee": [
+          "ready",
+          [
+            "purple-graphic-tee",
+            30,
+            "/assets/wardrobe/tryon/fitted/purple-graphic-tee.webp"
+          ]
+        ]
+      }
+    },
+    "categories": [
+      "top",
+      "bottom",
+      "dress",
+      "outerwear",
+      "shoes"
+    ],
+    "base": [
+      "brick-tee",
+      "espresso-jacket",
+      "blue-denim",
+      "oat-trousers",
+      "cream-trainers",
+      "penny-loafers"
+    ],
+    "catalog": [
+      "navy-shirt",
+      "nude-pumps",
+      "floral-maxi",
+      "white-sweatshirt",
+      "black-trousers",
+      "ivory-mary-janes",
+      "blue-collar-polo",
+      "gray-joggers",
+      "white-puffer",
+      "light-blue-jeans",
+      "white-platform-sneakers",
+      "purple-graphic-tee"
+    ],
+    "slots": {
+      "navy-shirt": "top",
+      "nude-pumps": "shoes",
+      "floral-maxi": "dress",
+      "white-sweatshirt": "top",
+      "black-trousers": "bottom",
+      "ivory-mary-janes": "shoes",
+      "blue-collar-polo": "top",
+      "gray-joggers": "bottom",
+      "white-puffer": "outerwear",
+      "light-blue-jeans": "bottom",
+      "white-platform-sneakers": "shoes",
+      "purple-graphic-tee": "top"
+    },
+    "originals": [
+      [
+        "./local-wardrobe/original/16dabf30e6e8fa3c96de5768fc31f823.png",
+        "8a47422a764b0d7a99c00ffe356e7e912662a9968aa24eb0ad16d1ff8fb7fe3c"
+      ],
+      [
+        "./local-wardrobe/original/272c3440b02e789f87eb2d0a383e2a11.png",
+        "4984350f77f248011f9ff3ca94dfaffd25dc9224637dfc724f82aad06e67318a"
+      ],
+      [
+        "./local-wardrobe/original/31e4250e21f793a2917dc58715075741.png",
+        "5bce5f9745a90fe6ef14167a8a39cb20a614dbee9c81666b4d7406e0cc0b5291"
+      ],
+      [
+        "./local-wardrobe/original/32781bf929015783b27f24d0d69f3292.png",
+        "7e1a99d66e872ee6400135bcab38972cd3cdfac8a02d17cc3aa93dda2abc0d98"
+      ],
+      [
+        "./local-wardrobe/original/3664b3d6eb66ec09e34ce78ab48204c3.png",
+        "9541d01587e31972a26ae1ccd1c128aacd908d9bfe5074806b6accc73f703459"
+      ],
+      [
+        "./local-wardrobe/original/39fac26a14d6cd1b7d173756751136d2.png",
+        "01445dc0d4768fef493983d4f79e37585a31509f9e2929fb997ba5e040801c9d"
+      ],
+      [
+        "./local-wardrobe/original/577805cad80d5445a78439e07346156f.png",
+        "6c3f99864bb200f62752f5f5d21be06feb77b8d6e8113ca89a2c9ea0fbdf7729"
+      ],
+      [
+        "./local-wardrobe/original/7b2cd16de2ec9269b45852756259e351.png",
+        "f6805c12c49055c3d60db266e40322c7aa2187a23450adc3631ad71120dd3f6c"
+      ],
+      [
+        "./local-wardrobe/original/8929e9f487e9cfe5a5953c3552c784c3.png",
+        "e1f2deb54f4fe308c86ab3539fb690a742079a52cf9c277b5b990937902466fc"
+      ],
+      [
+        "./local-wardrobe/original/a99416876ee749209a63ee61c4119910.png",
+        "e5797713fda2ec93379ed0b94e1b2e1998586666aee0d8d192b073f0211fee37"
+      ],
+      [
+        "./local-wardrobe/original/b5f922a651379879969c22772daf97a0.png",
+        "aded91cb3ab90ba831d97e199f18808723f271f2e587caffa39cd801cdff6591"
+      ],
+      [
+        "./local-wardrobe/original/c36ccdad34afa4c09314a2fe9e8ea18a.png",
+        "967fcb8278f30efd352876113e36e5485196c0d68ba751d06c697e5df068730b"
+      ]
+    ],
+    "references": [
+      [
+        "woman-bob",
+        "63645570227c1d46a003c0bc197765b940639e54c5f180be57cec8422efc4ca0"
+      ],
+      [
+        "man-smile",
+        "29d3e7ac431c57e0701066353a9a1eb9d648584af073df4d8dabab291022f06e"
+      ],
+      [
+        "man-glasses",
+        "171b8391fc7bf472cdf1c272abb9fd40919462def082faafcc41a0d7dca5bafa"
+      ],
+      [
+        "woman-silver",
+        "15cb4ba0efd4a9f02b4536aba179234d8180ce904b8aa19b823467b48328be0b"
+      ]
+    ]
+  },
+  "assets": {
+    "assets/avatar/ankles.webp": "f6a58eae0e1caa4e6e2a37952fdfe5dfc6dc905802badc88b2b7d794e84aba0b",
+    "assets/avatar/arms.webp": "05d7b64334a2a556f97f48ca984abd56c70859c10e60f05df162f58a664f0336",
+    "assets/avatar/blue-denim-thumb.webp": "555cc47635e9d1bf6bb08052a7b116ebd86868d853937aac74e5dc19acdff88c",
+    "assets/avatar/blue-denim.webp": "022c6884c4e03e214e47c0f437a80a17001311f8b80077ff3dd90d5b79ab7a47",
+    "assets/avatar/brick-tee-thumb.webp": "df4b81380ba61c2d8fe3598e92ba98aa2324e287751a123062c95471c79e0c2f",
+    "assets/avatar/brick-tee.webp": "46efa8fad9068a470e4c8d440c55b244da4e09200b955c3da895badba1ac7bf7",
+    "assets/avatar/cream-trainers-thumb.webp": "e4e01313fba1594ca870a41132c0c4141efeb0c01fe37ce63164bdc8fdbcb673",
+    "assets/avatar/cream-trainers.webp": "1d3e0faf366dfb93b060053b810272414ac340d0c67e865c101f08af96c6e304",
+    "assets/avatar/espresso-jacket-thumb.webp": "1fa602d29cbaf2e3e8fc211878e2746499bb643c94a6bbd028cfb7c8e21cbd9b",
+    "assets/avatar/espresso-jacket.webp": "0c8a0480c57cc3a87fc06ccbd6429ce5695df7246d1dbb6f9bacba5e9d83aaff",
+    "assets/avatar/head.webp": "60bbdc4666cb5a92ecd5329ede1936fc036a9b7c3b051091f9e165654be5cdab",
+    "assets/avatar/oat-trousers-thumb.webp": "cb6032c6fa8484e5c83053c5fb41fe912f9e8db59efb9e847dd2031f47fa7172",
+    "assets/avatar/oat-trousers.webp": "86f4d07feaef07545dd87f7e8b64f39650170498659bb3a55c5c18cc1a20d3bc",
+    "assets/avatar/penny-loafers-thumb.webp": "31a2dc84f9317ace3513b2a7dae38bd6e5c3fa2dd3f28096fbf915ad0f504a5d",
+    "assets/avatar/penny-loafers.webp": "006c63a144e7af255d94eafbb3dc96f8beef159ad1ea6bdcf9f7263d01730fa1",
+    "assets/local-avatar/man-glasses/ankles.webp": "e156345301ff0a8a9050ccac99388062c08fa3e9be1e6a8b5b9960bf8cb1f34c",
+    "assets/local-avatar/man-glasses/arms.webp": "357fa8193944957ddf4ae4334781c56017cb1c0bb0e21585ca162a0d5c02dee9",
+    "assets/local-avatar/man-glasses/head.webp": "08778cfd9d1f0dd27694bd7cb65ed6b292b6a4f216dd7810b45297cb894fed05",
+    "assets/local-avatar/man-smile/ankles.webp": "c2924b270f311a76ecc1303bda9c8e149115a66451f5bb2784333fdfa5432301",
+    "assets/local-avatar/man-smile/arms.webp": "d1f712f9e904761cd64b496c6fcedb6e8d54b969e5c0d5ca8efd0f9d9e75881b",
+    "assets/local-avatar/man-smile/head.webp": "4b0dc563248e717dc1f8dd96764d2556dcef262a8a8207f8b4f55e88e12059b3",
+    "assets/local-avatar/straight/blue-denim-thumb.webp": "f79514bf0c0157993eef60869964966af896a77e0d32a33ccbc7658267a0c82a",
+    "assets/local-avatar/straight/blue-denim.webp": "c1d81a4f7fc4d523e1384a2661c5f128f7eef834a236d3610aca224f6cbd50c2",
+    "assets/local-avatar/straight/brick-tee-thumb.webp": "fdc8c76f468b3f3e3d51b8358f7fcca7c3fa88daf60d35f926c63629f59caa78",
+    "assets/local-avatar/straight/brick-tee.webp": "d9deadbe63cb295dc28bdf2ad829f23d3bf5b90a2737cc54b47d5e97052ed587",
+    "assets/local-avatar/straight/cream-trainers-thumb.webp": "356291aa0cc99588b380ef98769e87532190e72669948f7ceedca6e2f27a114a",
+    "assets/local-avatar/straight/cream-trainers.webp": "e2ece12ecb11b9646e2adae3961013ad095032155d3910ad5eebfbd870b8aa7b",
+    "assets/local-avatar/straight/espresso-jacket-thumb.webp": "8ec4d2bdef626f62468c9b2f33617ff06467ac55c015b6d00a14df4f2f671a87",
+    "assets/local-avatar/straight/espresso-jacket.webp": "123a55b8ceec254e4ba794cebcc5b1c30536828070ae04d1c2fac2a92d6c5d4f",
+    "assets/local-avatar/straight/oat-trousers-thumb.webp": "d9e5af20b7c4ddb9e05fa191469a251d83cc98448a1f146f5b60d37102cbd8fc",
+    "assets/local-avatar/straight/oat-trousers.webp": "5e36b2da4225e1c46c0becbd217095976093d82b413ea85785d85d29d0d8be8d",
+    "assets/local-avatar/straight/penny-loafers-thumb.webp": "9b28ec78ba2bed5efa5a746d23c5f484effba94c01c0dd29fd5201ca93493174",
+    "assets/local-avatar/straight/penny-loafers.webp": "f7515265c9514109f139d727ac6a7e3c98ed9806707dec04728ae1d2401f0d50",
+    "assets/local-avatar/woman-bob/ankles.webp": "66dbf38c1a6594d97283cf26105810d5ba42fbf34d227a45f6d10ae4f46b072d",
+    "assets/local-avatar/woman-bob/arms.webp": "bda6262b4b22a592dc0d331795178a58f22e2d19065e24a74c1aa11961330efd",
+    "assets/local-avatar/woman-bob/head.webp": "42eed31a46289d7d831902630d5e74d2f1ce737fef524922be1dff1b735d2f49",
+    "assets/local-avatar/woman-silver/ankles.webp": "945346a5d88a6f293b01cdcfee1c2afc6fbc5566781927b565229917ad94bbb0",
+    "assets/local-avatar/woman-silver/arms.webp": "3681bafca99bc8a3748d441c3ed44ee8af4f601f7a2e80cf589b13ceecbef32d",
+    "assets/local-avatar/woman-silver/head.webp": "73e45f7c42e1bc999e2896082c12da8815cee654065a8439db348911fec74bae",
+    "assets/mark.svg": "68002bfeef4c7c2c7f39f8c9be23fdd38f411fb1e91f67382d7e5627ed5e6e68",
+    "assets/stage1a/iris-ankles.webp": "b836c6418e88ac7d7dbdc72e8eee751d39a75f2ce451518946b60b8a88bbaa17",
+    "assets/stage1a/iris-arms.webp": "65986b6237b6438206d5f6ee6f9483402f4f409606f83cdefc3d3e799e31aefd",
+    "assets/stage1a/iris-half.webp": "92002f91d8f81a4e4cd6281dd9303a4bd27f2a8a885398b63ca8a2b8ffa9ff10",
+    "assets/stage1a/iris-head.webp": "75b188ae7fc0bfb32750e2bc6b2b544c8e26c8132e59a7309db58b38243bd8aa",
+    "assets/stage1a/iris-reference.webp": "97b33413ca57ae07c12066b29ca66205110431176f1d4147f82fd1bbbc48f361",
+    "assets/stage1a/nia-ankles.webp": "0b3802823f99e39459ed91a31267b7a50458d649796ec8d1294f5b71845f72ef",
+    "assets/stage1a/nia-arms.webp": "90f04fb42bfc2b159c92942c27fd1e87fe919c11e2f0f2a11db0a6dee5ed2a9a",
+    "assets/stage1a/nia-half.webp": "8921d716ae178419643e485844a71a7ffcb7528fd2bc4d47c56c4fb013303329",
+    "assets/stage1a/nia-head.webp": "6535875b7783509800ba83fa966b66a933f4c8a76ea6293b1aa175cc7841c07d",
+    "assets/stage1a/nia-reference.webp": "90fc64fa30e6560e4d7b9efb93996af5f818e73e53af0d58a96576f2f3c625e0",
+    "assets/wardrobe/display/black-trousers.webp": "331b7485b77416762df418abb31078a0b8d052212fab43c310bf56f88d7a0282",
+    "assets/wardrobe/display/blue-collar-polo.webp": "b200df4e0657939369fec793f4e4b432d158a2912947528ba980478ec47f7cff",
+    "assets/wardrobe/display/floral-maxi.webp": "01a375dc7573f842d5fd3c88bd04cff1baa578476e7ed32e6ff195d278086033",
+    "assets/wardrobe/display/gray-joggers.webp": "359bf1367ec01ff9665cb597af389a21e4b3282223e53fa5579b00ed4977ee67",
+    "assets/wardrobe/display/ivory-mary-janes.webp": "1fc343146f89b981ce54f83136e0b08fcd92e16930c9a4a75def817c3ddc1e10",
+    "assets/wardrobe/display/light-blue-jeans.webp": "44e50dca03ad092a1ad6448ae974992406d7595996e5bada1a24a1a5315b6e2e",
+    "assets/wardrobe/display/navy-shirt.webp": "3c2d43b708bf3300979735be2424be470952c39ede21ef8fa654e7aab50f2dce",
+    "assets/wardrobe/display/nude-pumps.webp": "87f66544309a12ceba1a191a7b56270f01966d2411ce080f3d7887bafb05dcc6",
+    "assets/wardrobe/display/purple-graphic-tee.webp": "a39441b4adcac36dd0b5afdff050d2a56591d1af7ac95082301021237173f803",
+    "assets/wardrobe/display/white-platform-sneakers.webp": "7609f12b546aea6a069b1531147c3fec1fd2e07e31d79900cffc6d4bd63c0086",
+    "assets/wardrobe/display/white-puffer.webp": "70b06d4b2402ab1762607d8da82c36aea9028667b4730e7b3781b4ae8d91b91b",
+    "assets/wardrobe/display/white-sweatshirt.webp": "074f628840fbe11586564ab1455502873f1ff7e9bbe46414b87f9df84993d044",
+    "assets/wardrobe/tryon/fitted/black-trousers.webp": "275f241f2abca9f22a7977ac7164b70068a5415a3e120f47a34f4d1fa80cde38",
+    "assets/wardrobe/tryon/fitted/blue-collar-polo.webp": "22a1e4600ea0e120da7a6bd4d168f44967585a34af7a1df9e73044296135a5de",
+    "assets/wardrobe/tryon/fitted/floral-maxi.webp": "579cbe8455304d03655e687812ef14ac98600c5661e13fad8e01eb93feb302bd",
+    "assets/wardrobe/tryon/fitted/gray-joggers.webp": "7b0bde888ead65bfe46a1c7e3bec9a5576b839e06aeff6bba64a0a98b946cee7",
+    "assets/wardrobe/tryon/fitted/ivory-mary-janes.webp": "53362909859857bb64815215cc0f119e9f05a5cfadcc7db88dc0e3c2c92157ca",
+    "assets/wardrobe/tryon/fitted/light-blue-jeans.webp": "77b649c162a70bc70dedead9504241d050006e4e156c75eff1345e06eb827679",
+    "assets/wardrobe/tryon/fitted/navy-shirt.webp": "554165246a022f1e3dd0f4811913a06c8a7d6d21ea54d68202ea587d884bd459",
+    "assets/wardrobe/tryon/fitted/purple-graphic-tee.webp": "769635032513addef71bbc2cb01965d79d819b9e59e84685be554c3316f317b8",
+    "assets/wardrobe/tryon/fitted/white-platform-sneakers.webp": "ebc4525465d9ab69bd396879795f3faf483fdb2fafc3069518b3d484cef34dd2",
+    "assets/wardrobe/tryon/fitted/white-puffer-back.webp": "4dae45d7b3f4684220d78c7ccb248c6c1a5e774c132d850ad2168430d6293d67",
+    "assets/wardrobe/tryon/fitted/white-puffer.webp": "77e24f637b1bf4f19ee2714367cde2c0e2e05e706ebc8080586764046f64e912",
+    "assets/wardrobe/tryon/fitted/white-sweatshirt.webp": "8856c6f40926492fe94cb587889e5451cbb929ef5f76828fa31402da5edcf91c",
+    "assets/wardrobe/tryon/straight/black-trousers.webp": "758b1d225edbce49ea28a7a5f088e3aaff578d1fe3ae765e3b45d30fb092bef5",
+    "assets/wardrobe/tryon/straight/blue-collar-polo.webp": "8fb37276573dd0a9f3b071111665b51c69929e78eaee50ffc57b9f8229a7ac2b",
+    "assets/wardrobe/tryon/straight/floral-maxi.webp": "c6c8890c0081561c4d5c9b8cb1fe5498ea1136397ea3845f8da51f3ff4670faa",
+    "assets/wardrobe/tryon/straight/gray-joggers.webp": "e3fc1d2c858fa169bc781e743c23a8e2c5080d34c3075d160799b1a0396d39f1",
+    "assets/wardrobe/tryon/straight/ivory-mary-janes.webp": "2fd9f30f2761cd8caaa26be9d4b52bc3c06fa1dde100ce1d67117754dc10eb4b",
+    "assets/wardrobe/tryon/straight/light-blue-jeans.webp": "fd8750510c8c344275b3cff39d1031da57a49088489294e5980e869fc83645f9",
+    "assets/wardrobe/tryon/straight/navy-shirt.webp": "4c36e9c3c7331f15f7d501f681544d26d5eab1971ac17b7e3c55d870b7afbfbe",
+    "assets/wardrobe/tryon/straight/purple-graphic-tee.webp": "83a9039b752ba7a76cf64d7a3cee4e192ccbb71993ea1dd89ffc9c04a3e4d836",
+    "assets/wardrobe/tryon/straight/white-platform-sneakers.webp": "0cff65e382931e59f7b8173d73abb8ff5c197276c80473bd903acee89964536e",
+    "assets/wardrobe/tryon/straight/white-puffer-back.webp": "b4a1d0b083eed59cca83c9e485e53a572cf6c782e08b8c76128f7f05ea6b14b1",
+    "assets/wardrobe/tryon/straight/white-puffer.webp": "8d175f8f9caa22430a90fe25a04204172db6ef82835223aaa79836ec936814fd",
+    "assets/wardrobe/tryon/straight/white-sweatshirt.webp": "04c7e0e0de589ff5fc6ffde30713347c1ae946183a836beea492c70fc658a916",
+    "assets/wardrobe/tryon/woman-bob/black-trousers.webp": "3d8c78bcf5d149dcf4c7537d8ad5dfcf80d6618938712d3caa3a8de81fabd08a",
+    "assets/wardrobe/tryon/woman-bob/floral-maxi.webp": "ee0eec69c03721ef5f4047f7f903d7cc5cc3ddf2b96e496bdf4355a1da00b458",
+    "assets/wardrobe/tryon/woman-bob/gray-joggers.webp": "8ff31bfc88f6d22158c0dbcd46d8d0f3ebeec68e3366eafb3a7cb0f54623020a",
+    "assets/wardrobe/tryon/woman-bob/ivory-mary-janes.webp": "003eacf583bcc775b85203be78fc486e2cd493bfa4c50d4c57b5525b43c2f24e",
+    "assets/wardrobe/tryon/woman-bob/light-blue-jeans.webp": "dffe342451039d9804abf942f36effc445ba5dfd390c5546d5c04659f6cc4cd5",
+    "assets/wardrobe/tryon/woman-bob/mary-jane-insteps.webp": "976258a9d6138b48b5fb7ee68afab57e6620f7959743c9fac50cb04ae849f369",
+    "assets/wardrobe/tryon/woman-bob/navy-shirt-back.webp": "2bd497a21df3f416bed430e37387a9e0b5a25bd1d9fdf55538f2067539a58299",
+    "assets/wardrobe/tryon/woman-bob/navy-shirt.webp": "89496f3630c694ee3472140c4cb0d898599de3480cb387804af9bf1408b85c14",
+    "assets/wardrobe/tryon/woman-bob/neckline.webp": "ec73eb728a0d3e6752b6d9f9c6737a64c9dbae16b23236f147e58db1e5a531b6",
+    "assets/wardrobe/tryon/woman-bob/purple-graphic-tee.webp": "f1f5d26407cf5cbe34f2a19d8dedf21b08b0108146630f33f7f69444b3f42a6d",
+    "assets/wardrobe/tryon/woman-bob/white-platform-sneakers.webp": "1e0fde067dcd7df2b2145b90df8b6c4f20d041039b5f1997f17ef76a5e0c0342",
+    "assets/wardrobe/tryon/woman-bob/white-puffer-back.webp": "8999858ffe605ebac485dafa5c2a896314b55e14bdebd208c83137c51c603254",
+    "assets/wardrobe/tryon/woman-bob/white-puffer.webp": "1418ec07084778213046e6460b769f2e81f2b3194f54ba9d42c855c92732f8df"
+  },
+  "liveWeather": "天气获取失败。请重试或选择模拟天气。",
+  "weatherLooks": {
+    "mild": [
+      [
+        "light-blue-jeans",
+        "purple-graphic-tee",
+        "white-platform-sneakers"
+      ],
+      [
+        "floral-maxi",
+        "ivory-mary-janes"
+      ]
+    ],
+    "hot": [
+      [
+        "floral-maxi",
+        "white-platform-sneakers"
+      ],
+      [
+        "black-trousers",
+        "ivory-mary-janes",
+        "navy-shirt"
+      ]
+    ],
+    "rain": [
+      [
+        "light-blue-jeans",
+        "purple-graphic-tee",
+        "white-platform-sneakers"
+      ],
+      [
+        "black-trousers",
+        "navy-shirt",
+        "white-platform-sneakers"
+      ]
+    ],
+    "cold": [
+      [
+        "light-blue-jeans",
+        "purple-graphic-tee",
+        "white-platform-sneakers",
+        "white-puffer"
+      ],
+      [
+        "black-trousers",
+        "navy-shirt",
+        "white-platform-sneakers",
+        "white-puffer"
+      ]
+    ]
+  },
+  "wornByRole": {
+    "woman-bob": [
+      "navy-shirt",
+      "floral-maxi",
+      "black-trousers",
+      "ivory-mary-janes",
+      "gray-joggers",
+      "white-puffer",
+      "light-blue-jeans",
+      "white-platform-sneakers",
+      "purple-graphic-tee"
+    ],
+    "man-smile": [
+      "navy-shirt",
+      "floral-maxi",
+      "white-sweatshirt",
+      "black-trousers",
+      "ivory-mary-janes",
+      "blue-collar-polo",
+      "gray-joggers",
+      "white-puffer",
+      "light-blue-jeans",
+      "white-platform-sneakers",
+      "purple-graphic-tee"
+    ],
+    "man-glasses": [
+      "navy-shirt",
+      "floral-maxi",
+      "white-sweatshirt",
+      "black-trousers",
+      "ivory-mary-janes",
+      "blue-collar-polo",
+      "gray-joggers",
+      "white-puffer",
+      "light-blue-jeans",
+      "white-platform-sneakers",
+      "purple-graphic-tee"
+    ],
+    "woman-silver": [
+      "navy-shirt",
+      "floral-maxi",
+      "white-sweatshirt",
+      "black-trousers",
+      "ivory-mary-janes",
+      "blue-collar-polo",
+      "gray-joggers",
+      "white-puffer",
+      "light-blue-jeans",
+      "white-platform-sneakers",
+      "purple-graphic-tee"
+    ]
+  },
+  "sourcePhotosMatched": 4,
+  "people": {
+    "builtinsRendered": 7,
+    "independentModules": 4,
+    "photoRecovery": true,
+    "resultIsolation": true,
+    "mobileWidth": 390
+  },
+  "localErrors": [],
+  "externalHttpErrors": [],
+  "otherLocalOrigins": []
+}

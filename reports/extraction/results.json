@@ -1,0 +1,569 @@
+{
+  "builtins": {
+    "roles": [
+      "woman-bob",
+      "man-smile",
+      "man-glasses",
+      "woman-silver",
+      "mila",
+      "nia",
+      "iris"
+    ],
+    "analysisRequests": 0,
+    "backendDisabled": true
+  },
+  "photos": {
+    "head": {
+      "geometry": {
+        "encodedSize": [
+          455,
+          455
+        ],
+        "orientation": 1,
+        "orientedSize": [
+          455,
+          455
+        ],
+        "encodedToOriented": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "rasterSize": [
+          455,
+          455
+        ],
+        "rasterToOriented": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "headCropRaster": [
+          21,
+          0,
+          445,
+          455
+        ],
+        "headUnitToOriented": [
+          424,
+          0,
+          21,
+          0,
+          455,
+          0
+        ]
+      },
+      "landmarks": 478,
+      "body": "unobserved",
+      "needsSupplement": false,
+      "softAlphaPixels": 17511,
+      "observedClasses": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "samples": {
+        "skin": {
+          "rgb": [
+            205,
+            151,
+            120
+          ],
+          "pixelCount": 47977
+        },
+        "hair": {
+          "rgb": [
+            120,
+            110,
+            101
+          ],
+          "pixelCount": 10328
+        }
+      }
+    },
+    "longHair": {
+      "geometry": {
+        "encodedSize": [
+          900,
+          600
+        ],
+        "orientation": 1,
+        "orientedSize": [
+          900,
+          600
+        ],
+        "encodedToOriented": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "rasterSize": [
+          900,
+          600
+        ],
+        "rasterToOriented": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "headCropRaster": [
+          272,
+          0,
+          682,
+          460
+        ],
+        "headUnitToOriented": [
+          410,
+          0,
+          272,
+          0,
+          460,
+          0
+        ]
+      },
+      "landmarks": 478,
+      "body": "unobserved",
+      "needsSupplement": false,
+      "softAlphaPixels": 63279,
+      "observedClasses": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "samples": {
+        "skin": {
+          "rgb": [
+            225,
+            163,
+            134
+          ],
+          "pixelCount": 35221
+        },
+        "hair": {
+          "rgb": [
+            128,
+            77,
+            63
+          ],
+          "pixelCount": 84349
+        }
+      }
+    },
+    "phone": {
+      "geometry": {
+        "encodedSize": [
+          600,
+          900
+        ],
+        "orientation": 6,
+        "orientedSize": [
+          900,
+          600
+        ],
+        "encodedToOriented": [
+          0,
+          -1,
+          900,
+          1,
+          0,
+          0
+        ],
+        "rasterSize": [
+          900,
+          600
+        ],
+        "rasterToOriented": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "headCropRaster": [
+          272,
+          0,
+          682,
+          460
+        ],
+        "headUnitToOriented": [
+          410,
+          0,
+          272,
+          0,
+          460,
+          0
+        ]
+      },
+      "landmarks": 478,
+      "body": "unobserved",
+      "needsSupplement": false,
+      "softAlphaPixels": 65894,
+      "observedClasses": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "samples": {
+        "skin": {
+          "rgb": [
+            225,
+            163,
+            134
+          ],
+          "pixelCount": 35238
+        },
+        "hair": {
+          "rgb": [
+            128,
+            77,
+            63
+          ],
+          "pixelCount": 84254
+        }
+      }
+    },
+    "large": {
+      "geometry": {
+        "encodedSize": [
+          1800,
+          1200
+        ],
+        "orientation": 1,
+        "orientedSize": [
+          1800,
+          1200
+        ],
+        "encodedToOriented": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "rasterSize": [
+          1440,
+          960
+        ],
+        "rasterToOriented": [
+          1.25,
+          0,
+          0,
+          0,
+          1.25,
+          0
+        ],
+        "headCropRaster": [
+          436,
+          0,
+          1090,
+          735
+        ],
+        "headUnitToOriented": [
+          817.5,
+          0,
+          545,
+          0,
+          918.75,
+          0
+        ]
+      },
+      "landmarks": 478,
+      "body": "unobserved",
+      "needsSupplement": false,
+      "softAlphaPixels": 175401,
+      "observedClasses": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "samples": {
+        "skin": {
+          "rgb": [
+            225,
+            163,
+            134
+          ],
+          "pixelCount": 90408
+        },
+        "hair": {
+          "rgb": [
+            128,
+            77,
+            63
+          ],
+          "pixelCount": 215290
+        }
+      }
+    },
+    "full": {
+      "geometry": {
+        "encodedSize": [
+          640,
+          960
+        ],
+        "orientation": 1,
+        "orientedSize": [
+          640,
+          960
+        ],
+        "encodedToOriented": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "rasterSize": [
+          640,
+          960
+        ],
+        "rasterToOriented": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "headCropRaster": [
+          222,
+          0,
+          412,
+          230
+        ],
+        "headUnitToOriented": [
+          190,
+          0,
+          222,
+          0,
+          230,
+          0
+        ]
+      },
+      "landmarks": 478,
+      "body": "observed",
+      "needsSupplement": true,
+      "softAlphaPixels": 19058,
+      "observedClasses": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "samples": {
+        "skin": {
+          "rgb": [
+            201,
+            144,
+            115
+          ],
+          "pixelCount": 6182
+        },
+        "hair": {
+          "rgb": [
+            103,
+            60,
+            25
+          ],
+          "pixelCount": 5903
+        }
+      }
+    },
+    "athlete": {
+      "geometry": {
+        "encodedSize": [
+          1000,
+          667
+        ],
+        "orientation": 1,
+        "orientedSize": [
+          1000,
+          667
+        ],
+        "encodedToOriented": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "rasterSize": [
+          1000,
+          667
+        ],
+        "rasterToOriented": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "headCropRaster": [
+          433,
+          221,
+          525,
+          339
+        ],
+        "headUnitToOriented": [
+          92,
+          0,
+          433,
+          0,
+          118,
+          221
+        ]
+      },
+      "landmarks": 0,
+      "body": "observed",
+      "needsSupplement": true,
+      "softAlphaPixels": 14266,
+      "observedClasses": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "samples": {
+        "skin": {
+          "rgb": [
+            189,
+            120,
+            88
+          ],
+          "pixelCount": 1775
+        },
+        "hair": {
+          "rgb": [
+            81,
+            65,
+            60
+          ],
+          "pixelCount": 1175
+        }
+      }
+    },
+    "supplement": {
+      "geometry": {
+        "encodedSize": [
+          480,
+          480
+        ],
+        "orientation": 1,
+        "orientedSize": [
+          480,
+          480
+        ],
+        "encodedToOriented": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "rasterSize": [
+          480,
+          480
+        ],
+        "rasterToOriented": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "headCropRaster": [
+          0,
+          3,
+          480,
+          480
+        ],
+        "headUnitToOriented": [
+          480,
+          0,
+          0,
+          0,
+          477,
+          3
+        ]
+      },
+      "landmarks": 478,
+      "body": "unobserved",
+      "needsSupplement": false,
+      "softAlphaPixels": 38078,
+      "observedClasses": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "samples": {
+        "skin": {
+          "rgb": [
+            202,
+            144,
+            116
+          ],
+          "pixelCount": 54515
+        },
+        "hair": {
+          "rgb": [
+            103,
+            60,
+            25
+          ],
+          "pixelCount": 54399
+        }
+      }
+    },
+    "errors": {
+      "two.png": "multiple",
+      "empty.png": "no-face",
+      "covered.png": "occlusion",
+      "invalid.png": "decode"
+    },
+    "reloadContract": [
+      1,
+      "supplement",
+      "primary",
+      "supplement",
+      "c4784e27a7edb6e52c92c4bfda8135ac50acb4835cff46502983399b952d4b83",
+      478
+    ],
+    "reselectAndCancel": true
+  },
+  "upgradedLegacyPerson": true
+}

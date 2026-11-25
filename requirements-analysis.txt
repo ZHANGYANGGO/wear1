@@ -1,0 +1,7 @@
+# Tested with 64-bit Python 3.12
+mediapipe==0.10.21
+onnxruntime==1.22.1
+Pillow==11.3.0
+numpy==1.26.4
+opencv-contrib-python==4.11.0.86
+

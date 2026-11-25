@@ -1,0 +1,2 @@
+-r requirements-analysis.txt
+openvino==2025.2.0

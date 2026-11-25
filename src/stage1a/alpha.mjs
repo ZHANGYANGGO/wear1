@@ -20,7 +20,21 @@ export function layerFitsSlot(id, pixels, width, height, permittedSlots = slots)
     left ||= x < width / 2;
     right ||= x >= width / 2;
   }
-  return left && right;
+  return slot.oneSideAllowed ? left || right : left && right;
+}
+
+export function personalSlots(template, crop, limbSlots = slots, chinY = template.chinY) {
+  const [left,top,right,bottom] = crop;
+  const hair = { top: Math.max(0,Math.floor(top)-1), bottom: Math.min(template.anchors.waist[1],Math.ceil(bottom)+2),
+    containsX: x => x >= Math.max(0,Math.floor(left)-1) && x <= Math.min(559,Math.ceil(right)+1),
+    oneSideAllowed: true };
+  const center=template.anchors.neck[0];
+  const neckWidth=template.joinWidth/2+4;
+  return { arms: limbSlots.arms, ankles: limbSlots.ankles,
+    backHair: {...hair,top:Math.max(hair.top,Math.floor(chinY)-5)},
+    frontHair: {...hair,top:Math.max(hair.top,Math.floor(chinY))},
+    head: { top: 0, bottom: template.collarBottom+2,
+      containsX: (x,y) => (hair.containsX(x) && y<=chinY+2) || Math.abs(x-center)<=neckWidth } };
 }
 
 /** Check decoded same-origin images before replacing the active role. */

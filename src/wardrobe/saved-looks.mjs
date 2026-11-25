@@ -30,6 +30,7 @@ export function saveLook(storage, { roleId, name, selection }, byId, isReady) {
   if (!trimmed || trimmed.length > nameLimit) throw new Error('请填写 1 至 45 个字的穿搭名称。');
   if (!canWearSelection(selection, byId, isReady)) throw new Error('当前穿搭尚未完整加载，暂时无法保存。');
   const record = { roleId, name: trimmed, createdAt: new Date().toISOString(), ...visibleLook(selection) };
+  if (selection.dress) record.separates={top:selection.top,bottom:selection.bottom};
   if (!validEntry(record)) throw new Error('当前穿搭数据无效。');
   const looks = readSavedLooks(storage);
   try {

@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>人物库 · WearMate</title><link rel="icon" href="./assets/mark.svg">
+  <link rel="stylesheet" href="./src/theme.css"><link rel="stylesheet" href="./src/studio.css">
+  <link rel="stylesheet" href="./src/people/people.css"><script type="module" src="./src/people/page.mjs"></script>
+</head>
+<body>
+  <header class="masthead"><div class="container masthead-inner">
+    <a class="brand" href="./"><img src="./assets/mark.svg" width="32" height="32" alt="">WearMate.</a>
+    <nav class="site-nav" aria-label="主导航"><a class="site-link" href="./">穿搭工作台</a><a class="current-section" href="./people.html" aria-current="page">人物与造型</a><a class="site-link" href="./wardrobe.html">我的衣橱</a></nav>
+  </div></header>
+  <main class="container studio">
+    <div class="intro"><h1 id="title">人物库</h1></div>
+    <nav id="modules" aria-label="人物模块"></nav>
+    <div class="people-grid">
+      <figure class="look"><div class="stage people-stage"><div class="stage-frame" aria-hidden="true"></div><div id="preview"></div></div>
+        <figcaption class="look-caption"><strong id="person-name">正在载入人物…</strong><span id="source"></span></figcaption>
+      </figure>
+      <aside>
+        <section class="control-section" id="builtins"><h2>选择人物</h2>
+          <div id="portraits" aria-label="预制人物"></div>
+          <label class="field">当前人物<select id="person-select" disabled></select></label>
+          <p id="module-note"></p>
+          <fieldset id="body-panel" hidden><legend>身体模板</legend>
+            <label class="field">版型<select id="body-template"><option value="fitted">合身版</option><option value="straight">直身版</option></select></label>
+            <button id="body-preview" type="button">预览全身</button>
+            <button id="body-confirm" type="button" disabled>确认使用此模板</button>
+            <label id="mapped-label" hidden><input id="mapped-points" type="checkbox"> 查看全身画布上的五官对位</label>
+          </fieldset>
+          <button id="try-on" type="button" hidden>用此人物试穿</button> <button id="to-closet" type="button" hidden>进入此人物的衣橱</button>
+          <a class="lab-link" id="inspect" hidden>查看或更新照片分析</a>
+          <p><a class="lab-link" href="./stage1a.html">打开预制角色换装对照 ↗</a></p>
+        </section>
+        <section class="control-section"><a id="new-photo" class="lab-link" href="./create.html">上传照片生成 ↗</a>
+        </section>
+        <p role="status" id="message"></p><p role="alert" id="error"></p>
+      </aside>
+    </div>
+  </main>
+</body></html>

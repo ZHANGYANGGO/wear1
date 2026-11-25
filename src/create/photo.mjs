@@ -29,7 +29,7 @@ export async function openPhoto(file) {
       || image.naturalWidth * image.naturalHeight > maxPixels) {
       throw new Error('请使用宽高均不小于 128 像素、总像素不超过 1600 万的照片。');
     }
-    return { url, buffer };
+    return { url, buffer, type, width: image.naturalWidth, height: image.naturalHeight };
   } catch (error) {
     URL.revokeObjectURL(url);
     if (error.name === 'EncodingError') throw new Error('照片无法解码，请重新选择文件。');

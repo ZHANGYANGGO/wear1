@@ -1,7 +1,7 @@
 /* Optional real-browser smoke test. Start the local server before running this file. */
 const assert = require('node:assert/strict');
 const { chromium } = require(process.env.WEARMATE_PLAYWRIGHT || 'playwright');
-const base = process.env.WEARMATE_PREVIEW || 'http://127.0.0.1:4173';
+const base = process.env.WEARMATE_PREVIEW || 'http://127.0.0.1:4375';
 
 async function check(page) {
   await page.goto(base);

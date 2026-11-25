@@ -1,0 +1,17 @@
+{
+  "cities": [
+    {
+      "city": "上海",
+      "source": "Open-Meteo · 预报更新时间 2026-11-25 14:45　Asia/Shanghai",
+      "status": "",
+      "summary": "12°\n上海 · 阴\n\n低 2.4° / 高 12.1°\n\n体感偏冷，优先叠穿外套。\n\n体感 8.5°C　·　今日降水概率 0%　·　风速 7.1 km/h\n\nOpen-Meteo · 预报更新时间 2026-11-25 14:45　Asia/Shanghai"
+    },
+    {
+      "city": "北京",
+      "source": "Open-Meteo · 预报更新时间 2026-11-25 14:45　Asia/Shanghai",
+      "status": "",
+      "summary": "7°\n北京 · 晴\n\n低 -2.5° / 高 6.8°\n\n体感偏冷，优先叠穿外套。\n\n体感 2.7°C　·　今日降水概率 0%　·　风速 4.3 km/h\n\nOpen-Meteo · 预报更新时间 2026-11-25 14:45　Asia/Shanghai"
+    }
+  ],
+  "failures": []
+}

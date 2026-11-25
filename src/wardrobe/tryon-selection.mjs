@@ -1,6 +1,12 @@
 const separateSlots = ['top', 'bottom'];
 export const lookSlots = [...separateSlots, 'dress', 'outerwear', 'shoes'];
 
+export const studioViewKey = roleId => 'wearmate.studio.view.' + roleId;
+export function readStudioView(storage,roleId) {
+  try { return JSON.parse(storage.getItem(studioViewKey(roleId))); }
+  catch { return null; }
+}
+
 export function createLook(separates) {
   return {
     top: separates.top, bottom: separates.bottom, shoes: separates.shoes,

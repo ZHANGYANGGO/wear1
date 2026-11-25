@@ -44,7 +44,11 @@ test('role-scoped fitting entries have independent transparent parts in the shar
       }
     }
   }
-  assert.deepEqual(wardrobeSprites('mila'), []);
+  for (const templateRole of ['mila','nia','iris']) {
+    assert.ok(wardrobeSprites(templateRole).length > 0);
+    assert.equal(getFitInfo('navy-shirt',templateRole).template, 'fitted');
+  }
+  assert.deepEqual(wardrobeSprites('unknown'), []);
 });
 
 test('a dress replaces both separates and removing it restores them and any coat', () => {

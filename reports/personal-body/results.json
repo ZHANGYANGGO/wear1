@@ -1,0 +1,38 @@
+{
+  "generated": 3,
+  "templates": [
+    "fitted",
+    "straight"
+  ],
+  "catalogReadyEach": 11,
+  "dedicatedCatalog": 9,
+  "legacyAvatars": 7,
+  "landmarksPerTemplate": 478,
+  "staleHeadRejected": true,
+  "newTabRecovered": true,
+  "legacyHeadRecovered": true,
+  "legacyHeadRegenerated": true,
+  "mobileWidth": 390,
+  "occlusionPixels": {
+    "white-sweatshirt": {
+      "front": 462,
+      "back": 0
+    },
+    "navy-shirt": {
+      "front": 1633,
+      "back": 0
+    },
+    "coat": {
+      "front": 2811,
+      "back": 0
+    },
+    "clipped": {
+      "front": 0,
+      "back": 9505
+    },
+    "clippedCoat": {
+      "front": 0,
+      "back": 11534
+    }
+  }
+}

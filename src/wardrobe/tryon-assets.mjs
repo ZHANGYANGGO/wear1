@@ -1,6 +1,6 @@
 import { garmentCatalog } from './garments.mjs';
 import { bobId, bobLayers } from './woman-bob-wardrobe.mjs';
-import { localRegistration } from '../create/profiles.mjs';
+import { builtinPeople, localRegistration } from '../create/profiles.mjs';
 
 // Each entry names sprite parts in the role's 560 × 1536 coordinates.
 // Only browser-reviewed artwork belongs in these lists.
@@ -43,7 +43,8 @@ const straight = {
   'white-puffer': coatLayers,
 };
 
-const families = new Map(localRegistration.map(({ id, family }) => [id, family]));
+// Mila, Iris and Nia share the fitted template and its garment anchors.
+const families = new Map(builtinPeople.map(({id}) => [id, localRegistration.find(role => role.id === id)?.family ?? 'fitted']));
 const assets = { fitted, straight };
 const placement = {
   shoes: { anchor: 'feet', layer: 10 },
@@ -59,7 +60,7 @@ const swatches = {
   'light-blue-jeans': '#779fbb', 'white-platform-sneakers': '#dbceba', 'purple-graphic-tee': '#786389',
 };
 
-export function getFitInfo(id, roleId) {
+export function getFitInfo(id, roleId, templateId) {
   if (roleId === bobId) {
     const entries = Object.hasOwn(bobLayers, id) ? bobLayers[id] : null;
     if (!entries) return { status: 'pending', message: '这件衣物未纳入短发女士的专属衣橱。' };
@@ -70,7 +71,7 @@ export function getFitInfo(id, roleId) {
       })),
     };
   }
-  const family = families.get(roleId);
+  const family = families.get(roleId) ?? (roleId?.startsWith('photo-') && Object.hasOwn(assets,templateId) ? templateId : null);
   if (!family) return { status: 'pending', message: '请先创建并确认一个本地分身。' };
   const fit = assets[family][id];
   const roleFit = fit?.roles?.[roleId] ?? fit;
@@ -88,9 +89,9 @@ export function getFitInfo(id, roleId) {
   };
 }
 
-export function wardrobeSprites(roleId) {
+export function wardrobeSprites(roleId, templateId, overlays = {}) {
   return garmentCatalog.flatMap(item => {
-    const fit = getFitInfo(item.id, roleId);
+    const fit = getFitInfo(item.id, roleId, templateId);
     if (fit.status !== 'ready') return [];
     return [{
       id: item.id, name: item.name, category: item.category,
@@ -99,14 +100,14 @@ export function wardrobeSprites(roleId) {
       color: swatches[item.id],
       offset: [0, 0], scale: 1,
       ...placement[item.category],
-      parts: fit.parts,
+      parts: overlays[item.id] ? [...fit.parts,overlays[item.id]] : fit.parts,
     }];
   });
 }
 
 /** Catalogue view for future recommendation consumers. */
-export function withTryOnAvailability(item, roleId) {
-  const fit = getFitInfo(item.id, roleId);
+export function withTryOnAvailability(item, roleId, templateId) {
+  const fit = getFitInfo(item.id, roleId, templateId);
   return {
     ...item,
     tryOnStatus: fit.status,

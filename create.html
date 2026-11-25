@@ -1,101 +1,45 @@
 <!doctype html>
-<html lang="zh-CN">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="theme-color" content="#f9f7f1">
-    <title>创建分身 · WearMate</title>
-    <link rel="icon" type="image/svg+xml" href="./assets/mark.svg">
-    <link rel="stylesheet" href="./src/theme.css">
-    <link rel="stylesheet" href="./src/studio.css">
-    <link rel="stylesheet" href="./src/create/create.css">
-    <script type="module" src="./src/create/create.mjs"></script>
-  </head>
-  <body>
-    <header class="masthead">
-      <div class="container masthead-inner">
-        <a class="brand" href="./" aria-label="WearMate 工作台首页">
-          <img src="./assets/mark.svg" width="32" height="32" alt="">
-          <span>WearMate<span class="brand-period">.</span></span>
-        </a>
-        <nav class="site-nav" aria-label="主导航">
-          <a class="current-section" href="./create.html" aria-current="page">创建分身</a>
-          <a class="site-link" href="./">穿搭工作台</a>
-          <a class="site-link" href="./wardrobe.html">我的衣橱</a>
-        </nav>
-      </div>
-    </header>
-
-    <main class="container studio">
-      <div class="intro">
-        <div>
-          <p class="eyebrow intro-label">AVATAR STUDIO</p>
-          <h1>创建分身</h1>
-        </div>
-        <p class="intro-note">选一张清晰的半身照，填写身高和体重，<br class="desktop-break">预览后即可到工作台试穿。</p>
-      </div>
-
-      <div class="create-grid">
-        <section class="create-inputs" aria-labelledby="inputs-title">
-          <div class="section-heading">
-            <h2 id="inputs-title">照片与身材信息</h2>
-          </div>
-          <form id="create-form" autocomplete="off" novalidate>
-            <div class="upload-box">
-              <label for="photo">半身正面照</label>
-              <p id="photo-guide">单人正面，头脸和肩部清晰可见。JPEG、PNG 或 WebP，最大 10 MB。</p>
-              <input id="photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp" aria-describedby="photo-guide" required>
-            </div>
-            <div class="measurements">
-              <div class="measure">
-                <label for="height">身高（cm）</label>
-                <input id="height" name="height" type="number" step="any" inputmode="decimal" placeholder="例如 170" required>
-              </div>
-              <div class="measure">
-                <label for="weight">体重（kg）</label>
-                <input id="weight" name="weight" type="number" step="any" inputmode="decimal" placeholder="例如 65" required>
-              </div>
-            </div>
-            <button id="generate" class="create-action primary-action" type="submit" disabled>创建分身</button>
-          </form>
-          <p id="create-status" class="create-status" role="status">选择照片并填写两项数值。</p>
-          <p id="create-error" class="asset-error" role="alert" hidden></p>
-          <aside class="local-note" aria-label="当前生成范围">
-            <strong>本地预生成演示模式</strong>
-            <p>请使用四张指定参考照中的原文件。匹配后会直接预览对应分身。确认时保存身高、体重，预制体型按素材显示。照片在浏览器中匹配。</p>
-          </aside>
-        </section>
-
-        <section class="create-preview" aria-labelledby="preview-title">
-          <div class="section-heading">
-            <h2 id="preview-title" tabindex="-1">分身预览</h2>
-            <span id="preview-source" class="preview-source" hidden></span>
-          </div>
-          <div class="preview-grid">
-            <figure>
-              <div class="photo-frame">
-                <img id="uploaded-preview" alt="已选半身照片" hidden>
-                <span id="photo-empty">选择照片后显示</span>
-              </div>
-              <figcaption>原始半身照</figcaption>
-            </figure>
-            <figure>
-              <div class="stage candidate-stage">
-                <div class="stage-frame" aria-hidden="true"></div>
-                <div class="stage-light" aria-hidden="true"></div>
-                <div class="floor-shadow" aria-hidden="true"></div>
-                <div id="candidate-avatar" class="avatar" role="img" hidden></div>
-                <span id="candidate-empty">全身分身将在这里显示</span>
-              </div>
-              <figcaption>2D 分身</figcaption>
-            </figure>
-          </div>
-          <div id="preview-actions" class="preview-actions" hidden>
-            <button id="regenerate" class="create-action" type="button">重新匹配</button>
-            <button id="confirm" class="create-action primary-action" type="button">确认使用该分身</button>
-          </div>
-        </section>
-      </div>
-    </main>
-  </body>
-</html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>上传照片生成 · WearMate</title><link rel="icon" href="./assets/mark.svg">
+<link rel="stylesheet" href="./src/theme.css"><link rel="stylesheet" href="./src/studio.css"><link rel="stylesheet" href="./src/create/extraction.css">
+<script type="module" src="./src/create/create.mjs"></script></head>
+<body><header class="masthead"><div class="container masthead-inner">
+<a class="brand" href="./"><img src="./assets/mark.svg" width="32" height="32" alt="">WearMate.</a>
+<nav class="site-nav"><a href="./people.html" class="site-link">人物与造型</a><a href="./" class="site-link">穿搭工作台</a><a href="./wardrobe.html" class="site-link">我的衣橱</a></nav></div></header>
+<main class="container studio"><div class="intro"><h1>上传照片生成</h1><a class="site-link" href="./people.html#builtins">使用内置模型 ↗</a></div>
+<div class="extraction-grid"><section><h2>人物提取预览</h2>
+<div id="frame" data-background="light"><canvas id="canvas" hidden aria-label="照片分析预览"></canvas><span id="empty">选择照片后可检查发丝、肩部和面部点位</span></div>
+<div class="preview-tools" id="tools" hidden>
+<label>查看来源<select id="view-source"><option value="primary">主照片</option><option value="supplement" hidden>补拍正脸</option></select></label>
+<label>预览<select id="view"><option value="foreground">精细透明人物</option><option value="original">原图</option><option value="basic">基础分割</option><option value="semantic">部位分区</option></select></label>
+<label>底色<select id="background"><option value="light">浅色</option><option value="dark">深色</option></select></label>
+<label><input id="points" type="checkbox"> 眼、唇与脸型点位</label></div>
+<p id="legend" hidden>头发 · 棕　脸部皮肤 · 粉　身体皮肤 · 金　衣物 · 蓝　配饰 · 紫</p>
+<p id="details"></p></section>
+<aside><h2>选择单人照片</h2>
+<label>主照片<input type="file" id="photo" accept="image/jpeg,image/png,image/webp" disabled></label>
+<p>可选头像、半身照或全身照。支持 JPEG、PNG 和 WebP，单张最多 10 MB。照片仅在本机处理。</p>
+<div id="supplement-box" hidden><label>补拍同一人的清晰正脸<input type="file" id="supplement" accept="image/jpeg,image/png,image/webp"></label>
+<p>保留主照片的全身轮廓，补拍图提供面部点位。请自行核对两张照片中的人物。</p></div>
+<label>人物名称<input id="name" maxlength="64" placeholder="默认使用照片文件名"></label>
+<div class="measures"><label>身高（可选，cm）<input type="number" min="1" step="any" id="height"></label><label>体重（可选，kg）<input type="number" min="1" step="any" id="weight"></label></div>
+<p id="status" role="status"></p><p id="error" role="alert"></p>
+<div class="actions"><a id="to-cartoon" href="#cartoon-panel" hidden>生成或查看卡通头像 ↓</a><button type="button" id="confirm" disabled>确认并保存人物</button><a id="cancel" href="./people.html">取消并返回人物库</a></div>
+</aside></div>
+<section id="cartoon-panel" hidden aria-labelledby="cartoon-title">
+<h2 id="cartoon-title">照片转卡通</h2>
+<div class="cartoon-actions"><label>画风 <select id="cartoon-style"><option value="handdrawn">手绘</option><option value="anime">动漫</option></select></label>
+<button type="button" id="cartoon-generate">生成卡通头层</button>
+<button type="button" id="cartoon-stop" hidden>取消本次生成</button></div>
+<p role="status" id="cartoon-status"></p><p role="alert" id="cartoon-error"></p>
+<div class="cartoon-strip">
+<figure><figcaption id="cartoon-source-label">原照片</figcaption><img id="cartoon-original" alt="当前用于生成的原照片"></figure>
+<figure><figcaption>人物提取</figcaption><img id="cartoon-foreground" alt="同一张照片的透明人物"></figure>
+<figure><figcaption id="cartoon-caption">卡通头层</figcaption><div class="head-stage"><canvas id="cartoon-canvas" hidden></canvas><span id="cartoon-empty">生成后可查看</span></div></figure>
+</div>
+<div id="cartoon-inspect" hidden><label><input type="checkbox" id="cartoon-points"> 显示五官与头部定位点</label>
+<div class="cartoon-fitting"><canvas id="cartoon-fitting" width="460" height="480" aria-label="当前头层与工作台衣领的接合预览"></canvas>
+<div><label>衣领预览 <select id="cartoon-garment"><option value="white-sweatshirt">浅色圆领</option><option value="navy-shirt">深色衬衫领</option></select></label>
+<p id="neck-note"></p><button id="cartoon-save" type="button">确认并保存这个头层</button></div></div>
+</div></section>
+</main></body></html>

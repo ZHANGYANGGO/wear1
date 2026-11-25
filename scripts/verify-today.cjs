@@ -2,7 +2,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const path=require('node:path');
 const {chromium}=require(process.env.WEARMATE_PLAYWRIGHT || 'playwright');
-const base=process.env.WEARMATE_PREVIEW || 'http://127.0.0.1:4173';
+const base=process.env.WEARMATE_PREVIEW || 'http://127.0.0.1:4375';
 const folder=path.join(__dirname,'../stage4-evidence');
 const record={scenarios:{}};
 

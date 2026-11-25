@@ -2,8 +2,10 @@ import { openPhoto } from '../create/photo.mjs';
 import { availability, categories, seasons, statements, tryOnStatuses, warmth } from './model.mjs';
 import { openPersonalWardrobe } from './personal.mjs';
 import { bobId } from './woman-bob-wardrobe.mjs';
-import { localRegistration, readConfirmedProfile } from '../create/profiles.mjs';
+import { builtinPeople, readConfirmedProfile } from '../create/profiles.mjs';
 import { getFitInfo } from './tryon-assets.mjs';
+import { getPhotoPerson } from '../people/store.mjs';
+import { bodyTemplates } from '../avatar/body-templates.mjs';
 
 const byId = id => document.getElementById(id);
 const roleId = readConfirmedProfile()?.id ?? bobId;
@@ -36,7 +38,14 @@ let activeItem;
 let uploadURL;
 let requestId = 0;
 let returnFocus;
-const role = localRegistration.find(record => record.id === roleId);
+let role = builtinPeople.find(record => record.id === roleId);
+if (roleId.startsWith('photo-')) {
+  role = await getPhotoPerson(roleId).catch(()=>null);
+  document.querySelector('h1').textContent = (role?.name ?? '照片人物') + '的衣橱';
+  document.querySelector('.wardrobe-note').textContent = role?.templateId
+    ? '当前身体模板 · '+bodyTemplates[role.templateId].name : '请到人物库确认身体模板，再选择衣物试穿。';
+}
+window.addEventListener('pageshow',event=>{if(event.persisted) location.reload();});
 if (roleId === bobId) {
   document.querySelector('h1').textContent = '短发女士的衣橱';
   document.querySelector('.wardrobe-note').textContent = '为当前分身制作的试穿单品。';
@@ -165,9 +174,9 @@ function setActive(item, sourceURL) {
   byId('original-unavailable').hidden = true;
   original.src = sourceURL;
   cartoon.src = item.cartoonDisplayImage;
-  const fit = getFitInfo(item.id, role?.id);
+  const fit = getFitInfo(item.id, role?.id, role?.templateId);
   const text = fit.status === 'ready'
-    ? `可试穿 · ${role.label}`
+    ? `可试穿 · ${role.name}`
     : [tryOnStatuses[fit.status], fit.message].join(' · ');
   byId('tryon-status').textContent = text;
   for (const key of ['name', 'category', 'availability', 'primaryColor', 'warmthLevel', 'statementLevel']) {
@@ -269,7 +278,7 @@ function showDetails(item, trigger) {
 }
 
 tryOn.addEventListener('click', () => {
-  if (dialogMode !== 'details' || getFitInfo(activeItem?.id, role?.id).status !== 'ready') return;
+  if (dialogMode !== 'details' || getFitInfo(activeItem?.id, role?.id,role?.templateId).status !== 'ready') return;
   const destination = new URL('./', window.location.href);
   destination.searchParams.set('tryOn', activeItem.id);
   window.location.assign(destination);

@@ -44,10 +44,8 @@ test('four registrations have distinct identities, hashes and actual layered ass
   for (const hashes of Object.values(bodyHashes)) assert.equal(hashes.size, 4);
 });
 
-test('an unregistered input returns an explicit rejection and unknown IDs cannot restore', async () => {
+test('built-in provider accepts explicit identifiers only', async () => {
   const provider = new LocalAvatarProvider();
-  await assert.rejects(provider.resolve({
-    photo: new TextEncoder().encode('unregistered'), heightCm: 170, weightKg: 65,
-  }), /当前演示版本暂不支持该照片/);
+  assert.equal(provider.resolve, undefined);
   await assert.rejects(provider.byId('unknown'), /找不到已确认的分身/);
 });

@@ -2,7 +2,7 @@ import { categories, garments as defaultGarments, outfits as classicOutfits } fr
 import { bobId, bobCommute } from './wardrobe/woman-bob-wardrobe.mjs';
 import { getFitInfo, wardrobeSprites } from './wardrobe/tryon-assets.mjs';
 import {
-  canWearSelection, createLook, removeLayer, restoreLook, selectTryOnItem, visibleLook,
+  canWearSelection, createLook, readStudioView, removeLayer, restoreLook, selectTryOnItem, studioViewKey, visibleLook,
 } from './wardrobe/tryon-selection.mjs';
 import { readSavedLooks, saveLook } from './wardrobe/saved-looks.mjs';
 import { openPersonalWardrobe } from './wardrobe/personal.mjs';
@@ -40,7 +40,7 @@ let avatar;
 let profileError = '';
 try {
   const bundle = await avatarProvider.byId(profileId);
-  const extras = wardrobeSprites(bundle.id);
+  const extras = wardrobeSprites(bundle.id,bundle.templateId,bundle.overlays);
   const prepared = await preparePreview(avatarElement, bundle, { extras, strict: false });
   avatarElement.replaceWith(prepared.next);
   avatarElement = prepared.next;
@@ -49,10 +49,15 @@ try {
   activeBundle = bundle;
   adapted = extras;
   document.querySelector('#stage-role-name').textContent = bundle.avatar.label;
-  document.querySelector('#stage-role-type').textContent = '本地预制分身';
-} catch {
-  profileError = '当前分身暂不可用，现显示示例角色 Mila。';
+  document.querySelector('#stage-role-type').textContent = bundle.templateId ? bundle.sourceLabel : '本地预制分身';
+} catch (error) {
+  if (profileId.startsWith('photo-')) {
+    avatar = {ready:Promise.resolve({ok:false,message:error.message}),garmentLoads:new Map(),show(){}};
+    document.querySelector('#stage-role-name').textContent='个人角色待确认';
+    document.querySelector('#stage-role-type').textContent='请返回人物库检查身体模板';
+  } else profileError = '当前分身暂不可用，现显示示例角色 Mila。';
 }
+window.addEventListener('pageshow',event=>{if(event.persisted) location.reload();});
 avatar ??= mountAvatar(avatarElement, mila, defaultGarments);
 const dedicated = activeBundle?.id === bobId;
 const outfits = dedicated ? [classicOutfits[0], bobCommute] : classicOutfits;
@@ -63,7 +68,7 @@ const allById = new Map(garments.map(item => [item.id, item]));
 const baseIds = new Set(Object.values(classicOutfits[0].items));
 const controlGarments = garments.filter(item =>
   item.parts ? personal.has(item.id) : (!dedicated || baseIds.has(item.id)));
-const garmentById = dedicated ? new Map(controlGarments.map(item => [item.id, item])) : allById;
+const garmentById = dedicated || activeBundle?.templateId ? new Map(controlGarments.map(item => [item.id, item])) : allById;
 const tabs = [...categories];
 if (adapted.some(item => item.category === 'dress')) tabs.push({ id: 'dress', name: '连衣裙' });
 if (adapted.some(item => item.category === 'outerwear')) tabs.push({ id: 'outerwear', name: '外套' });
@@ -76,11 +81,12 @@ let selection = createLook(defaults);
 let activeCategory = categories[0].id;
 let avatarReady = false;
 let avatarError = '';
-const roleId = activeBundle?.id ?? mila.id;
-const viewKey = 'wearmate.studio.view.' + roleId;
+const roleId = activeBundle?.id ?? (profileId.startsWith('photo-') ? profileId : mila.id);
+let viewStorage;
 
 try {
-  const previous = JSON.parse(sessionStorage.getItem(viewKey));
+  viewStorage = profileId.startsWith('photo-') ? local : sessionStorage;
+  const previous = readStudioView(viewStorage,roleId);
   selection = restoreLook(previous?.selection, defaults, garmentById);
   if (tabs.some(({ id }) => id === previous?.category)) activeCategory = previous.category;
 } catch {
@@ -103,7 +109,7 @@ function applyRequest() {
   const item = garmentById.get(requestedId);
   let reply;
   if (!personal.has(requestedId)) reply = '请先把这件衣物加入个人衣橱。';
-  else if (!item?.parts) reply = getFitInfo(requestedId, roleId).message ?? '当前分身的试穿图层暂不可用。';
+  else if (!item?.parts) reply = getFitInfo(requestedId, roleId,activeBundle?.templateId).message ?? '当前分身的试穿图层暂不可用。';
   else if (garmentStatus(item.id) === 'failed') reply = `「${item.name}」加载失败，已保留当前穿搭。`;
   else if (!avatarReady || !isGarmentReady(item.id)) {
     if (!avatarError) {
@@ -134,7 +140,7 @@ function applyRequest() {
 
 function rememberView() {
   try {
-    sessionStorage.setItem(viewKey, JSON.stringify({ selection, category: activeCategory }));
+    if (activeBundle || !profileId.startsWith('photo-')) viewStorage.setItem(studioViewKey(roleId), JSON.stringify({ selection, category: activeCategory }));
   } catch {
     // The selected outfit remains active on the current page.
   }
@@ -354,7 +360,7 @@ function renderSaved() {
     const load = button('saved-look-load');
     load.textContent = record.name;
     load.addEventListener('click', () => {
-      const candidate = restoreLook(record, selection, garmentById);
+      const candidate = restoreLook({...record, ...record.separates}, selection, garmentById);
       const complete = Object.entries(visibleLook(candidate)).every(([slot, id]) => id === record[slot])
         && canWearSelection(candidate, garmentById, isGarmentReady);
       if (!complete) {

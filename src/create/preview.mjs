@@ -3,7 +3,7 @@ import { inspectGeneratedLayers } from '../stage1a/alpha.mjs';
 import { selectOutfit } from '../wardrobe/selection.mjs';
 
 /** Validate offstage, so an invalid candidate can never replace the workbench. */
-export async function preparePreview(element, bundle, { extras = [], strict = true } = {}) {
+export async function preparePreview(element, bundle, { extras = [], strict = true, selection } = {}) {
   const next = element.cloneNode(false);
   const mounted = mountAvatar(next, bundle.avatar, [...bundle.garments, ...extras]);
   const result = await mounted.ready;
@@ -13,9 +13,10 @@ export async function preparePreview(element, bundle, { extras = [], strict = tr
   if (!strict) return { next, mounted };
   const loaded = [...mounted.garmentLoads.values()];
   await Promise.all(loaded.map(load => load.settled));
-  if (loaded.length !== bundle.garments.length || loaded.some(load => load.status !== 'ready')) {
+  if (bundle.garments.some(item=>mounted.garmentLoads.get(item.id)?.status!=='ready')) {
     throw new Error('分身的试穿素材没有完整加载，请重试。');
   }
-  mounted.show(selectOutfit('casual'));
+  const ready=selection && Object.values(selection).every(id=>!id || mounted.garmentLoads.get(id)?.status==='ready');
+  mounted.show(ready ? selection : selectOutfit('casual'));
   return { next, mounted };
 }
