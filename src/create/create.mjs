@@ -1,5 +1,7 @@
 import { createModelViewer } from '../3d/viewer.mjs';
-import { fitBody, tiers } from '../3d/fitting.mjs';
+import { tiers } from '../3d/fitting.mjs';
+import { fitGeometry } from '../3d/photo-geometry.mjs';
+import { localTemplate } from '../3d/mesh-tape.mjs';
 import { confirmModel, readConfirmedModel } from '../3d/profile.mjs';
 import { downloadBody } from '../3d/download.mjs';
 import { installCamera } from './camera.mjs';
@@ -23,7 +25,7 @@ catch { status.textContent = '请在支持 WebGL 的浏览器中启用硬件加�
 const guides = {
   quick: '使用身高和体重估计体型，可调节肩宽、腰腹和臀部。',
   photos: '两张照片仅在本页分析。宽松服装会影响轮廓估计。',
-  measured: '在自然站立时用软尺测量三处围度，水平绕一圈。围度将约束双视角拟合结果。',
+  measured: '自然站立时用软尺水平绕一圈。填写至少一项实测围度，其余部位按照片估计。',
   appearance: '先用正侧面照建立试衣分身，围度可选。确认后可另选清晰正脸等参考照，自主决定是否提交云端增强。',
 };
 function refresh() {
@@ -37,6 +39,8 @@ function refresh() {
   }
   if (!byId('height').validity.valid || !byId('weight').validity.valid) reasons.push('请填写有效的身高和体重');
   if (byId('girths').querySelector('input:invalid')) reasons.push('请检查胸围、腰围和臀围');
+  if (form.elements.tier.value === 'measured' && ![...byId('girths').querySelectorAll('input')].some(el => el.value))
+    reasons.push('请填写至少一项实测围度');
   const guide = reasons.join('，');
   if (byId('generate-guide').textContent !== guide) byId('generate-guide').textContent = guide;
   byId('generate').disabled = !viewer || busy || reasons.length > 0;
@@ -109,7 +113,7 @@ function updateTier() {
     byId(id).hidden = !show;
     byId(id).disabled = !show;
   }
-  for (const input of byId('girths').querySelectorAll('input')) input.required = tier === 'measured';
+  for (const input of byId('girths').querySelectorAll('input')) input.required = false;
   byId('tier-guide').textContent = guides[tier];
   byId('confirm').textContent = tier === 'appearance' ? '确认分身，查看外观增强选项' : '在工作台使用';
 }
@@ -147,9 +151,14 @@ form.addEventListener('submit', async event => {
   refresh();
   try {
     if (tier !== 'quick') {
-      for (const view of ['front','side']) input.views[view] = review.get(view).sections;
+      input.contours = {};
+      for (const view of ['front','side']) {
+        input.views[view] = review.get(view).sections;
+        input.contours[view] = review.get(view).contour;
+      }
     }
-    const record = fitBody(input);
+    const record = fitGeometry(input,await localTemplate());
+    if (current !== revision) return;
     status.textContent = '正在拟合人体模板…';
     const stats = await viewer.load(null, record);
     if (current !== revision) return;
@@ -158,6 +167,9 @@ form.addEventListener('submit', async event => {
     byId('preview-source').textContent = tiers[tier] + ' · 本地';
     byId('preview-source').hidden = false;
     byId('model-meta').textContent = record.heightCm + ' cm / ' + record.weightKg + ' kg · ' + stats.triangles.toLocaleString() + ' 个三角面';
+    const cm=stats.measurements;
+    byId('tape-result').textContent = '网格复测（cm）　身高 '+cm.height.toFixed(1)+'　胸 '+cm.chest.toFixed(1)+'　腰 '+cm.waist.toFixed(1)+'　臀 '+cm.hips.toFixed(1);
+    viewer.showTape(byId('show-tape').checked);
     byId('preview-actions').hidden = false;
     status.textContent = '本地分身已就绪，可旋转检查后确认。';
     byId('preview-title').focus();
@@ -165,12 +177,30 @@ form.addEventListener('submit', async event => {
     if (revision === current) { error.textContent = failure.message; error.hidden = false; status.textContent = '请调整输入后重试。'; }
   } finally { busy = false; refresh(); }
 });
-byId('confirm').onclick = () => {
+byId('confirm').onclick = async () => {
   if (!candidate) return;
-  try { confirmModel(candidate); location.assign(candidate.tier === 'appearance' ? './#reference-panel' : './'); }
+  const body=candidate,slot=review.get('front'),nose=slot.contour?.landmarks?.[0];
+  if(body.tier!=='quick' && slot.photo?.url && nose){
+    try{
+      const im=new Image();im.src=slot.photo.url;await im.decode();
+      const eyes=slot.contour.landmarks;
+      const eyeSpan=Math.abs(eyes[2].x-eyes[5].x)*im.naturalWidth;
+      if(eyeSpan>=22){
+        const size=Math.min(im.naturalWidth,im.naturalHeight,eyeSpan*5.8);
+        const x=Math.max(0,Math.min(im.naturalWidth-size,nose.x*im.naturalWidth-size/2));
+        const y=Math.max(0,Math.min(im.naturalHeight-size,nose.y*im.naturalHeight-size*.54));
+        const c=document.createElement('canvas');c.width=c.height=Math.min(640,Math.ceil(size));
+        c.getContext('2d').drawImage(im,x,y,size,size,0,0,c.width,c.height);
+        if(candidate===body)sessionStorage.setItem('wearmate.face.input.'+body.id,c.toDataURL('image/jpeg',.90));
+      }
+    }catch{/* A supplementary close-up can always be supplied in the editor. */}
+  }
+  if(candidate!==body)return;
+  try { confirmModel(body); location.assign(body.tier === 'appearance' ? './#reference-panel' : './'); }
   catch { error.textContent = '无法保存分身，请允许浏览器会话存储。'; error.hidden = false; }
 };
 byId('reset-view').onclick = () => viewer?.reset();
+byId('show-tape').onchange = e => viewer?.showTape(e.target.checked);
 byId('auto-rotate').onclick = event => {
   const button = event.currentTarget, active = button.getAttribute('aria-pressed') !== 'true';
   viewer?.setAutoRotate(active); button.setAttribute('aria-pressed', String(active));

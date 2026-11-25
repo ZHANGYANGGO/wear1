@@ -3,6 +3,7 @@ import { garmentCatalog, garmentGroups } from '../3d/garments.mjs';
 import { readConfirmedModel } from '../3d/profile.mjs';
 
 const profile = readConfirmedModel();
+document.querySelector('#face-editor-link').hidden=profile?.kind!=='local';
 const empty = document.querySelector('#tryon-empty');
 const status = document.querySelector('#tryon-status');
 const errorBox = document.querySelector('#tryon-error');
@@ -46,6 +47,7 @@ for (const group of garmentGroups) {
   for (const item of garmentCatalog.filter(garment => group.categories.includes(garment.category))) {
     const button = document.createElement('button');
     button.type = 'button';
+    button.disabled = true;
     button.className = 'garment-option';
     button.dataset.garment = item.id;
     button.setAttribute('aria-pressed', 'false');

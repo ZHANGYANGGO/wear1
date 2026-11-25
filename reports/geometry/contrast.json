@@ -1,0 +1,47 @@
+{
+  "units": "cm",
+  "tolerance": 1,
+  "passed": true,
+  "A": {
+    "reference": {
+      "waistWidth": 31.402777777777775,
+      "waistDepth": 19.36111111111111,
+      "bellyFront": 12.868055555555555,
+      "lowerBack": -8.145833333333332
+    },
+    "actual": {
+      "waistWidth": 31.01024563869894,
+      "waistDepth": 19.313279171475443,
+      "bellyFront": 12.842600263289,
+      "lowerBack": -8.13397109669587
+    },
+    "waistGirth": 83.22863945031995,
+    "errors": {
+      "waistWidth": -0.3925321390788348,
+      "waistDepth": -0.04783193963566745,
+      "bellyFront": -0.025455292266554963,
+      "lowerBack": 0.011862236637462331
+    }
+  },
+  "B": {
+    "reference": {
+      "waistWidth": 28.097222222222218,
+      "waistDepth": 23.375,
+      "bellyFront": 16.645833333333332,
+      "lowerBack": -8.145833333333332
+    },
+    "actual": {
+      "waistWidth": 27.9738749766874,
+      "waistDepth": 23.020758245268212,
+      "bellyFront": 16.348572063592137,
+      "lowerBack": -8.052036492201221
+    },
+    "waistGirth": 83.78386329802085,
+    "errors": {
+      "waistWidth": -0.12334724553481635,
+      "waistDepth": -0.3542417547317882,
+      "bellyFront": -0.2972612697411954,
+      "lowerBack": 0.09379684113211084
+    }
+  }
+}

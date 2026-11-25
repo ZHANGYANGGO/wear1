@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>面部造型 · WearMate</title>
+<link rel="stylesheet" href="/src/theme.css"><link rel="stylesheet" href="/src/face/editor.css">
+<script type="importmap">{"imports":{"three":"/vendor/three/build/three.module.js","three/addons/":"/vendor/three/examples/jsm/"}}</script>
+<script type="module" src="/src/face/editor.mjs"></script></head>
+<body><header><a href="/">WearMate</a><nav><a href="/">工作台</a><a href="/wardrobe.html">试衣间</a></nav></header>
+<main><h1>面部造型</h1><div id="layout"><section class="preview"><div id="face-view"></div>
+<div class="toolbar"><button id="compare" type="button">按住看原貌</button><button id="gray" aria-pressed="false">查看灰模</button><button id="focus">看全身</button></div>
+<p id="state" role="status">正在读取人台…</p><small id="dimensions"></small><p id="error" role="alert"></p></section>
+<section id="panel" inert><fieldset><legend>原貌</legend><p>可直接在模板脸上试妆。建立本人脸型时，请平视镜头、自然闭嘴，露出下颌并拍全头发。可补一张同一人的侧脸或三分之二侧脸，以改善鼻尖和下巴的轮廓。</p>
+<label>正脸照片<input id="front" type="file" accept="image/png,image/jpeg,image/webp"></label><label><input id="front-mirror" type="checkbox"> 正脸照片已镜像</label>
+<label>侧脸照片（可选）<input id="side" type="file" accept="image/png,image/jpeg,image/webp"></label><label><input id="side-mirror" type="checkbox"> 侧脸照片已镜像</label>
+<div class="toolbar"><button id="retry">重新检测</button><button id="remove-side">仅用正脸</button></div><small id="photo-info"></small></fieldset>
+<fieldset><legend>美颜</legend><div class="toolbar" id="beauty-presets"></div><p id="beauty-name"></p><div id="beauty-controls"></div><button id="beauty-reset">重置美颜</button></fieldset>
+<fieldset><legend>彩妆</legend><div class="toolbar" id="makeup-presets"></div><div id="makeup-controls"></div><button id="remove-makeup">卸妆</button></fieldset>
+<div class="toolbar"><button id="save" class="primary">确认造型</button><a href="/" id="cancel">取消编辑</a><a id="wardrobe" href="/wardrobe.html" hidden>进入衣橱</a></div>
+<div class="toolbar"><button id="export-base">导出原貌 GLB</button><button id="export-style">导出当前造型 GLB</button></div>
+</section></div></main></body></html>
+

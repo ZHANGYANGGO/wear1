@@ -1,0 +1,207 @@
+{
+  "weightsSHA256": "5d59de76a01b45f39644e6404da5fdf8c238ad3f704708555a22713dfa1b4a33",
+  "testA": {
+    "total": 1684,
+    "common": 1684,
+    "subjects": 87,
+    "coverage": {
+      "quick": {
+        "success": 1684,
+        "partial": 0,
+        "failed": 0,
+        "coverage": 1
+      },
+      "previous": {
+        "success": 1042,
+        "partial": 642,
+        "failed": 0,
+        "coverage": 1
+      },
+      "current": {
+        "success": 1042,
+        "partial": 642,
+        "failed": 0,
+        "coverage": 1
+      }
+    },
+    "results": {
+      "quick": {
+        "chest": {
+          "mae": 4.478,
+          "p90": 9.087,
+          "subjectMAE": 4.426
+        },
+        "waist": {
+          "mae": 9.354,
+          "p90": 16.04,
+          "subjectMAE": 9.593
+        },
+        "hips": {
+          "mae": 5.411,
+          "p90": 11.521,
+          "subjectMAE": 5.399
+        }
+      },
+      "previous": {
+        "chest": {
+          "mae": 3.482,
+          "p90": 7.301,
+          "subjectMAE": 3.538
+        },
+        "waist": {
+          "mae": 5.616,
+          "p90": 10.174,
+          "subjectMAE": 5.654
+        },
+        "hips": {
+          "mae": 4.563,
+          "p90": 9.031,
+          "subjectMAE": 4.5
+        }
+      },
+      "current": {
+        "chest": {
+          "mae": 2.514,
+          "p90": 5.219,
+          "subjectMAE": 2.452
+        },
+        "waist": {
+          "mae": 2.758,
+          "p90": 5.971,
+          "subjectMAE": 2.757
+        },
+        "hips": {
+          "mae": 1.523,
+          "p90": 2.973,
+          "subjectMAE": 1.513
+        }
+      }
+    },
+    "worst": [
+      {
+        "name": "chest",
+        "photo": "dcef50d19b8caf6ef6c35e2331cbe8cb",
+        "delta": 4.343,
+        "current": 4.376,
+        "previous": 0.033
+      },
+      {
+        "name": "waist",
+        "photo": "1d93d23ba2d3df45eb0094c4bb9b7ae4",
+        "delta": 19.24,
+        "current": 23.851,
+        "previous": 4.611
+      },
+      {
+        "name": "hips",
+        "photo": "e755fe20b6e6b955b8a49dd25a8c095b",
+        "delta": 7.414,
+        "current": 8.676,
+        "previous": 1.262
+      }
+    ],
+    "failures": []
+  },
+  "testB": {
+    "total": 1160,
+    "common": 1160,
+    "subjects": 400,
+    "coverage": {
+      "quick": {
+        "success": 1160,
+        "partial": 0,
+        "failed": 0,
+        "coverage": 1
+      },
+      "previous": {
+        "success": 599,
+        "partial": 561,
+        "failed": 0,
+        "coverage": 1
+      },
+      "current": {
+        "success": 599,
+        "partial": 561,
+        "failed": 0,
+        "coverage": 1
+      }
+    },
+    "results": {
+      "quick": {
+        "chest": {
+          "mae": 4.534,
+          "p90": 9.382,
+          "subjectMAE": 4.589
+        },
+        "waist": {
+          "mae": 12.424,
+          "p90": 21.496,
+          "subjectMAE": 12.604
+        },
+        "hips": {
+          "mae": 4.687,
+          "p90": 9.562,
+          "subjectMAE": 4.683
+        }
+      },
+      "previous": {
+        "chest": {
+          "mae": 3.87,
+          "p90": 7.843,
+          "subjectMAE": 3.776
+        },
+        "waist": {
+          "mae": 8.823,
+          "p90": 15.994,
+          "subjectMAE": 9.03
+        },
+        "hips": {
+          "mae": 4.235,
+          "p90": 9.064,
+          "subjectMAE": 4.217
+        }
+      },
+      "current": {
+        "chest": {
+          "mae": 2.996,
+          "p90": 5.979,
+          "subjectMAE": 2.923
+        },
+        "waist": {
+          "mae": 3.648,
+          "p90": 7.825,
+          "subjectMAE": 3.734
+        },
+        "hips": {
+          "mae": 2.362,
+          "p90": 4.947,
+          "subjectMAE": 2.379
+        }
+      }
+    },
+    "worst": [
+      {
+        "name": "chest",
+        "photo": "82206a7293be9693168de0f5d766fe2e",
+        "delta": 11.6,
+        "current": 20.689,
+        "previous": 9.089
+      },
+      {
+        "name": "waist",
+        "photo": "6005af266732297800b0004a361e5328",
+        "delta": 19.67,
+        "current": 20.446,
+        "previous": 0.776
+      },
+      {
+        "name": "hips",
+        "photo": "12882a30b9e1a9dc1e8bc6f24c5d8f27",
+        "delta": 15.586,
+        "current": 18.651,
+        "previous": 3.065
+      }
+    ],
+    "failures": []
+  }
+}

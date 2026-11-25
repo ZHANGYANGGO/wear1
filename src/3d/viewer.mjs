@@ -1,4 +1,5 @@
 import { createPointDeformer } from './fitting.mjs';
+import { localTemplate, measureMesh, girthNames } from './mesh-tape.mjs';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
@@ -36,7 +37,7 @@ function armInfluence(object) {
   };
 }
 
-function fitTemplate(source, profile) {
+function fitTemplate(source, profile, restMeshes) {
   const fitted = new THREE.Group();
   const deform = createPointDeformer(profile);
   source.traverse(object => {
@@ -56,6 +57,7 @@ function fitTemplate(source, profile) {
     geometry.computeVertexNormals();
     const mesh = new THREE.Mesh(geometry, object.material);
     mesh.name = object.name;
+    restMeshes?.set(mesh,object.geometry.attributes.position);
     fitted.add(mesh);
     object.geometry.dispose();
     object.skeleton?.dispose();
@@ -101,6 +103,14 @@ export function createModelViewer(container) {
   ground.receiveShadow = true;
   scene.add(ground);
   let model = null;
+  let updateFace=null, faceCloseup=false;
+  let tapeLines = null;
+  function clearTape() {
+    if (!tapeLines) return;
+    scene.remove(tapeLines);
+    disposeObject(tapeLines);
+    tapeLines = null;
+  }
   let localProfile = null;
   let displayHeight = 2.7;
   let bodyCoverage = 'full';
@@ -112,6 +122,13 @@ export function createModelViewer(container) {
   let frame = 0;
 
   function reset() {
+    if(faceCloseup){
+      controls.minDistance=displayHeight*.12;
+      controls.target.set(0,displayHeight*.928,displayHeight*.043);
+      camera.position.copy(controls.target).add(new THREE.Vector3(0,0,displayHeight*.32));
+      controls.update();return;
+    }
+    controls.minDistance=1.5;
     camera.position.set(.12, displayHeight * .55, displayHeight * 2.04);
     controls.target.set(0, displayHeight * .5, 0);
     controls.update();
@@ -161,13 +178,17 @@ export function createModelViewer(container) {
   });
 
   return {
+    cancelPendingLoad(){loadVersion++;},
+    setFaceStyle(style,gray=false){ updateFace?.(style,gray); },
+    focusFace(value){faceCloseup=Boolean(value);reset();},
+    showTape(visible) { if (tapeLines) tapeLines.visible = Boolean(visible); },
     async exportModel() {
       if (!model) throw new Error('请先生成分身。');
       const { GLTFExporter } = await import('three/addons/exporters/GLTFExporter.js');
       const bytes = await new GLTFExporter().parseAsync(model, { binary: true });
       return new Blob([bytes], { type: 'model/gltf-binary' });
     },
-    async load(url, options = {}) {
+    async load(url, options = {}, editor=false) {
       const version = ++loadVersion;
       bodyCoverage = options.bodyCoverage === 'cropped' ? 'cropped' : 'full';
       clothingVersion++;
@@ -178,8 +199,21 @@ export function createModelViewer(container) {
       clothing.clear();
       clothingRequests.clear();
       const gltf = await new GLTFLoader().loadAsync(options.kind === 'local' ? '/assets/3d/fitting-body.glb' : url);
+      let metric = options.kind === 'local';
+      gltf.scene.traverse(o => { if (o.userData.wearmateTape === 1) metric=true; });
+      const template = metric ? await localTemplate() : null;
+      const restMeshes=options.kind==='local' && (editor || options.faceLook) ? new Map() : null;
+      const nextModel=options.kind==='local'?fitTemplate(gltf.scene,options,restMeshes):gltf.scene;
+      let nextFace=null;
+      if(restMeshes){
+        try {
+          const {mountFace}=await import('../face/render.mjs');
+          nextFace=await mountFace(nextModel,options,restMeshes,options.faceLook);
+          nextFace(options.faceLook?.style);
+        }catch(e){disposeObject(nextModel);throw e;}
+      }
       if (disposed || version !== loadVersion) {
-        disposeObject(gltf.scene);
+        disposeObject(nextModel);
         throw new Error('模型加载已取消。');
       }
       if (model) {
@@ -187,8 +221,36 @@ export function createModelViewer(container) {
         disposeObject(model);
       }
       localProfile = options.kind === 'local' ? options : null;
+      clearTape();
       displayHeight = localProfile ? options.heightCm / 100 : 2.7;
-      model = localProfile ? fitTemplate(gltf.scene, localProfile) : gltf.scene;
+      model=nextModel;updateFace=nextFace;
+      let measurements;
+      if (metric) {
+        model.userData.wearmateTape = 1;
+        const body = model.getObjectByName('Body');
+        const result = measureMesh(template.tape,body.geometry.attributes.position.array);
+        measurements=result.cm;
+        displayHeight=measurements.height/100;
+        tapeLines=new THREE.Group();
+        girthNames.forEach((k,i)=>{
+          const points=result.paths[k].map(p=>new THREE.Vector3(...p));
+          const geometry=new THREE.BufferGeometry().setFromPoints(points);
+          const material=new THREE.LineBasicMaterial({color:[0xe13b37,0x196bce,0x289355][i],depthTest:false});
+          const line=new THREE.LineLoop(geometry,material);
+          line.renderOrder=2;
+          tapeLines.add(line);
+        });
+        const position=body.geometry.attributes.position;
+        const foot=position.getY(template.tape.foot), crown=position.getY(template.tape.crown);
+        const x=-displayHeight*.35, tick=displayHeight*.012;
+        const marks=[[x,foot,0],[x,crown,0],[x-tick,foot,0],[x+tick,foot,0],[x-tick,crown,0],[x+tick,crown,0]];
+        const heightLine=new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(marks.map(p=>new THREE.Vector3(...p))),
+          new THREE.LineBasicMaterial({color:0x514867,depthTest:false}));
+        heightLine.renderOrder=2;
+        tapeLines.add(heightLine);
+        tapeLines.visible=false;
+        scene.add(tapeLines);
+      }
       let triangles = 0;
       model.traverse(object => {
         if (!object.isMesh) return;
@@ -200,7 +262,7 @@ export function createModelViewer(container) {
       const size = initial.getSize(new THREE.Vector3());
       if (!Number.isFinite(size.y) || size.y <= 0) throw new Error('GLB 中没有可显示的网格。');
       // Tripo 多视图结果可能以 X 为前后轴；统一为 X 肩宽、Z 前后，与服装网格一致。
-      if (!localProfile) {
+      if (!metric) {
         if (size.z > size.x) model.rotateY(Math.PI / 2);
         model.scale.setScalar(2.7 / size.y);
         const scaled = new THREE.Box3().setFromObject(model);
@@ -211,7 +273,7 @@ export function createModelViewer(container) {
       }
       scene.add(model);
       reset();
-      return { triangles: Math.round(triangles) };
+      return { triangles: Math.round(triangles), measurements };
     },
     async wear(garment) {
       if (!model) throw new Error('请先加载 3D 人物，再选择服装。');
@@ -257,6 +319,8 @@ export function createModelViewer(container) {
       clothing.delete(slot);
     },
     clear() {
+      updateFace=null;
+      clearTape();
       loadVersion++;
       clothingVersion++;
       clothingRequests.clear();
@@ -275,6 +339,7 @@ export function createModelViewer(container) {
       controls.autoRotate = Boolean(value);
     },
     dispose() {
+      clearTape();
       disposed = true;
       loadVersion++;
       cancelAnimationFrame(frame);

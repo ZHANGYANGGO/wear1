@@ -1,0 +1,26 @@
+{
+  "baseline": {
+    "meshHeightCm": 170.00000482990072,
+    "posedHandSpanCm": 108.29817056655884,
+    "cm": {
+      "height": 170.00000482990072,
+      "hips": 104.1916556827682,
+      "belly": 84.97878758861842,
+      "waist": 75.2098446406651,
+      "chest": 96.49581786029353
+    }
+  },
+  "current": {
+    "meshHeightCm": 170.00000482990072,
+    "posedHandSpanCm": 108.97047519683838,
+    "cm": {
+      "height": 170.00000482990072,
+      "hips": 108.5767188934871,
+      "belly": 94.32000629646818,
+      "waist": 86.17775692282545,
+      "chest": 103.93624835981727
+    }
+  },
+  "quickPosedHandSpanCm": 108.8702223379818,
+  "armSpanWithinFiveCm": true
+}

@@ -109,15 +109,21 @@ export function upgradePhotoFit(record) {
 function bandScales(y, bands) {
   let i = 1;
   while (i < bands.length - 1 && y > bands[i][0]) i++;
-  const [low, a, b] = bands[i - 1], [high, c, d] = bands[i];
+  const [low, a, b, dz0=0] = bands[i - 1], [high, c, d, dz1=0] = bands[i];
   const u = clamp((y - low) / (high - low), 0, 1);
   const t = u * u * (3 - 2 * u);
-  return [a + (c - a) * t, b + (d - b) * t];
+  return [a + (c - a) * t, b + (d - b) * t, dz0 + (dz1 - dz0) * t];
 }
 
 export function createPointDeformer(profile) {
   const scale = profile.heightCm / 100 / templateHeight, spine = .025;
   const hip = profile.lengths?.hip ?? .874, shoulder = profile.lengths?.shoulder ?? 1.357;
+  let bands = profile.bands;
+  if (profile.bellyBand) {
+    const offsets = profile.depthOffsets ?? {};
+    const dz = [0,0,offsets.hips,offsets.belly,offsets.waist,offsets.chest,0,0,0];
+    bands = [...bands.slice(0,3),profile.bellyBand,...bands.slice(3)].map((b,i)=>[...b,dz[i]??0]);
+  }
   function level(y) {
     if (y < .874) return y * hip / .874;
     if (y < 1.357) return hip + (y - .874) * (shoulder - hip) / (1.357 - .874);
@@ -127,8 +133,8 @@ export function createPointDeformer(profile) {
   const dx = shoulderPivot.x * (sx - 1), dy = level(shoulderPivot.y) - shoulderPivot.y;
   const dz = (shoulderPivot.z - spine) * (sz - 1);
   return (x, y, z, armWeight = 0) => {
-    const [width, depth] = bandScales(y, profile.bands);
-    let px = x * width, py = level(y), pz = spine + (z - spine) * depth;
+    const [width, depth, offset] = bandScales(y, bands);
+    let px = x * width, py = level(y), pz = spine + (z - spine) * depth + offset;
     if (profile.tier !== 'quick' && armWeight > 0) {
       // Translate the arm with its shoulder. The original rig weights blend the
       // shoulder seam; the fully weighted forearm and hand keep their shape.
@@ -147,6 +153,9 @@ export function deformPoint(x, y, z, profile, armWeight = 0) {
 export function validLocalFit(record) {
   return (record.lengths == null || (Number.isFinite(record.lengths.hip) && Number.isFinite(record.lengths.shoulder)
     && record.lengths.hip > 0 && record.lengths.hip < record.lengths.shoulder && record.lengths.shoulder < templateHeight))
+    && (record.bellyBand == null || (Array.isArray(record.bellyBand) && record.bellyBand.length === 3
+      && record.bellyBand[0] === .96 && record.bellyBand.slice(1).every(v => Number.isFinite(v) && v>0)))
+    && (record.depthOffsets == null || Object.values(record.depthOffsets).every(v => Number.isFinite(v) && Math.abs(v)<=.07))
     && Object.hasOwn(tiers, record.tier) && record.heightCm >= 80 && record.heightCm <= 250
     && record.weightKg >= 20 && record.weightKg <= 300 && Array.isArray(record.bands) && record.bands.length === 8
     && record.bands.every((row, i) => Array.isArray(row) && row.length === 3 && row.every(Number.isFinite)

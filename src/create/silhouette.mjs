@@ -113,7 +113,7 @@ export function torsoSections(mask, width, height, points, view, world, issues =
 }
 
 function torsoVisibility(points) {
-  return Math.min(...[11, 23].map(i => Math.max(points[i].visibility, points[i + 1].visibility)));
+  return Math.min(...[11, 23].map(i => Math.max(points[i]?.visibility??0, points[i + 1]?.visibility??0)));
 }
 
 export function poseInput(image) {
@@ -128,11 +128,50 @@ export function poseInput(image) {
   return canvas;
 }
 
+function checkMaskFrame(contour) {
+  const {top,bottom,left,right,maskHeight:h,maskWidth:w}=contour.frame;
+  if(top<h*.004 || bottom>h*.996 || left<=0 || right>=w-1 || bottom-top<h*.38)
+    throw new PhotoQualityError('请保留头脚和两侧边缘，使用完整的单人轮廓。');
+  const widthAt=level=>{
+    const r=contour.rows[Math.round((1-level)*(contour.rows.length-1))];
+    return r[2]-r[1];
+  };
+  if(widthAt(.67)<.045 || widthAt(.95)>.9*widthAt(.67) || widthAt(.51)>.65)
+    throw new PhotoQualityError('轮廓缺少可辨认的头部或躯干，请检查遮罩。');
+}
+
+// BodyM supplies opaque white-on-black silhouette PNGs. Preserve their original
+// pixel edges instead of asking an RGB pose detector to rediscover the subject.
+function nativeMask(img,view) {
+  const canvas=document.createElement('canvas'),ctx=canvas.getContext('2d',{willReadFrequently:true});
+  function binary(rgba) {
+    for(let i=0;i<rgba.length;i+=4) {
+      const v=rgba[i];
+      if((v!==0 && v!==255) || rgba[i+1]!==v || rgba[i+2]!==v || rgba[i+3]!==255) return false;
+    }
+    return true;
+  }
+  canvas.width=32; canvas.height=32; ctx.imageSmoothingEnabled=false;
+  ctx.drawImage(img,0,0,32,32);
+  if(!binary(ctx.getImageData(0,0,32,32).data)) return null;
+  canvas.width=img.naturalWidth; canvas.height=img.naturalHeight;
+  ctx.drawImage(img,0,0);
+  const bytes=ctx.getImageData(0,0,canvas.width,canvas.height).data;
+  if(bytes[0]!==0 || !binary(bytes)) return null;
+  const contour=extractContour(bytes,canvas.width,canvas.height,{stride:4,threshold:128,view});
+  checkMaskFrame(contour);
+  return {sections:{},contour,advice:'已读取二值轮廓，按模板比例定位躯干。'};
+}
+
 export async function analyzePhoto(photo, view) {
-  const engine = await landmarker();
   const img = new Image();
   img.src = photo.url;
   await img.decode();
+  if(photo.type==='image/png') {
+    const native=nativeMask(img,view);
+    if(native) return native;
+  }
+  const engine = await landmarker();
   const input = poseInput(img);
   let result;
   try { result = engine.detect(input); }
@@ -153,10 +192,13 @@ export async function analyzePhoto(photo, view) {
       inputWidth: input.naturalWidth ?? input.width, inputHeight: input.naturalHeight ?? input.height,
       originalWidth: img.naturalWidth, originalHeight: img.naturalHeight,
     });
-    const sections = torsoSections(pixels, mask.width, mask.height, points, view, result.worldLandmarks?.[index], contour.issues);
+    const haveJoints=[11,12,23,24,27,28].every(i=>Number.isFinite(points[i]?.y))
+      && [11,23,27].every(i=>Math.max(points[i].visibility,points[i+1].visibility)>=.3);
+    if(!haveJoints) checkMaskFrame(contour);
+    const sections = haveJoints ? torsoSections(pixels, mask.width, mask.height, points, view, result.worldLandmarks?.[index], contour.issues) : {};
     const notes = imageAdvice(img, pixels, mask.width, mask.height);
     // One side is naturally less visible in profile. Only advise when both sides are weak.
-    const uncertain = [11, 23, 27].some(i => Math.max(points[i].visibility, points[i + 1].visibility) < .65);
+    const uncertain = [11, 23, 27].some(i => Math.max(points[i]?.visibility??0, points[i + 1]?.visibility??0) < .65);
     if (uncertain) notes.push('部分关节点不够清晰，可让手臂稍离身体，减少遮挡。');
     return { sections, contour, advice: notes.join(' ') };
   } finally { result.close(); }

@@ -9,7 +9,10 @@
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "test": "node --test",
-    "bodym:parse": "node scripts/parse-bodym.mjs"
+    "bodym:parse": "node scripts/parse-bodym.mjs",
+    "bodym:train": "node scripts/evaluate-geometry.mjs --train",
+    "bodym:evaluate": "node scripts/evaluate-geometry.mjs",
+    "geometry:verify": "node scripts/geometry-fixtures.mjs"
   },
   "dependencies": {
     "@mediapipe/tasks-vision": "0.10.32",

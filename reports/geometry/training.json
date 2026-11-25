@@ -1,0 +1,22 @@
+{
+  "split": "train",
+  "group": "SHA256(subject_id)[0] modulo 5",
+  "fitSubjects": 1608,
+  "validationSubjects": 410,
+  "scores": [
+    {
+      "lambda": 0.05,
+      "mae": 2.4736634381235976
+    },
+    {
+      "lambda": 0.5,
+      "mae": 2.503091659158542
+    },
+    {
+      "lambda": 5,
+      "mae": 2.815946870852166
+    }
+  ],
+  "selectedLambda": 0.05,
+  "refitPairs": 6134
+}

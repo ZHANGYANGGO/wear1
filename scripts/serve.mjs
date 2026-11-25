@@ -1,5 +1,6 @@
 import { createReadStream, promises as fs } from 'node:fs';
 import { createServer } from 'node:http';
+import { spawn } from 'node:child_process';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createReconstructionService } from './reconstruction.mjs';
@@ -7,6 +8,7 @@ import { createReconstructionService } from './reconstruction.mjs';
 const root = fileURLToPath(new URL('../', import.meta.url));
 const host = '127.0.0.1';
 const port = Number(process.argv[2] ?? 4173);
+const openBrowser = process.platform === 'win32' && process.argv.includes('--open-browser');
 try {
   process.loadEnvFile(path.join(root, '.env'));
 } catch (error) {
@@ -21,6 +23,7 @@ const mime = {
   '.svg': 'image/svg+xml',
   '.wasm': 'application/wasm',
   '.task': 'application/octet-stream',
+  '.tflite': 'application/octet-stream',
   '.webp': 'image/webp',
   '.glb': 'model/gltf-binary',
 };
@@ -105,7 +108,7 @@ const server = createServer(async (request, response) => {
     }
     const vendorRoute = route.match(/^\/vendor\/three\/((?:build|examples\/jsm)\/(?:[a-z0-9-]+\/)*[a-z0-9.-]+\.js)$/i);
     const poseRoute = route.match(/^\/vendor\/pose\/(vision_bundle\.mjs|wasm\/vision_wasm_(?:nosimd_)?internal\.(?:js|wasm))$/);
-    const publicRoute = vendorRoute || poseRoute || route === '/assets/3d/pose-lite.task' || ['/', '/index.html', '/stage1a.html', '/create.html', '/wardrobe.html', '/appearance.html'].includes(route)
+    const publicRoute = vendorRoute || poseRoute || ['/assets/3d/pose-lite.task','/assets/3d/face-landmarker.task','/assets/3d/selfie-multiclass.tflite','/face.html','/', '/index.html', '/stage1a.html', '/create.html', '/wardrobe.html', '/appearance.html'].includes(route)
       || /^\/(assets|src)\/(?:[a-z0-9-]+\/)*[a-z0-9-]+\.(?:css|mjs|svg|webp|glb)$/i.test(route);
     if (!publicRoute) {
       response.writeHead(404).end();
@@ -137,11 +140,38 @@ function routeIsApi(request) {
   return request.url?.startsWith('/api/');
 }
 
-server.on('error', error => {
+function openCreatePage(url) {
+  console.log(`创建页面  ${url}`);
+  const browser = spawn('rundll32.exe', ['url.dll,FileProtocolHandler', url], { stdio: 'ignore', windowsHide: true });
+  browser.on('error', () => console.error('请在浏览器中打开上方地址。'));
+  browser.unref();
+}
+
+server.on('error', async error => {
+  if (openBrowser && error.code === 'EADDRINUSE') {
+    const url = `http://${host}:${port}/create.html`;
+    try {
+      const response = await fetch(url, { redirect: 'error', signal: AbortSignal.timeout(2500) });
+      if (response.ok && (await response.text()).includes('aria-label="WearMate 工作台首页"')) {
+        console.log('WearMate 已在运行。');
+        openCreatePage(url);
+        return;
+      }
+    } catch {
+      // A different process may be listening without serving the WearMate page.
+    }
+    console.error(`端口 ${port} 已被占用，请关闭占用该端口的程序后重新启动。`);
+    process.exitCode = 1;
+    return;
+  }
   console.error(error.message);
   process.exitCode = 1;
 });
 server.listen(port, host, () => {
   console.log(`WearMate 3D  http://${host}:${server.address().port}/`);
   console.log(`阿里云百炼 Tripo: ${reconstruction.configured() ? '已配置' : '未配置（在 .env 设置 DASHSCOPE_API_KEY 和 DASHSCOPE_WORKSPACE_ID）'}`);
+  if (openBrowser) {
+    console.log('使用期间请保留此窗口，结束时关闭窗口或按 Ctrl+C。');
+    openCreatePage(`http://${host}:${server.address().port}/create.html`);
+  }
 });
